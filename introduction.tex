@@ -1,1 +1,74 @@
+\section{Introduction}
 
+Bitcoin~\cite{bitcoin} is the first and most successful \emph{cryptocurrency} to
+date. It introduced \emph{blockchains}, a of cryptographic consensus protocol in
+which \emph{transactions} are organized into \emph{blocks} which are put in a
+mutually agreed sequence despite the presence of adversaries. Since its
+inception, a plethora of other cryptocurrencies have sprung into existence, each
+claiming its own features.
+
+There are two ways in which a cryptocurrency can choose to achieve consensus in
+the decentralized setting:
+\emph{proof-of-work}~\cite{C:DwoNao92} and
+\emph{proof-of-stake}~\cite{ouroboros}. The consensus mechanism defines the
+mandates of block generation. In the case of proof-of-work, where block
+generation is called \emph{mining}, blocks are produced by \emph{miners}
+expending computational power to solve cryptographic puzzles. On the other hand,
+in the case of proof-of-stake where block generation is called \emph{minting},
+blocks are produced by \emph{minters} who ``stake'' their coins. In both cases,
+during honest protocol executions, a leader is drawn at random from the
+miners or minters population, with a probability of selection proportional to
+their computational power or stake respectively. Block generators are
+incentivized to produce blocks by receiving a reward for each block they
+successfully produce and which is subsequently adopted in the resulting
+blockchain.
+
+A central economic question pertains to cryptocurrency \emph{egalitarianism}.
+In an ideal world, investing a certain amount of capital to mining or minting
+should allow a participant to receive rewards proportional to their capital.
+However, this has not been the case with most cryptocurrencies. Specifically, in
+the case of mining, there exist various tiers of mining hardware which have
+vastly different performance. If one were to mine using a CPU, a GPU, an FPGA,
+or specialized hardware such as ASICs, it would make a vast difference in their
+success rate and, in turn, return on investment, despite the pricing of the
+respective hardware not having a similarly vast difference in cost of purchase.
+Though the term \emph{egalitarianism} has been left undefined, several
+cryptocurrencies have claimed to achieve more egalitarianism than others.
+However, lacking a comparable metric, the question of whether some
+cryptocurrencies are more \emph{egalitarian} than others remains.
+
+In this paper, we focus our research on four proof-of-work-based
+cryptocurrencies: Bitcoin, Litecoin, Ethereum, and Monero. Bitcoin was chosen as
+a baseline for comparison as the first and most successful cryptocurrency to
+date. Ethereum is the most promising ``altcoin,'' as cryptocurrencies beyond
+Bitcoin came to be known. Litecoin and Monero, although not next by market cap,
+do make claims that they are more egalitarian because their mining puzzles are
+based on hash functions which are claimed to be memory-hard. Memory-hardness
+has the goal of making it costly to perform large-scale custom hardware attacks
+by requiring large amounts of memory, and hence are claimed to yield more
+egalitarian cryptocurrencies.
+
+On the proof-of-stake side, as will soon become clear, egalitarian behavior is
+similar regardless of implementation. We study the case of a pure proof-of-stake
+cryptocurrency, Cardano~\cite{ouroboros}, as well as a hybrid work/stake
+cryptocurrency, Decred.
+
+\noindent
+\textbf{Related work.} XXX
+
+\noindent
+\textbf{Our contributions.}
+Our contributions are as follows:
+
+\begin{enumerate}
+  \item We define an exact economic measure of cryptocurrency
+        \emph{egalitarianism}.
+        To do this, we first define the \emph{egalitarian curve} of a
+        cryptocurrency from which we extract the measure.
+  \item We measure and compare the egalitarianism curve and egalitarianism of
+        four indicative proof-of-work cryptocurrencies, one representative
+        proof-of-stake cryptocurrency, and a hybrid cryptocurrency, using
+        current market data.
+  \item We show that proof-of-stake is, perhaps unexpectedly, perfectly
+        egalitarian.
+\end{enumerate}
