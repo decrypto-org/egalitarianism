@@ -2,7 +2,7 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from math import inf
-import simulator
+from simulator import Simulator, GreedyTechnologyFirst
 from helpers import slugify
 from mining_hardware import MiningHardware
 
@@ -23,6 +23,7 @@ def main():
     hardware = []
     points = []
     parseMininingHardware('sample.csv', hardware)
+    simulator = Simulator(GreedyTechnologyFirst())
 
     for x in np.linspace(0, MAX_CAPITAL, MAX_CAPITAL):
         y = simulator.simulate(x, hardware)
