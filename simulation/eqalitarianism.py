@@ -27,7 +27,7 @@ def main():
     for x in np.linspace(0, MAX_CAPITAL, MAX_CAPITAL):
         y = simulator.simulate(x, hardware)
         net = 0 if y[0] == -inf else y[0]
-        points.append((x, net / x))
+        points.append((x, (net - x) / x))
 
     x = [point[0] for point in points]
     y = [point[1] for point in points]
