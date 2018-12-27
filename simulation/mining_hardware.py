@@ -10,21 +10,23 @@ class MiningHardware:
 
     def __init__(self, keys, values):
         for k, v in zip(keys, values):
-            self.__dict__[k] = v
+            key = '_' + k
+            self.__dict__[key] = v
 
     def __repr__(object):
         return '<MiningHardware>'
 
-    def __getattribute__(self, name):
-        if name == 'watt' or name == 'price':
-            return float(
-                re.sub(r'[^\d.]', '', object.__getattribute__(self, name))
-            )
+    @property
+    def watt(self):
+            return float(re.sub(r'[^\d.]', '', self._watt))
 
-        if name == 'thash_s':
-            return float(object.__getattribute__(self, name))
+    @property
+    def price(self):
+            return float(re.sub(r'[^\d.]', '', self._price))
 
-        return object.__getattribute__(self, name)
+    @property
+    def thash_s(self):
+            return float(self._thash_s)
 
     @property
     def cost_per_hour(self):
