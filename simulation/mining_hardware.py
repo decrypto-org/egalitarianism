@@ -26,11 +26,14 @@ class MiningHardware:
 
         return object.__getattribute__(self, name)
 
+    @property
     def cost_per_hour(self):
         return self.watt * (self.KWH_USD / 1000)
 
+    @property
     def expected_btc_income(self, sec=3600):
         return ((self.thash_s * pow(10, 12)) * sec * self.BTC_COINBASE) / (pow(2, 32) * self.BTC_DIFFICULTY)
 
+    @property
     def net(self):
-        return self.expected_btc_income() * self.BTC_USD - self.cost_per_hour()
+        return self.expected_btc_income * self.BTC_USD - self.cost_per_hour
