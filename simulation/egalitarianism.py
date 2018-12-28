@@ -22,7 +22,7 @@ def parseMininingHardware(file, hardware):
 def main():
     hardware = []
     points = []
-    parseMininingHardware('sample.csv', hardware)
+    parseMininingHardware('data/btc.csv', hardware)
     simulator = Simulator(GreedyTechnologyFirst())
 
     for x in np.linspace(0, MAX_CAPITAL, MAX_CAPITAL):
