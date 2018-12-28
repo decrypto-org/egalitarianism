@@ -1,5 +1,4 @@
 import abc
-from math import inf
 from itertools import count
 
 HOUR = 1
@@ -24,7 +23,7 @@ class Strategy(metaclass=abc.ABCMeta):
 
 class GreedyTechnologyFirst(Strategy):
     def simulate(self, initial_capital, hardware):
-        optimal_income = -inf
+        optimal_income = 0
         optimal_configuration = None
         for h in hardware:
             for n in count(1):
