@@ -42,3 +42,24 @@ class GreedyTechnologyFirst(Strategy):
                     optimal_configuration = {'hardware': h, 'n': n}
 
         return (optimal_income, optimal_configuration)
+
+
+class GreedyElectricityFirst(Strategy):
+    def simulate(self, initial_capital, hardware):
+        optimal_income = 0
+        optimal_configuration = None
+        for h in hardware:
+            for n in count(1):
+                electricity_cost = h.cost_per_hour * n * HOURS_OF_OPERATION
+                technology_cost = h.price * n
+
+                if technology_cost > (initial_capital - electricity_cost):
+                    break
+
+                income = HOURS_OF_OPERATION * h.net * n
+
+                if income > optimal_income:
+                    optimal_income = income
+                    optimal_configuration = {'hardware': h, 'n': n}
+
+        return (optimal_income, optimal_configuration)
