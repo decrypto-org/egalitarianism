@@ -25,8 +25,8 @@ class MiningHardware:
             return float(re.sub(r'[^\d.]', '', self._price))
 
     @property
-    def thash_s(self):
-            return float(self._thash_s)
+    def hash_s(self):
+            return float(self._hash_s)
 
     @property
     def cost_per_hour(self):
@@ -34,7 +34,7 @@ class MiningHardware:
 
     @property
     def expected_btc_income(self, sec=3600):
-        return ((self.thash_s * pow(10, 12)) * sec * self.BTC_COINBASE) / (pow(2, 32) * self.BTC_DIFFICULTY)
+        return (self.hash_s * sec * self.BTC_COINBASE) / (pow(2, 32) * self.BTC_DIFFICULTY)
 
     @property
     def net(self):
