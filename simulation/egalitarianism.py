@@ -5,25 +5,34 @@ from math import inf
 from simulator import Simulator, GreedyTechnologyFirst
 from helpers import slugify
 from mining_hardware import MiningHardware
+from mining_hardware import Hardware
+from configuration import Configuration
+from calculator import BTCCalculator, ETHCalculator
 
 
 MAX_CAPITAL = 10000
 
 
-def parseMininingHardware(file, hardware):
+def parseMininingHardware(file):
+    hardware = []
     with open(file, newline='') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
         fields = [slugify(f) for f in next(csvreader)]
 
         for row in csvreader:
-            hardware.append(MiningHardware(fields, row))
+            hardware.append(Hardware(fields, row))
+
+    return hardware
 
 
 def main():
     hardware = []
     points = []
-    parseMininingHardware('data/btc.csv', hardware)
-    simulator = Simulator(GreedyTechnologyFirst())
+    btc_configuration = Configuration(5106422924659.82, 12.5, 0.11, 4074.25)
+    hardware = parseMininingHardware('data/btc.csv')
+    calculator = BTCCalculator(btc_configuration)
+    strategy = GreedyTechnologyFirst()
+    simulator = Simulator(strategy, calculator)
 
     for x in np.linspace(0, MAX_CAPITAL, MAX_CAPITAL):
         y = simulator.simulate(x, hardware)
