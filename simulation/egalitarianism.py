@@ -1,16 +1,13 @@
+import argparse
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from math import inf
-from simulator import Simulator, GreedyTechnologyFirst
+from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst
 from helpers import slugify
-from mining_hardware import MiningHardware
 from mining_hardware import Hardware
 from configuration import Configuration
 from calculator import BTCCalculator, ETHCalculator
-
-
-MAX_CAPITAL = 10000
 
 
 def parseMininingHardware(file):
@@ -26,15 +23,34 @@ def parseMininingHardware(file):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
+    parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr'])
+    parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp'])
+    parser.add_argument('-d', '--data', required=True)
+    parser.add_argument('-p', '--capital', required=True, type=int)
+    parser.add_argument('--version', action='version', version='%(prog)s 2.0')
+    args = parser.parse_args()
+
     hardware = []
     points = []
+    capital = args.capital
+
     btc_configuration = Configuration(5106422924659.82, 12.5, 0.11, 4074.25)
-    hardware = parseMininingHardware('data/btc.csv')
-    calculator = BTCCalculator(btc_configuration)
+    eth_configuration = Configuration(2529724525783320, 3, 0.11, 126.12)
+
     strategy = GreedyTechnologyFirst()
+    calculator = BTCCalculator(btc_configuration)
+
+    if args.currency == 'eth':
+        calculator = ETHCalculator(eth_configuration)
+
+    if args.strategy == 'electricity':
+        strategy = GreedyElectricityFirst()
+
+    hardware = parseMininingHardware(args.data)
     simulator = Simulator(strategy, calculator)
 
-    for x in np.linspace(0, MAX_CAPITAL, MAX_CAPITAL):
+    for x in np.linspace(0, capital, capital):
         y = simulator.simulate(x, hardware)
         net = 0 if y[0] == -inf else y[0]
         points.append((x, (net - x) / x))
@@ -47,7 +63,7 @@ def main():
     plt.ylabel('ROI')
     plt.title('Egalitarianism curve')
     plt.legend()
-    plt.savefig(str(int(MAX_CAPITAL / 1000)) + 'K.pdf', format='pdf', dpi=1000, bbox_inches='tight')
+    plt.savefig(str(int(capital / 1000)) + 'K.pdf', format='pdf', dpi=1000, bbox_inches='tight')
 
 
 if __name__ == '__main__':
