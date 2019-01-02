@@ -1,11 +1,6 @@
 import abc
 from itertools import count
 
-HOUR = 1
-DAY = 24 * HOUR
-MONTH = 30 * DAY
-HOURS_OF_OPERATION = 6 * MONTH
-
 
 class Simulator:
     def __init__(self, strategy, calculator):
@@ -17,6 +12,9 @@ class Simulator:
 
 
 class Strategy(metaclass=abc.ABCMeta):
+    def __init__(self, hours_of_operation):
+        self._hours_of_operation = hours_of_operation
+
     @abc.abstractmethod
     def simulate(self, initial_capital, hardware, calculator):
         pass
@@ -35,7 +33,7 @@ class GreedyTechnologyFirst(Strategy):
 
                 electricity_capital = initial_capital - technology_cost
                 hours_of_operation = electricity_capital / calculator.cost_per_hour(h)
-                hours_of_operation = min(hours_of_operation, HOURS_OF_OPERATION)
+                hours_of_operation = min(hours_of_operation, self._hours_of_operation)
                 income = hours_of_operation * calculator.net(h) * n
 
                 if income > optimal_income:
@@ -51,13 +49,13 @@ class GreedyElectricityFirst(Strategy):
         optimal_configuration = None
         for h in hardware:
             for n in count(1):
-                electricity_cost = calculator.cost_per_hour(h) * n * HOURS_OF_OPERATION
+                electricity_cost = calculator.cost_per_hour(h) * n * self._hours_of_operation
                 technology_cost = h.price * n
 
                 if technology_cost > (initial_capital - electricity_cost):
                     break
 
-                income = HOURS_OF_OPERATION * calculator.net(h) * n
+                income = self._hours_of_operation * calculator.net(h) * n
 
                 if income > optimal_income:
                     optimal_income = income

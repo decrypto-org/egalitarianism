@@ -31,6 +31,7 @@ def main():
     parser.add_argument('-k', '--kwh', required=True, type=float, help='Price per kilowatt per hour (required)')
     parser.add_argument('-r', '--rate', required=True, type=float, help='Currency price in fiat (required)')
     parser.add_argument('-p', '--capital', required=True, type=float, help='Capital of invenstment (required)')
+    parser.add_argument('-t', '--time', default='6', type=int, help='Total time of operation in months (required) (default: %(default)s)')
     parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
     parser.add_argument('--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
@@ -40,6 +41,7 @@ def main():
     calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator}
     strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP}
     capital = args.capital
+    hours_of_operation = args.time * 30 * 24
 
     Strategy = strategies[args.strategy]
     Calculator = calculators[args.currency]
@@ -49,7 +51,7 @@ def main():
     configuration = Configuration(args.difficulty, args.coinbase, args.kwh, args.rate)
 
     hardware = parseMininingHardware(args.file)
-    simulator = Simulator(Strategy(), Calculator(configuration))
+    simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
 
     for x in np.linspace(0, capital, capital):
         y = simulator.simulate(x, hardware)
@@ -60,7 +62,7 @@ def main():
     y = [point[1] for point in points]
 
     filename = '{0}_{1}_{2}K.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)))
-    desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3}'.format(args.difficulty, args.coinbase, args.kwh, args.rate)
+    desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)
 
     plt.plot(x, y)
     plt.xlabel('$')
