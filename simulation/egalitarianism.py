@@ -61,7 +61,7 @@ def main():
     x = [point[0] for point in points]
     y = [point[1] for point in points]
 
-    filename = '{0}_{1}_{2}K.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)))
+    filename = '{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
     desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)
 
     plt.plot(x, y)
