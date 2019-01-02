@@ -65,3 +65,7 @@ class GreedyElectricityFirst(Strategy):
 
         return (optimal_income, optimal_configuration)
 
+
+class DP(Strategy):
+    def simulate(self, initial_capital, hardware):
+        pass
