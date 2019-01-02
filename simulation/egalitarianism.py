@@ -59,12 +59,16 @@ def main():
     x = [point[0] for point in points]
     y = [point[1] for point in points]
 
+    filename = '{0}_{1}_{2}K.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)))
+    desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3}'.format(args.difficulty, args.coinbase, args.kwh, args.rate)
+
     plt.plot(x, y)
     plt.xlabel('$')
     plt.ylabel('ROI')
     plt.title('Egalitarianism curve')
     plt.legend()
-    plt.savefig(str(int(capital / 1000)) + 'K.pdf', format='pdf', dpi=1000, bbox_inches='tight')
+    plt.figtext(0, -0.1, desc)
+    plt.savefig(filename, format='pdf', dpi=1000, bbox_inches='tight')
 
 
 if __name__ == '__main__':
