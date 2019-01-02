@@ -3,11 +3,11 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from math import inf
-from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst
+from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP
 from helpers import slugify
 from mining_hardware import Hardware
 from configuration import Configuration
-from calculator import BTCCalculator, ETHCalculator
+from calculator import BTCCalculator, ETHCalculator, XMRCalculator
 
 
 def parseMininingHardware(file):
@@ -24,31 +24,32 @@ def parseMininingHardware(file):
 
 def main():
     parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
-    parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr'])
-    parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp'])
-    parser.add_argument('-d', '--data', required=True)
-    parser.add_argument('-p', '--capital', required=True, type=int)
+    parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr'], help='Currency (default: %(default)s)')
+    parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp'], help='Strategy of invenstment (default: %(default)s)')
+    parser.add_argument('-d', '--difficulty', required=True, type=float, help='Block difficulty (required)')
+    parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
+    parser.add_argument('-k', '--kwh', required=True, type=float, help='Price per kilowatt per hour (required)')
+    parser.add_argument('-r', '--rate', required=True, type=float, help='Currency price in fiat (required)')
+    parser.add_argument('-p', '--capital', required=True, type=int, help='Capital of invenstment (required)')
+    parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
     parser.add_argument('--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
 
     hardware = []
     points = []
+    calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator}
+    strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP}
     capital = args.capital
 
-    btc_configuration = Configuration(5106422924659.82, 12.5, 0.11, 4074.25)
-    eth_configuration = Configuration(2529724525783320, 3, 0.11, 126.12)
+    Strategy = strategies[args.strategy]
+    Calculator = calculators[args.currency]
 
-    strategy = GreedyTechnologyFirst()
-    calculator = BTCCalculator(btc_configuration)
+    # btc: 5106422924659.82, 12.5, 0.11, 4074.25
+    # eth: 2529724525783320, 3, 0.11, 126.12
+    configuration = Configuration(args.difficulty, args.coinbase, args.kwh, args.rate)
 
-    if args.currency == 'eth':
-        calculator = ETHCalculator(eth_configuration)
-
-    if args.strategy == 'electricity':
-        strategy = GreedyElectricityFirst()
-
-    hardware = parseMininingHardware(args.data)
-    simulator = Simulator(strategy, calculator)
+    hardware = parseMininingHardware(args.file)
+    simulator = Simulator(Strategy(), Calculator(configuration))
 
     for x in np.linspace(0, capital, capital):
         y = simulator.simulate(x, hardware)
