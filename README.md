@@ -21,8 +21,8 @@ perfectly egalitarian in our model.
 
 ```
 usage: egalitarianism.py [-h] [-c {btc,eth,xmr}] [-s {tech,electricity,dp}] -d
-                         DIFFICULTY -b COINBASE -k KWH -r RATE -p CAPITAL -f
-                         FILE [--version]
+                         DIFFICULTY -b COINBASE -k KWH -r RATE -p CAPITAL
+                         [-t TIME] -f FILE [--version]
 
 Cryptocurrency egalitarianism: A quantitative approach
 
@@ -40,11 +40,12 @@ optional arguments:
   -r RATE, --rate RATE  Currency price in fiat (required)
   -p CAPITAL, --capital CAPITAL
                         Capital of invenstment (required)
+  -t TIME, --time TIME  Total time of operation in months (default:
+                        6)
   -f FILE, --file FILE  The path of the file that contains the specs of each
                         hardware (required). Each hardware should contain the
                         following fields: product, hash / s, watt, price
-  --version             show program's version number and exit
-```
+  --version             show program's version number and exit```
 
 ### Examples
 
