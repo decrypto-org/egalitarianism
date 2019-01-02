@@ -24,3 +24,8 @@ class BTCCalculator(Calculator):
 class ETHCalculator(Calculator):
     def expected_income(self, h, sec=3600):
         return (h.hash_s * sec * self.configuration.c) / self.configuration.d
+
+
+class XMRCalculator(Calculator):
+    def expected_income(self, h, sec=3600):
+        return (h.hash_s * sec * self.configuration.c) / self.configuration.d
