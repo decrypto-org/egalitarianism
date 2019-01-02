@@ -33,7 +33,7 @@ def main():
     parser.add_argument('-p', '--capital', required=True, type=float, help='Capital of invenstment (required)')
     parser.add_argument('-t', '--time', default='6', type=int, help='Total time of operation in months (default: %(default)s)')
     parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
-    parser.add_argument('--version', action='version', version='%(prog)s 2.0')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.1')
     args = parser.parse_args()
 
     hardware = []
