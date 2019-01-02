@@ -30,7 +30,7 @@ def main():
     parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
     parser.add_argument('-k', '--kwh', required=True, type=float, help='Price per kilowatt per hour (required)')
     parser.add_argument('-r', '--rate', required=True, type=float, help='Currency price in fiat (required)')
-    parser.add_argument('-p', '--capital', required=True, type=int, help='Capital of invenstment (required)')
+    parser.add_argument('-p', '--capital', required=True, type=float, help='Capital of invenstment (required)')
     parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
     parser.add_argument('--version', action='version', version='%(prog)s 2.0')
     args = parser.parse_args()
