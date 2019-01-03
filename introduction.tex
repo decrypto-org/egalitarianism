@@ -68,9 +68,6 @@ pure proof-of-stake cryptocurrency, Cardano~\cite{C:KRDO17}, as well as a hybrid
 work/stake cryptocurrency, Decred.
 
 \noindent
-\textbf{Related work.} XXX
-
-\noindent
 \textbf{Our contributions.}
 Our contributions are as follows:
 
@@ -86,3 +83,36 @@ Our contributions are as follows:
   \item We show that proof-of-stake is, perhaps unexpectedly, perfectly
         egalitarian.
 \end{enumerate}
+
+\noindent
+\textbf{Related work.}
+The macro and microeconomics of blockchain design have
+been studied from several perspectives but remain an active area of research
+which is not yet fully understood. The topic of incentivizing participants to
+generate blocks according to the honest protocol has been explored for both
+proof-of-work and proof-of-stake. Proof-of-work protocols such as bitcoin were
+formalized in the Bitcoin Backbone~\cite{backbone1,backbone2} papers and
+follow-up works~\cite{pass}. The seminal work of selish mining~\cite{selfish}
+showed that the honest behavior is not incentive-compatible in Bitcoin, but the
+protocol can be modified to behave that way. On the other hand, restricted
+renditions of Bitcoin have been shown to be incentive-compatible in certain
+models in which the adversarial incentives are related to chain
+quality~\cite{tselekounis-kiayias}. Proof-of-stake systems such as Ouroboros
+have been designed from the ground up to be
+incentive-compatible~\cite{ouroboros}. The question of how to incentivize
+parties to conduct pool formation into the desired number of pools was studied
+in~\cite{stouka-koutsoupias-kiayias}.
+
+The above works study the incentives of blockchain systems from the designer's
+point of view so that participants do not deviate from the prescribed protocol.
+A related question is how \emph{fair} the protocol is to participants
+themselves, and in particular to honest participants. The Backbone and Selfish
+Mining works include attacks in which an adversary can strategically harm
+\emph{chain quality}, ensuring the number of blocks and, in turn, the respective
+rewards, are disproportionate to their contributed computational power, thereby
+harming fairness against honest participants. Fruitchains~\cite{fruitchains}
+proposes a protocol which solves this problem.
+
+\dionyziz{fill-in above citations}
+\dionyziz{memory-hard functions related work}
+\dionyziz{equitability related work}
