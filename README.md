@@ -9,7 +9,6 @@ measure the egalitarianism of two proof-of-stake-based cryptocurrencies, DCR
 and ADA. Perhaps contrary to folklore belief, we find that proof-of-stake is
 perfectly egalitarian in our model.
 
-
 ## Simulation
 
 ### Installation
@@ -45,7 +44,8 @@ optional arguments:
   -f FILE, --file FILE  The path of the file that contains the specs of each
                         hardware (required). Each hardware should contain the
                         following fields: product, hash / s, watt, price
-  --version             show program's version number and exit```
+  --version             show program's version number and exit
+```
 
 ### Examples
 
@@ -56,7 +56,6 @@ optional arguments:
 #### ETH
 
 `pipenv run python egalitarianism.py -f ./data/eth.csv -c eth -d 2529724525783320 -b 3 -k 0.11 -r 126.12 -p 10000`
-
 
 ### Docker
 
