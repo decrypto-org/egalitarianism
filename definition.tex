@@ -84,6 +84,26 @@ a contradiction.
     \label{fig:ideal}
 \end{figure}
 
+Now that we have defined the egalitarian curve, we can define egalitarianism
+as a concrete number. We begin by considering the initial capital $v$ as a
+random variable following a certain distribution $\mathcal{D}$. Egalitarianism
+is defined as the variance of the expected ROI when the capital is chosen from
+the given distribution.
+
+\begin{definition}[Egalitarianism]
+  Given a cryptocurrency $c$, an investment period duration $d$ and an initial
+  capital distribution $\mathcal{D}$, we define the egalitarianism $e$ of $c$
+  for investment duration $d$ under initial capital distribution $\mathcal{D}$
+  as follows:
+
+  \[
+    e_{c,d,\mathcal{D}} = \textsf{Var}_{v \gets \mathcal{D}}[f(v)]
+  \]
+
+  where $f$ is the egalitarian curve of $c$ for duration $d$ and the support of
+  $\mathcal{D}$ is $[v_0, v_1]$.
+\end{definition}
+
 \noindent
 \textbf{The case for proof-of-stake. }
 
