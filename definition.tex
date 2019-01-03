@@ -35,8 +35,31 @@ given an optimal allocation of the financial capital. Note that we require that
 the Return On Investment is necessarily \emph{freshly generated} cryptocurrency;
 thus, it must be newly mined or minted. Of course, purchasing cryptocurrency
 which has already been generated is an investment option, but it is immaterial
-to or egalitarianism definition, which focuses on measuring the egalitarianism
+to our egalitarianism definition, which focuses on measuring the egalitarianism
 of freshy generated cryptocurrency.
+
+\begin{definition}[Egalitarian curve]
+  Given a cryptocurrency $c$, an investment period duration $d$, a minimum
+  capital $v_0$ and a maximum capital $v_1$, we define the
+  \emph{egalitarian curve}
+  $f_{c,d,v_0,v_1}: [v_0, v_1] \longrightarrow \mathbb{R}^+$ of $c$ for
+  duration $d$ covering the range of capital $v_0 \cdots v_1$ is defined as:
+
+  \[
+  f_{c,d,v_0,v_1}(v) = \frac{\max_B{\mathbb{E}[B(v)]} - v}{v}
+  \]
+
+  Where the maximum is taken across all investment strategies $B$ which return
+  the freshly generated coins which remain unspent for a given initial capital
+  $v$ (and, hence, denotes the optimal strategy). The expectation is taken with
+  the blockchain execution as a random variable, as returns vary by chance.
+\end{definition}
+
+We remark that we do allow strategies to reinvest capital. As an example,
+returns earned from mining rewards can be reinvested in electricity costs for
+future mining. Furthermore, for unit consistency, we assume the strategy $B(v)$
+returns the freshly generated coins in the same units as the capital $v$ was
+given in, such that $f$ represents a ROI.
 
 It is now easy to define the \emph{ideal egalitarian curve}. In this curve, the
 ROI remains the same regardless of capital invested. Under these ideal
