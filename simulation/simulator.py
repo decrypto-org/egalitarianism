@@ -64,6 +64,31 @@ class GreedyElectricityFirst(Strategy):
         return (optimal_income, optimal_configuration)
 
 
+class Reinvested(Strategy):
+    def simulate(self, capital, hardware, calculator):
+        sorted_hardware = sorted(hardware, key=lambda h: calculator.net(h) - (h.price / self._hours_of_operation), reverse=True)
+
+        profit = 0
+        optimal_configuration = []
+        for h in sorted_hardware:
+            if calculator.net(h) - (h.price / self._hours_of_operation) < 0:
+                break
+            n = 0
+            while True:
+                n += 1
+                if h.price * n > capital:
+                    break
+            n -= 1
+            technology_cost = h.price * n
+            income = self._hours_of_operation * calculator.net(h) * n
+            profit += income
+            capital -= technology_cost
+            if n:
+                optimal_configuration.append([n, h.name])
+
+        return (capital + profit, optimal_configuration)
+
+
 class DP(Strategy):
     def simulate(self, initial_capital, hardware):
         pass
