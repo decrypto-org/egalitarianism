@@ -114,5 +114,14 @@ class Reinvested(Strategy):
 
 
 class DP(Strategy):
-    def simulate(self, initial_capital, hardware):
+    def gain_velocity(self, capital, hardware, calculator):
+        g = [0 for _ in range(capital + 1)]
+        for i in range(capital + 1):
+
+            for h in hardware:
+                if h.price <= i:
+                    g[i] = max(g[i], g[int(i - h.price)] + calculator.net(h))
+        return g
+
+    def simulate(self, initial_capital, hardware, calculator):
         pass
