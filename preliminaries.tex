@@ -51,6 +51,27 @@ science point of view, memory-hard functions have been formalized in the line of
 work studying pebbling games. We are the first to confirm this correspondence between the
 memory-hardness of proof-of-work hash functions and the economics of mining.
 
+\noindent
+\textbf{Remark.}
+We only analyze the scaling of the economics of proof-of-work mining with
+respect to hardware and electricity costs. There are a multitude of factors that
+play important roles for mining operations at scale. Such examples include rental
+costs for the operation of hardware, machine cooling costs, maintenance cost
+for mining machines that break down which requires specialized workers to fix
+them, as well as different tiers of electricity cost when energy is purchased in
+bulk. As is common in economies of scale, these relative costs are reduced when
+one scales their operations. These additional costs are similar for all
+proof-of-work cryptocurrencies and thus do not affect relative comparisons
+between them. We also remark that we analyze mining costs for small capital
+investments. If larger capital (above a few millions) is available,
+corporations can develop their own specialized hardware which
+gives them a competitive advantage and which they treat as a trade secret.
+These details will make our comparison in favour of proof-of-stake only
+\emph{more pronounced}, as proof-of-stake operations do not incur any
+of these costs which can be optimized at scale and do not lend themselves to
+specialized mining hardware research. We leave the analysis and calculation
+of egalitarianism under these parameters to future work.
+
 \noindent\textbf{Proof-of-stake.}
 In the proof-of-stake case, a minter is selected in proportion to the stake they
 hold, which is to say proportionally to the amount of money they own. There are
