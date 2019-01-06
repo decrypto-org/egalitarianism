@@ -193,4 +193,39 @@ work studying pebbling games~\cite{pebbling}.
 \dionyziz{verify monero ASIC-less claim above}
 \dionyziz{fill-in above citations}
 \dionyziz{memory-hard functions related work citations (pebbling games - ask orestis)}
-\dionyziz{equitability related work}
+
+An analysis of economic fairness pertaining to blockchain reward functions has recently
+been studied in the work of~\cite{equitability}, where they propose the notion
+of \emph{equitability}. In their work, they study the evolution of a blockchain system
+after a series of rounds and they put forth the desirable property that stake ownership
+after the rewards of a fixed period of time have been handed out is proportional
+to stake ownership before the rewards have been handed out. For example, if an
+investor initially owns $20\%$ of the total funds before the game begins, they
+should own $20\%$ of the total funds when the game ends, which now includes
+rewards. They study how the \emph{variance} of these returns behaves under the
+randomness of executions. They show that the distribution of capital after
+execution follows a Pòlya process and propose a mechanism to reduce its
+variance by the introduction of a \emph{geometric reward} function.
+In contrast, our work studies the \emph{expectation} of rewards given different
+initial capital.
+In their work, they make two simplifying assumptions.
+First, they assume that the \emph{expectation} of returns is proportional to
+capital invested. While this holds for proof-of-stake systems, it does not hold
+for proof-of-work systems as we show in this work. Secondly, they assume that
+proof-of-work miners do not reinvest their entrepreneurial proceeds back in the
+mining operation, while proof-of-stake miners do. As we show in this work, this
+is highly unlikely, as such a strategy would not be profitable to proof-of-work
+miners. In fact, empirical data shows that large-scale miners pay for electricity
+directly using their proceeds~\cite{is this even true?}. Regardless,
+\emph{egalitarianism} and \emph{equitability} are two orthogonal notions. A
+cryptocurrency can be perfectly egalitarian and poorly equitable if it uses a
+constant or decreasing reward function and is proof-of-stake. On the other hand,
+a cryptocurrency can be poorly egalitarian but maximally equitable if it uses a
+geometric reward function in conjuction with a proof-of-work function which
+lends itself to economies of scale and allows the construction of specialized
+hardware. Naturally, the ideal cryptocurrency is \emph{perfectly egalitarian}
+and \emph{maximally equitable}. Such a currency is achieved by adopting
+proof-of-stake under a geometric reward function.
+
+\dionyziz{Ensure we illustrate the above claim -- non-reinvestment is non-profitable}
+\dionyziz{Investigate whether large-scale miners pay for their electricity in bitcoin and find a relevant source}
