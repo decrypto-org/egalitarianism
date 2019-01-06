@@ -1,0 +1,105 @@
+\section{Preliminaries}\label{sec:preliminaries}
+
+The leader election is a central part of each blockchain consensus algorithm. We
+now give an overview of the details of proof-of-work mining and proof-of-stake
+minting, as they are central in understanding the difference in egalitarianism
+between the two.
+
+\noindent\textbf{Proof-of-work.}
+In
+the proof-of-work case, miners attempt to solve the proof-of-work inequality. Their
+mining hardware is provided with two constants $\textsc{previd}$ and $\textsc{data}$
+related to blockchain maintenance. It then
+brute-force searches for some string \textsc{nonce} such that
+$H(\textsc{previd} || \textsc{data} || \textsc{nonce}) \leq T$. Here, $T$ is a
+(relatively) small number called
+the \emph{difficulty target}, which typically remains constant for periods of several
+consecutive blocks called \emph{epochs} (for example, in Bitcoin, epochs are
+2016 blocks long). In this inequality, $H$ is a
+cryptographically secure function. Because the search for solutions is
+brute-forced, the expected number of solutions found by a given miner in a given
+timeframe is proportional to the number of evaluations of the hash function $H$
+she can obtain in this timeframe.
+
+\dionyziz{Verify that modifying the difficulty retains the shape of our curves}
+
+The number of such evaluations is one of the several critical parameters to consider when purchasing
+mining hardware. The other important parameters are the cost of purchase for a mining unit,
+as well as its electricity consumption, in Watts.
+There exist various tiers of mining hardware which have
+vastly different performance. These tiers are CPU miners, GPU miners, FPGA miners,
+and specialized hardware miners in the form of ASICs. It makes a vast difference in
+terms of hashing rate and, in turn, return on investment, despite the pricing of
+the respective hardware not having a similarly vast difference in cost of
+purchase. As a motivating indicative example, at the time of writing, the mining hardware ``Whatsminer
+M10'' produced by the company ``MicroBT'' has a cost of purchase of $\$1,448.00$ per unit and produces $\$0.039916$ per hour
+of operation in net gains when electricity costs are subtracted from profits. On
+the other hand, the mining hardware ``8 Nano Pro'' produced by the company ``ASICMiner'' has a cost of purchase of
+$\$47,500.00$ per unit, but produces $\$0.195327$ per hour of operation in net gains, close to five times the net gains per hour of its cheaper competitor.
+Thus, if one can afford to purchase the more expensive hardware, each of their
+subsequent dollar invested in electricity is worth more in terms of freshly mined coin returns.
+
+It
+has long been folklore knowledge in the blockchain community that, if a
+memory-hard function is employed as the proof-of-work mining hash function, then
+mining becomes more egalitarian and such differences are not so pronounced. This intuition is correct, because
+it is difficult to construct specialized hardware for memory-hard functions, and
+hence the only way to scale mining operations is by purchasing more hardware of
+the cheap kind, hence scaling returns proportionally to investments. For
+example, there are currently no ASICs available for Monero mining. From a theoretical computer
+science point of view, memory-hard functions have been formalized in the line of
+work studying pebbling games. We are the first to confirm this correspondence between the
+memory-hardness of proof-of-work hash functions and the economics of mining.
+
+\noindent\textbf{Proof-of-stake.}
+In the proof-of-stake case, a minter is selected in proportion to the stake they
+hold, which is to say proportionally to the amount of money they own. There are
+two flavours of this process. In the first flavour, all money owned automatically participates in the leader election
+process. This is the case for the various variations of Ouroboros~\cite{ouroboros}
+and Ethereum Casper~\cite{casper}. In the second flavour, the stake has to opt-in to participate in
+the election by a special process, such as purchasing a so-called \emph{ticket}. This is the case for cryptocurrencies such as
+Decred~\cite{decred}. Among those participating in the election, a leader is
+elected at random, in proportion to their stake.
+
+While some protocols such as Ouroboros elect \emph{exactly one} leader, there
+are protocols, in both the work and stake setting, such as Bitcoin and Ouroboros
+Praos, which can elect multiple leaders for a particular time slot. However, the
+final blockchain forms a \emph{sequence}, and hence only one block survives among multiple competing blocks.
+As will shortly become clear, our analysis is not sensitive to such nuances.
+
+Proof-of-stake is often criticized for its lack of egalitarianism. The rationale
+is that, in proof-of-stake, the more money one stakes, the more money one is
+able to generate. Thus, the \emph{rich get richer}, and that is precisely the
+\emph{opposite} of egalitarianism. Additionally, in proof-of-stake systems, the
+money owners could constitute a \emph{closed rich club} in which only they and
+their friends have access to stake. In contrast, this argument claims,
+proof-of-work is naturally egalitarian in the following manner. Everyone is paid
+not according to the money the own and stake, but according to the computational
+power they put to work. In this case, a closed rich club cannot be formed,
+because computational power is a very \emph{natural} thing and cannot be
+exclusively owned by the few like money can. In the worst case, one can still
+have a minuscule chance of generating a block with computational power by mining
+with pencil and paper~\cite{paper-mining}, or by building one's own computer. On
+the other hand, if one were to be deprived from owning money by a closed system
+of money owners, there is no natural process for them to generate it on their
+own.
+
+While this line of thought at first seems agreeable, we will show that this
+is not the case in an open market. In fact, as we will soon see with concrete
+data, stake-based systems are much more egalitarian than work. It is instructive
+to dispell the above argument intuively before we support our position with
+data. First of all, the argument that money can be exclusively owned, but
+computational power cannot, is misguided. This may only be true in the case of
+a peculiar oligopoly in which a small permissioned faction of parties mutually
+agrees to only ever allow each other access to stake and never sell to
+outsiders, despite external demand. However, in an open market, both money and
+computational power can be freely purchased with money, and, in fact, any
+non-negligible amount of computational power must necessarily be purchased on
+the open market. Given that both money and computational power are purchasable,
+the question comes down to how much money one needs to spend, investing either
+in technology (and purchasing machines which generate computational power) or in
+financial capital (and purchasing cryptocurrency which one can put to stake), in
+order to maximize the money generated through a cryptocurrency's block
+generation mechanisms. The amount of cryptocurrency generated by a given
+investment can be concretely measured and compared, thus the question can now be
+analyzed quantitatively and answered concretely.

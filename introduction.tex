@@ -22,37 +22,6 @@ during honest protocol executions, a leader is drawn at regular intervals at ran
 miners or minters population, with a probability of selection proportional to
 their computational power or stake respectively.
 
-The leader election is a central part of each blockchain consensus algorithm. In
-the proof-of-work case, miners attempt to solve the proof-of-work inequality, in
-which they brute-force search for some string \textsc{nonce} such that
-$H(\textsc{previd} || \textsc{data} || \textsc{nonce}) \leq T$. In this
-inequality, $\textsc{previd}$ and $\textsc{data}$ are constants related to
-blockchain maintenance and $T$ is a (relatively) small number called
-the \emph{difficulty target}, which typically remains constant for periods of several
-consecutive blocks called \emph{epochs} (for example, in Bitcoin, epochs are
-2016 blocks long). Most importantly for our purposes, in this equation $H$ is a
-cryptographically secure function. Because the search for solutions is
-brute-forced, the expected number of solutions found by a given miner in a given
-timeframe is proportional to the number of evaluations of the hash function $H$
-she can obtain in this timeframe.
-
-\dionyziz{Verify that modifying the difficulty retains the shape of our curves}
-
-In the proof-of-stake case, a minter is selected in proportion to the stake they
-hold, which is to say proportionally to the amount of money they own. There are
-two flavours of this process. In the first flavour, all money owned automatically participates in the leader election
-process. This is the case for the various variations of Ouroboros~\cite{ouroboros}
-and Ethereum Casper~\cite{casper}. In the second flavour, the stake has to opt-in to participate in
-the election by a special process, such as purchasing a so-called \emph{ticket}. This is the case for cryptocurrencies such as
-Decred~\cite{decred}. Among those participating in the election, a leader is
-elected at random, in proportion to their stake.
-
-% While some protocols such as Ouroboros elect \emph{exactly one} leader, there
-% are protocols, in both the work and stake setting, such as Bitcoin and Ouroboros
-% Praos, which can elect multiple leaders for a particular time slot. However, the
-% final blockchain forms a \emph{sequence}, and hence only one block survives among multiple competing blocks.
-% As will shortly become clear, our analysis is not sensitive to such nuances.
-%
 Block generators are
 incentivized to produce blocks by receiving a \emph{reward} for each block they
 successfully produce and which is subsequently adopted in the resulting
@@ -71,19 +40,7 @@ power. The central economic question pertains to cryptocurrency \emph{egalitaria
 In an ideal world, investing a certain amount of capital to mining or minting
 should allow a participant to receive rewards proportional to their capital;
 that is, a \emph{poor dollar} should have equal participatory power as a \emph{rich dollar}.
-However, this is far from true with most cryptocurrencies today. Specifically, in
-the case of mining, there exist various tiers of mining hardware which have
-vastly different performance. If one were to mine using a CPU, a GPU, an FPGA,
-or specialized hardware such as ASICs, it would make a tremendous difference in
-their success rate and, in turn, return on investment, despite the pricing of
-the respective hardware not having a similarly vast difference in cost of
-purchase. As an introductory but indicative example, at the time of writing, the mining hardware ``Whatsminer
-M10'' by the company ``MicroBT'' has a cost of purchase of $\$1,448.00$ per unit and produces $\$0.039916$ per hour
-of operation in net gains when electricity costs are subtracted from profits. On
-the other hand, the mining hardware ``8 Nano Pro'' by the company ``ASICMiner'' has a cost of purchase of
-$\$47,500.00$ per unit, but produces $\$0.195327$ per hour of operation in net gains, close to five times the net gains per hour of its cheaper competitor.
-Thus, if one can afford to purchase the more expensive hardware, each of their
-subsequent dollar invested in electricity is worth more in terms of freshly mined coin returns.
+However, this is far from true with most cryptocurrencies today.
 
 \dionyziz{Fix comma typesetting in monetary values above (should not have a space after the comma)}
 
@@ -136,8 +93,8 @@ Our contributions are summarized as follows:
         egalitarian.
 \end{enumerate}
 
-Our paper is structured as follows. We begin by reviewing related work in
-Section~\ref{sec:related}. We put forth our definition for the egalitarian curve
+Our paper is structured as follows. We begin by reviewing related work and preliminaries in
+Sections~\ref{sec:related} and~\ref{sec:preliminaries}. We put forth our definition for the egalitarian curve
 and egalitarianism of a cryptocurrency and motivate its intuition in
 Section~\ref{sec:definition}. In Section~\ref{sec:experiments} we collect
 empirical data for several cryptocurrencies of interest. We present our
