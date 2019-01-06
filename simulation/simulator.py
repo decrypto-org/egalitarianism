@@ -114,14 +114,32 @@ class Reinvested(Strategy):
 
 
 class DP(Strategy):
+    def construct_solution(self, capital, gain_velocity, items):
+        solution = []
+        initial_capital = capital
+
+        for i in range(capital, 0, -1):
+            if gain_velocity[i - 1] < gain_velocity[i]:
+                initial_capital -= int(items[i].price)
+
+                if items[i] and initial_capital >= 0:
+                    solution.append(items[i])
+
+        return solution
+
     def gain_velocity(self, capital, hardware, calculator):
         g = [0 for _ in range(capital + 1)]
-        for i in range(capital + 1):
+        items = [None for _ in range(capital + 1)]
 
+        for i in range(capital + 1):
             for h in hardware:
                 if h.price <= i:
-                    g[i] = max(g[i], g[int(i - h.price)] + calculator.net(h))
-        return g
+                    if g[int(i - h.price)] + calculator.net(h) > g[i]:
+                        items[i] = h
 
+                    g[i] = max(g[i], g[int(i - h.price)] + calculator.net(h))
+
+        return (g, items)
+        
     def simulate(self, initial_capital, hardware, calculator):
         pass
