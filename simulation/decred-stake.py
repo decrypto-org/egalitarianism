@@ -7,7 +7,7 @@ import sys
 
 plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
-pp = PdfPages('../figures/decred.pdf')
+pp = PdfPages('../figures/decred-stake.pdf')
 
 rc('text', usetex=True, **{'latex.unicode': True})
 rc(
