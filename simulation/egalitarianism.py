@@ -2,7 +2,6 @@ import argparse
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-from math import inf
 from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
 from helpers import slugify
 from mining_hardware import Hardware
@@ -37,7 +36,6 @@ def main():
     args = parser.parse_args()
 
     hardware = []
-    points = []
     calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator, 'ltc': BTCCalculator, 'dcr': BTCCalculator}
     strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested}
     capital = args.capital
@@ -52,14 +50,10 @@ def main():
 
     hardware = parseMininingHardware(args.file)
     simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
+    r = simulator.simulate(capital, hardware)
 
-    for x in np.linspace(0, capital, capital):
-        y = simulator.simulate(x, hardware)
-        net = 0 if y[0] == -inf else y[0]
-        points.append((x, (net - x) / x))
-
-    x = [point[0] for point in points]
-    y = [point[1] for point in points]
+    x = np.linspace(0, capital, capital)
+    y = [(r[i]) / i if i > 0 else r[i] for i in range(0, capital)]
 
     filename = '{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
     desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)

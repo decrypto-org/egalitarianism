@@ -1,4 +1,5 @@
 import abc
+import numpy as np
 from itertools import count, product
 
 
@@ -8,12 +9,21 @@ class Simulator:
         self._calculator = calculator
 
     def simulate(self, initial_capital, hardware):
-        return self._strategy.simulate(initial_capital, hardware, self._calculator)
+        return self._strategy.run(initial_capital, hardware, self._calculator)
 
 
 class Strategy(metaclass=abc.ABCMeta):
     def __init__(self, hours_of_operation):
         self._hours_of_operation = hours_of_operation
+
+    def run(self, capital, hardware, calculator):
+        profits = []
+
+        for x in range(capital + 1):
+            res = self.simulate(x, hardware, calculator)
+            profits.append(res[0])
+
+        return profits
 
     @abc.abstractmethod
     def simulate(self, initial_capital, hardware, calculator):
@@ -21,24 +31,24 @@ class Strategy(metaclass=abc.ABCMeta):
 
 
 class GreedyTechnologyFirst(Strategy):
-    def simulate(self, initial_capital, hardware, calculator):
+    def simulate(self, capital, hardware, calculator):
         optimal_income = 0
-        optimal_configuration = None
+        optimal_configuration = []
         for h in hardware:
             for n in count(1):
                 technology_cost = h.price * n
 
-                if technology_cost > initial_capital:
+                if technology_cost > capital:
                     break
 
-                electricity_capital = initial_capital - technology_cost
+                electricity_capital = capital - technology_cost
                 hours_of_operation = electricity_capital / calculator.cost_per_hour(h)
                 hours_of_operation = min(hours_of_operation, self._hours_of_operation)
                 income = hours_of_operation * calculator.net(h) * n
 
                 if income > optimal_income:
                     optimal_income = income
-                    optimal_configuration = {'hardware': h, 'n': n}
+                    optimal_configuration = [n, h._product]
 
         return (optimal_income, optimal_configuration)
 
@@ -59,7 +69,7 @@ class GreedyElectricityFirst(Strategy):
 
                 if income > optimal_income:
                     optimal_income = income
-                    optimal_configuration = {'hardware': h, 'n': n}
+                    optimal_configuration = [n, h._product]
 
         return (optimal_income, optimal_configuration)
 
