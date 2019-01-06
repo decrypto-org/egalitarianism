@@ -80,7 +80,7 @@ plt.plot(x, y, label='Decred egalitarian curve')
 plt.xlabel('Investment Capital (nominal 2018 USD)')
 plt.ylabel('Freshly generated ROI')
 
-plt.title('Proof-of-Stake egalitarian curve for Decred')
+plt.title('Proof-of-stake egalitarian curve for Decred')
 
 plt.legend()
 plt.gca().set_yticklabels(['{:.0f}\%'.format(x*100) for x in plt.gca().get_yticks()])
