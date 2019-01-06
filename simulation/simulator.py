@@ -140,6 +140,9 @@ class DP(Strategy):
                     g[i] = max(g[i], g[int(i - h.price)] + calculator.net(h))
 
         return (g, items)
-        
+
+    def electricity_velocity(self, hardware, calculator):
+        return sum(calculator.cost_per_hour(h) for h in hardware)
+
     def simulate(self, initial_capital, hardware, calculator):
         pass
