@@ -20,7 +20,40 @@ in the case of proof-of-stake, where block generation is called \emph{minting},
 blocks are produced by \emph{minters} who ``stake'' their coins. In both cases,
 during honest protocol executions, a leader is drawn at regular intervals at random from the
 miners or minters population, with a probability of selection proportional to
-their computational power or stake respectively. Block generators are
+their computational power or stake respectively.
+
+The leader election is a central part of each blockchain consensus algorithm. In
+the proof-of-work case, miners attempt to solve the proof-of-work inequality, in
+which they brute-force search for some string \textsc{nonce} such that
+$H(\textsc{previd} || \textsc{data} || \textsc{nonce}) \leq T$. In this
+inequality, $\textsc{previd}$ and $\textsc{data}$ are constants related to
+blockchain maintenance and $T$ is a (relatively) small number called
+the \emph{difficulty target}, which typically remains constant for periods of several
+consecutive blocks called \emph{epochs} (for example, in Bitcoin, epochs are
+2016 blocks long). Most importantly for our purposes, in this equation $H$ is a
+cryptographically secure function. Because the search for solutions is
+brute-forced, the expected number of solutions found by a given miner in a given
+timeframe is proportional to the number of evaluations of the hash function $H$
+she can obtain in this timeframe.
+
+\dionyziz{Verify that modifying the difficulty retains the shape of our curves}
+
+In the proof-of-stake case, a minter is selected in proportion to the stake they
+hold, which is to say proportionally to the amount of money they own. There are
+two flavours of this process. In the first flavour, all money owned automatically participates in the leader election
+process. This is the case for the various variations of Ouroboros~\cite{ouroboros}
+and Ethereum Casper~\cite{casper}. In the second flavour, the stake has to opt-in to participate in
+the election by a special process, such as purchasing a so-called \emph{ticket}. This is the case for cryptocurrencies such as
+Decred~\cite{decred}. Among those participating in the election, a leader is
+elected at random, in proportion to their stake.
+
+% While some protocols such as Ouroboros elect \emph{exactly one} leader, there
+% are protocols, in both the work and stake setting, such as Bitcoin and Ouroboros
+% Praos, which can elect multiple leaders for a particular time slot. However, the
+% final blockchain forms a \emph{sequence}, and hence only one block survives among multiple competing blocks.
+% As will shortly become clear, our analysis is not sensitive to such nuances.
+%
+Block generators are
 incentivized to produce blocks by receiving a \emph{reward} for each block they
 successfully produce and which is subsequently adopted in the resulting
 blockchain.
