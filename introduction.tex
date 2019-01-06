@@ -3,9 +3,9 @@
 \section{Introduction}
 
 Bitcoin~\cite{bitcoin} is the first and most successful \emph{cryptocurrency} to
-date. It introduced \emph{blockchains}, a of cryptographic consensus protocol in
+date. It introduced a cryptographic consensus protocol in
 which \emph{transactions} are organized into \emph{blocks} which are put in a
-mutually agreed sequence despite the presence of adversaries. Since its
+globally agreed sequence, the \emph{blockchain}, despite the presence of adversaries. Since its
 inception, a plethora of other cryptocurrencies have sprung into existence, each
 claiming its own features.
 
@@ -16,9 +16,9 @@ the decentralized setting:
 mandates of block generation. In the case of proof-of-work, where block
 generation is called \emph{mining}, blocks are produced by \emph{miners}
 expending computational power to solve cryptographic puzzles. On the other hand,
-in the case of proof-of-stake where block generation is called \emph{minting},
+in the case of proof-of-stake, where block generation is called \emph{minting},
 blocks are produced by \emph{minters} who ``stake'' their coins. In both cases,
-during honest protocol executions, a leader is drawn at random from the
+during honest protocol executions, a leader is drawn at regular intervals at random from the
 miners or minters population, with a probability of selection proportional to
 their computational power or stake respectively. Block generators are
 incentivized to produce blocks by receiving a \emph{reward} for each block they
@@ -35,9 +35,7 @@ be can have significant impact on the variance of stake ownership after an
 execution of a sufficient number of protocol rounds and has been studied
 extensively~\cite{equitability}. In this paper, we instead focus on the
 comparison of the \emph{expected} returns of investors with different purchasing
-power.
-
-The central economic question pertains to cryptocurrency \emph{egalitarianism}.
+power. The central economic question pertains to cryptocurrency \emph{egalitarianism}.
 In an ideal world, investing a certain amount of capital to mining or minting
 should allow a participant to receive rewards proportional to their capital.
 However, this is not the case with most cryptocurrencies. Specifically, in
@@ -49,7 +47,7 @@ the respective hardware not having a similarly vast difference in cost of
 purchase. Though the term \emph{egalitarianism} has been left undefined, several
 cryptocurrencies have claimed to achieve more egalitarianism than others.
 However, lacking a comparable metric, the question of whether some
-cryptocurrencies are more \emph{egalitarian} than others remains.
+cryptocurrencies are more \emph{egalitarian} than others remains open.
 
 In this paper, we focus our research on four proof-of-work-based
 cryptocurrencies: Bitcoin, Litecoin, Ethereum, and Monero. Bitcoin was chosen as
@@ -63,13 +61,14 @@ by requiring large amounts of memory, and hence are claimed to yield more
 egalitarian cryptocurrencies.
 
 On the proof-of-stake side, as will soon become clear, egalitarian behavior is
-similar across all coins regardless of implementation. We study the case of a
+similar across all coins regardless of implementation. Therefore, it suffices to
+perform a case study of an indicative proof-of-stake currency. We study the case of a
 pure proof-of-stake cryptocurrency, Cardano~\cite{C:KRDO17}, as well as a hybrid
 work/stake cryptocurrency, Decred.
 
 \noindent
 \textbf{Our contributions.}
-Our contributions are as follows:
+Our contributions are summarized as follows:
 
 \begin{enumerate}
   \item We define an exact economic measure of cryptocurrency
@@ -96,17 +95,16 @@ The macro and microeconomics of blockchain design have
 been studied from several perspectives but remain an active area of research
 which is not yet fully understood. The topic of incentivizing participants to
 generate blocks according to the honest protocol has been explored for both
-proof-of-work and proof-of-stake. Proof-of-work protocols such as bitcoin were
+proof-of-work and proof-of-stake. Proof-of-work protocols such as Bitcoin were
 formalized in the Bitcoin Backbone~\cite{backbone1,backbone2} papers and
-follow-up works~\cite{pass}. The seminal work of selish mining~\cite{selfish}
+follow-up works~\cite{pass}. The seminal work of Selish Mining~\cite{selfish}
 showed that the honest behavior is not incentive-compatible in Bitcoin, but the
 protocol can be modified to behave that way. On the other hand, restricted
-renditions of Bitcoin have been shown to be incentive-compatible in certain
-models in which the adversarial incentives are related to chain
-quality~\cite{tselekounis-kiayias}. Proof-of-stake systems such as Ouroboros
+renditions of Bitcoin have been shown to be incentive-compatible in limited
+models~\cite{tselekounis-kiayias}. Proof-of-stake systems such as Ouroboros
 have been designed from the ground up to be
 incentive-compatible~\cite{ouroboros}. The question of how to incentivize
-parties to conduct pool formation into the desired number of pools was studied
+parties to conduct pool formation into the desired number of pools, or groups of minters, was studied
 in~\cite{stouka-koutsoupias-kiayias}.
 
 The above works study the incentives of blockchain systems from the designer's
