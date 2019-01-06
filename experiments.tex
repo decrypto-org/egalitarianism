@@ -61,7 +61,13 @@ electricity costs to generate more coins. This strategy produces an income of
 freshly generated coins which have not been spent and are reported as the
 strategy's income.
 
-To calculate our concrete numbers, define the following constants:
+To calculate our concrete numbers, we employ the constants shown in
+Table~\ref{tbl:work-constants}. We use the expected block generation rates
+for each cryptocurrency, as well as the reward per block, token price, and
+mining difficulty at the time of writing, all of which we assume remain
+constant. While we cannot predict future prices and difficulty, it is worth
+noting that these do not affect the relative comparison of cryptocurrencies in
+terms of egalitarianism.
 
 \begin{table}
   \centering
@@ -83,7 +89,7 @@ To calculate our concrete numbers, define the following constants:
     \hline
   \end{tabular}
   \caption{The parameters to our proof-of-work mining simulations. Some depend on the cryptocurrency $c$.}
-  \label{tbl:cost-analysis}
+  \label{tbl:work-constants}
 \end{table}
 
 \dionyziz{confirm that changing the total hash rate maintains curve shapes and argue about it in the main text}
