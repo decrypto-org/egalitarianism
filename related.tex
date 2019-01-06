@@ -1,0 +1,86 @@
+\section{Related work}\label{sec:related}
+The macro and microeconomics of blockchain design have
+been studied from several perspectives but remain an active area of research
+which is not yet fully understood. The topic of incentivizing participants to
+generate blocks according to the honest protocol has been explored for both
+proof-of-work and proof-of-stake. Proof-of-work protocols such as Bitcoin were
+formalized in the Bitcoin Backbone~\cite{backbone1,backbone2} papers and
+follow-up works~\cite{pass}. The seminal work of Selish Mining~\cite{selfish}
+showed that the honest behavior is not incentive-compatible in Bitcoin, but the
+protocol can be modified to behave that way. On the other hand, restricted
+renditions of Bitcoin have been shown to be incentive-compatible in limited
+models~\cite{tselekounis-kiayias}. Proof-of-stake systems such as Ouroboros
+have been designed from the ground up to be
+incentive-compatible~\cite{ouroboros}. The question of how to incentivize
+parties to conduct pool formation into the desired number of pools, or groups of minters, was studied
+in~\cite{stouka-koutsoupias-kiayias}.
+
+The above works study the incentives of blockchain systems from the designer's
+point of view so that participants do not deviate from the prescribed protocol.
+A related question is how \emph{fair} the protocol is to participants
+themselves, and in particular to honest participants. The Backbone and Selfish
+Mining works include attacks in which an adversary can strategically harm
+\emph{chain quality}, ensuring the number of blocks and, in turn, the respective
+rewards, are disproportionate to their contributed computational power, thereby
+harming fairness against honest participants. Fruitchains~\cite{fruitchains}
+proposes a protocol which solves this problem.
+While these works study incentives of block generation, it has been
+assumed that handing out rewards in exact proportion to computational power is
+``fair''. However, the question of whether computational power grows proportionally
+to capital invested has not been previously studied. As such, the notion of
+fairness in treating each dollar equally, regardless of whether it comes from a
+rich or poor fund, has not been previously studied.
+
+Intuitively, we are studying the effects of economies of scale as they are
+applied to block generation.
+In proof-of-work systems, the question of \emph{egalitarianism} has been studied
+from a technological point of view through the work on \emph{memory-hard functions}~\cite{pebbling}.
+
+\dionyziz{verify monero ASIC-less claim above}
+\dionyziz{fill-in above citations}
+\dionyziz{memory-hard functions related work citations (pebbling games - ask orestis)}
+
+An analysis of economic fairness pertaining to blockchain reward functions has recently
+been studied in the work of~\cite{equitability}, where they propose the notion
+of \emph{equitability}. In their work, they study the evolution of a blockchain system
+after a series of rounds and they put forth the desirable property that stake ownership
+after the rewards of a fixed period of time have been handed out is proportional
+to stake ownership before the rewards have been handed out. For example, if an
+investor initially owns $20\%$ of the total funds before the game begins, they
+should own $20\%$ of the total funds when the game ends, which now includes
+rewards. They study how the \emph{variance} of these returns behaves under the
+randomness of executions. They show that the distribution of capital after
+execution follows a Pòlya process and propose a mechanism to reduce its
+variance by the introduction of a \emph{geometric reward} function.
+In contrast, our work studies the \emph{expectation} of rewards given different
+initial capital.
+In their work, they make two simplifying assumptions.
+First, they assume that the \emph{expectation} of returns is proportional to
+capital invested for proof-of-stake. As we show in this work, this is only
+approximately true for some proof-of-stake systems (those that are perfectly egalitarian). For proof-of-work, they
+correctly assume that the expectation of returns is proportional to computational
+power expended, but do not study the relationship between computational power and
+capital, which, as we show in this work, is far from linear. Secondly, they assume that
+proof-of-work miners do not reinvest their proceeds back in the
+mining operation, while proof-of-stake minters do. This is the critical assumption which allows the authors to incorrectly
+conclude that proof-of-stake minting behaves like Pòlya's urn, while
+proof-of-work mining does not. As we show in this work, this
+is highly unlikely, as such a strategy would not be profitable to proof-of-work
+miners. In fact, empirical data shows that large-scale miners pay for electricity
+directly using their proceeds~\cite{is this even true?}. Hence, their mathematical analysis
+using a Pòlya process is correct, but, contrary to their claims, their model applies to proof-of-work
+and proof-of-stake systems alike, meaning that they are both equally unequitable. Regardless,
+\emph{egalitarianism}, which we treat in this work, and \emph{equitability}, which
+they treat in their work, are two orthogonal notions. A
+cryptocurrency can be perfectly egalitarian and poorly equitable if it uses a
+constant or decreasing reward function and is proof-of-stake. On the other hand,
+a cryptocurrency can be poorly egalitarian but maximally equitable if it uses a
+geometric reward function in conjuction with a proof-of-work function which
+lends itself to economies of scale and allows the construction of specialized
+hardware. The reader is invited to contrast the two notions, which measure
+block generation fairness from a different point of view. Naturally, the ideal cryptocurrency is both \emph{perfectly egalitarian}
+and \emph{maximally equitable}. Designers of such a currency would adopt
+proof-of-stake under a geometric reward function.
+
+\dionyziz{Ensure we illustrate the above claim -- non-reinvestment is non-profitable}
+\dionyziz{Investigate whether large-scale miners pay for their electricity in bitcoin and find a relevant source}
