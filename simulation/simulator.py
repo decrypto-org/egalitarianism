@@ -1,5 +1,5 @@
 import abc
-from itertools import count
+from itertools import count, product
 
 
 class Simulator:
@@ -62,6 +62,55 @@ class GreedyElectricityFirst(Strategy):
                     optimal_configuration = {'hardware': h, 'n': n}
 
         return (optimal_income, optimal_configuration)
+
+
+class ReinvestedSimple(Strategy):
+    def simulate(self, capital, hardware, calculator):
+        sorted_hardware = sorted(hardware, key=lambda h: calculator.net(h) - (h.price / self._hours_of_operation), reverse=True)
+
+        profit = 0
+        optimal_configuration = []
+        for h in sorted_hardware:
+            if calculator.net(h) - (h.price / self._hours_of_operation) < 0:
+                break
+            n = 0
+            while True:
+                n += 1
+                if h.price * n > capital:
+                    break
+            n -= 1
+            technology_cost = h.price * n
+            income = self._hours_of_operation * calculator.net(h) * n
+            profit += income
+            capital -= technology_cost
+            if n:
+                optimal_configuration.append([n, h.name])
+
+        return (capital + profit, optimal_configuration)
+
+
+class Reinvested(Strategy):
+    def simulate(self, capital, hardware, calculator):
+        # Sort the hardware by profitability and keep only the profitable
+        sorted_hardware = [h for h in sorted(hardware, key=lambda h: calculator.net(h) - (h.price / self._hours_of_operation), reverse=True) if calculator.net(h) - (h.price / self._hours_of_operation) > 0]
+
+        optimal_configuration = (capital, [])
+        flag = True
+        combinations_ctr = 0
+        while flag:
+            flag = False
+            combinations_ctr += 1
+            # Iterate over all possible combinations and pick the best one
+            for combination in product(sorted_hardware, repeat=combinations_ctr):
+                technology_cost = sum([h.price for h in combination])
+                if technology_cost > capital:
+                    continue
+                income = sum([self._hours_of_operation * calculator.net(h) for h in combination]) + capital - technology_cost
+                if income > optimal_configuration[0]:
+                    optimal_configuration = (income, [h.name for h in combination])
+                    flag = True  # If at least 1 combination was valid, then continue trying with increased combinations counter
+
+        return optimal_configuration
 
 
 class DP(Strategy):

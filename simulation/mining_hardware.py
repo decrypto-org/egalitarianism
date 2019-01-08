@@ -11,6 +11,10 @@ class Hardware():
         return '<MiningHardware>'
 
     @property
+    def name(self):
+            return self._product
+
+    @property
     def watt(self):
             return float(re.sub(r'[^\d.]', '', self._watt))
 

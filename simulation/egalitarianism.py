@@ -3,7 +3,7 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 from math import inf
-from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP
+from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
 from helpers import slugify
 from mining_hardware import Hardware
 from configuration import Configuration
@@ -25,7 +25,7 @@ def parseMininingHardware(file):
 def main():
     parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
     parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr'], help='Currency (default: %(default)s)')
-    parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp'], help='Strategy of invenstment (default: %(default)s)')
+    parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp', 'reinvest'], help='Strategy of invenstment (default: %(default)s)')
     parser.add_argument('-d', '--difficulty', required=True, type=float, help='Block difficulty (required)')
     parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
     parser.add_argument('-k', '--kwh', required=True, type=float, help='Price per kilowatt per hour (required)')
@@ -39,7 +39,7 @@ def main():
     hardware = []
     points = []
     calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator}
-    strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP}
+    strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested}
     capital = args.capital
     hours_of_operation = args.time * 30 * 24
 
