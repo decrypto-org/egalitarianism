@@ -65,6 +65,10 @@ optional arguments:
 
 `pipenv run python egalitarianism.py -f ./data/ltc.csv -c ltc -d 44453209154 -b 25 -k 0.11 -r 32.10 -p 10000`
 
+#### DCR
+
+`pipenv run python egalitarianism.py -f ./data/dcr.csv -c dcr -d 13034411457.7978 -b 11.38 -k 0.11 -r 16.62 -p 10000`
+
 ### Docker
 
 #### Build

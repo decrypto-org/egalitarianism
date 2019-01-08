@@ -24,7 +24,7 @@ def parseMininingHardware(file):
 
 def main():
     parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
-    parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr', 'ltc'], help='Currency (default: %(default)s)')
+    parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr', 'ltc', 'dcr'], help='Currency (default: %(default)s)')
     parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp', 'reinvest'], help='Strategy of invenstment (default: %(default)s)')
     parser.add_argument('-d', '--difficulty', required=True, type=float, help='Block difficulty (required)')
     parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
@@ -38,7 +38,7 @@ def main():
 
     hardware = []
     points = []
-    calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator, 'ltc': BTCCalculator}
+    calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator, 'ltc': BTCCalculator, 'dcr': BTCCalculator}
     strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested}
     capital = args.capital
     hours_of_operation = args.time * 30 * 24
