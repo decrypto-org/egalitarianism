@@ -154,5 +154,16 @@ class DP(Strategy):
     def electricity_velocity(self, hardware, calculator):
         return sum(calculator.cost_per_hour(h) for h in hardware)
 
+    def run(self, initial_capital, hardware, calculator):
+        return self.simulate(initial_capital, hardware, calculator)
+
     def simulate(self, initial_capital, hardware, calculator):
-        pass
+        r = [0 for _ in range(initial_capital + 1)]
+        sorted_hardware = [h for h in sorted(hardware, key=lambda h: calculator.net(h), reverse=True) if calculator.net(h) > 0]
+        g = self.gain_velocity(initial_capital, sorted_hardware, calculator)
+        gain_velocity = g[0]
+
+        for x in range(initial_capital + 1):
+            r[x] = gain_velocity[x] * self._hours_of_operation
+
+        return (r)
