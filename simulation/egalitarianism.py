@@ -2,6 +2,8 @@ import argparse
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import rc
+from matplotlib.backends.backend_pdf import PdfPages
 from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
 from helpers import slugify
 from mining_hardware import Hardware
@@ -58,13 +60,32 @@ def main():
     filename = '{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
     desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)
 
-    plt.plot(x, y)
-    plt.xlabel('$')
-    plt.ylabel('ROI')
-    plt.title('Egalitarianism curve')
+    plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
+
+    rc('text', usetex=True)
+    rc(
+        'font',
+        family='serif',
+        serif=['Computer Modern Roman'],
+        monospace=['Computer Modern Typewriter']
+    )
+
+    pp = PdfPages(filename)
+
+    fig = plt.figure()
+    fig.set_size_inches(6.2, 6.2)
+
+    plt.plot(x, y, label='Egalitarian curve')
+
+    plt.xlabel('Investment Capital (nominal 2018 USD)')
+    plt.ylabel('Freshly generated ROI')
+
+    plt.title('Egalitarian curve')
+
     plt.legend()
-    plt.figtext(0, -0.1, desc)
-    plt.savefig(filename, format='pdf', dpi=1000, bbox_inches='tight')
+
+    plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
+    pp.close()
 
 
 if __name__ == '__main__':
