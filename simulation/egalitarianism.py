@@ -57,7 +57,7 @@ def main():
     x = np.linspace(0, capital, capital)
     y = [(r[i]) / i if i > 0 else r[i] for i in range(0, capital)]
 
-    filename = '{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
+    filename = '../figures/{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
     desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)
 
     plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
