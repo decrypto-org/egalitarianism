@@ -1,4 +1,5 @@
 import abc
+import numpy as np
 from itertools import count, product
 
 
@@ -8,12 +9,21 @@ class Simulator:
         self._calculator = calculator
 
     def simulate(self, initial_capital, hardware):
-        return self._strategy.simulate(initial_capital, hardware, self._calculator)
+        return self._strategy.run(initial_capital, hardware, self._calculator)
 
 
 class Strategy(metaclass=abc.ABCMeta):
     def __init__(self, hours_of_operation):
         self._hours_of_operation = hours_of_operation
+
+    def run(self, capital, hardware, calculator):
+        profits = []
+
+        for x in range(capital + 1):
+            res = self.simulate(x, hardware, calculator)
+            profits.append(res[0])
+
+        return profits
 
     @abc.abstractmethod
     def simulate(self, initial_capital, hardware, calculator):
@@ -21,24 +31,24 @@ class Strategy(metaclass=abc.ABCMeta):
 
 
 class GreedyTechnologyFirst(Strategy):
-    def simulate(self, initial_capital, hardware, calculator):
+    def simulate(self, capital, hardware, calculator):
         optimal_income = 0
-        optimal_configuration = None
+        optimal_configuration = []
         for h in hardware:
             for n in count(1):
                 technology_cost = h.price * n
 
-                if technology_cost > initial_capital:
+                if technology_cost > capital:
                     break
 
-                electricity_capital = initial_capital - technology_cost
+                electricity_capital = capital - technology_cost
                 hours_of_operation = electricity_capital / calculator.cost_per_hour(h)
                 hours_of_operation = min(hours_of_operation, self._hours_of_operation)
                 income = hours_of_operation * calculator.net(h) * n
 
                 if income > optimal_income:
                     optimal_income = income
-                    optimal_configuration = {'hardware': h, 'n': n}
+                    optimal_configuration = [n, h._product]
 
         return (optimal_income, optimal_configuration)
 
@@ -59,7 +69,7 @@ class GreedyElectricityFirst(Strategy):
 
                 if income > optimal_income:
                     optimal_income = income
-                    optimal_configuration = {'hardware': h, 'n': n}
+                    optimal_configuration = [n, h._product]
 
         return (optimal_income, optimal_configuration)
 
@@ -114,5 +124,46 @@ class Reinvested(Strategy):
 
 
 class DP(Strategy):
-    def simulate(self, initial_capital, hardware):
-        pass
+    def construct_solution(self, capital, gain_velocity, items):
+        solution = []
+        initial_capital = capital
+
+        for i in range(capital, 0, -1):
+            if gain_velocity[i - 1] < gain_velocity[i]:
+                initial_capital -= int(items[i].price)
+
+                if items[i] and initial_capital >= 0:
+                    solution.append(items[i])
+
+        return solution
+
+    def gain_velocity(self, capital, hardware, calculator):
+        g = [0 for _ in range(capital + 1)]
+        items = [None for _ in range(capital + 1)]
+
+        for i in range(capital + 1):
+            for h in hardware:
+                if h.price <= i:
+                    if g[int(i - h.price)] + calculator.net(h) > g[i]:
+                        items[i] = h
+
+                    g[i] = max(g[i], g[int(i - h.price)] + calculator.net(h))
+
+        return (g, items)
+
+    def electricity_velocity(self, hardware, calculator):
+        return sum(calculator.cost_per_hour(h) for h in hardware)
+
+    def run(self, initial_capital, hardware, calculator):
+        return self.simulate(initial_capital, hardware, calculator)
+
+    def simulate(self, initial_capital, hardware, calculator):
+        r = [0 for _ in range(initial_capital + 1)]
+        sorted_hardware = [h for h in sorted(hardware, key=lambda h: calculator.net(h), reverse=True) if calculator.net(h) > 0]
+        g = self.gain_velocity(initial_capital, sorted_hardware, calculator)
+        gain_velocity = g[0]
+
+        for x in range(initial_capital + 1):
+            r[x] = gain_velocity[x] * self._hours_of_operation
+
+        return (r)
