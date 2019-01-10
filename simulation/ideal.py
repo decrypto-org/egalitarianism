@@ -19,7 +19,7 @@ rc(
 MAX_CAPITAL = 1000000
 
 x = np.linspace(0, MAX_CAPITAL, MAX_CAPITAL)
-y = np.zeros(MAX_CAPITAL) + 0.07
+y = [0] + [0.07 for _ in range(MAX_CAPITAL-1)]
 
 fig = plt.figure()
 fig.set_size_inches(6.2, 6.2)
