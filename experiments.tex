@@ -178,9 +178,10 @@ Figure~?.
 \noindent\textbf{Proof-of-stake}
 
 \noindent
-We analyze the proof-of-stake egalitarianism of two protocols: Ouroboros,
-which is a pure proof-of-stake protocol, and the proof-of-stake strategy
-for mining Decred.
+We analyze the proof-of-stake egalitarianism in two settings. First, we
+consider pure proof-of-stake, which can be applied on top of a protocol like
+Ouroboros. Second, we consider the case of mining Decred, a hybrid
+proof-of-work/proof-of-stake cryptocurrency.
 
 The egalitarian curve for \emph{staking} Decred is illustrated in
 Figure~\ref{fig:decred-stake}. The curve is almost perfectly egalitarian. Decred
@@ -199,6 +200,17 @@ multiples of the ticket price.
     \label{fig:decred-stake}
 \end{figure}
 
+In the case of pure proof-of-stake, every coin has the same probability of being chosen, so that its owner is eligible to create a block. Specifically, consider the case of a cryptocurrency with $N$ coins in circulation. Whenever a block needs to be created, a coin is chosen, therefore each coin may be chosen with $1 \over N$ probability. Then the address which owns the chosen coin, in other words the stakeholder which controls this coin, is eligible to generate a block and receive the rewards associated with this operation. In our experiments, we assume that every block is associated with a constant reward which pertains to newly minted coins. Furthermore, since computational power does not affect the rate of block production, it is reasonable to assume that both the electricity and the hardware equipment's price is constant, such that all users can participate using a cheap machine.
+
+Figure~\ref{fig:pure-pos-stake} depicts the simulation of a pure proof-of-stake system. In this case, the users pay a set fee which represents the hardware and electricity cost, whereas the rest of the capital is used to buy coins. It is clear that this system converges much faster than both proof-of-work and the hybrid case above.
+
+\begin{figure}[H]
+    \caption{The egalitarianism of \emph{staking} in a pure proof-of-stake cryptocurrency.}
+    \centering
+    \includegraphics[width=0.75 \columnwidth,keepaspectratio]{figures/pure-pos.pdf}
+    \label{fig:pure-pos-stake}
+\end{figure}
+
 \dionyziz{Add Ouroboros figure and discussion}
 
 Our findings are summarized in Table~\ref{tbl:egalitarianism}. We find that
@@ -207,7 +219,7 @@ The latter two are the most egalitarian due to their use of scrypt and
 Cryptonight respectively. Decred is a hybrid coin which can both be staked and
 mined. Mining with Decred has egalitarianism which stands between Ethereum and
 Litecoin. The most egalitarian coins involve staking. Decred staking, due to its
-quantized ticket pricing, is only approximately egalitarian. Ouroboros, which
+quantized ticket pricing, is only approximately egalitarian. Pure proof-of-stake, which
 allows continuous staking, is perfectly egalitarian.
 
 \dionyziz{Spelling of ``cryptonight''?}
