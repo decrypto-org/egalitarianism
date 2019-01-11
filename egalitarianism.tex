@@ -2,15 +2,62 @@
 
 \newif\ifanonymous
 \newif\ifshort
+\newif\iflncs
+% \lncstrue
 % \anonymoustrue
 % \shorttrue
 
+\iflncs
 \documentclass[11pt]{llncs}
 \usepackage{preamble}
 
 \begin{document}
 \import{./}{title.tex}
 \thispagestyle{plain}
+\else
+\documentclass[a4paper,UKenglish,cleveref, autoref]{lipics-v2019}
+\usepackage{preamble}
+
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
+\import{./}{title.tex}
+
+\Copyright{Sara Tucci-Piergiovanni et al.}%TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\ccsdesc[100]{General and reference~General literature}
+\ccsdesc[100]{General and reference}%TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm
+
+\keywords{blockchain, egalitarianism, cryptocurrency, economics, proof-of-work, proof-of-stake}%TODO mandatory; please add comma-separated list of keywords
+
+\category{}%optional, e.g. invited paper
+
+\relatedversion{}%optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+%\relatedversion{A full version of the paper is available at \url{...}.}
+
+\supplement{}%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+
+\ifanonymous\else
+\acknowledgements{Research partially supported by H2020 project PRIVILEDGE \# 780477}
+\fi
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\EventEditors{Sara Tucci-Piergiovanni et al.}
+\EventNoEds{5}
+\EventLongTitle{Tokenomics: International Conference on Blockchain Economics, Security and Protocols 2019}
+\EventShortTitle{TOKENOMICS 2019}
+\EventAcronym{TOKENOMICS}
+\EventYear{2019}
+\EventDate{May 6--7, 2019}
+\EventLocation{Paris, France}
+\EventLogo{}
+\SeriesVolume{1}
+\ArticleNo{9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\fi
 \import{./}{abstract.tex}
 
 \import{./}{introduction.tex}
@@ -20,7 +67,11 @@
 \import{./}{experiments.tex}
 \import{./}{conclusion.tex}
 
+% \appendix
+
+\iflncs
 \bibliographystyle{alpha}
+\fi
 \bibliography{pubs,abbrev3,crypto}
 
 \end{document}

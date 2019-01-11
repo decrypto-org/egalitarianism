@@ -134,10 +134,19 @@
 \newcommand{\ie}{\textit{i.e.} }
 
 \newcommand{\placefigure}[4]{
+  \iflncs
     \begin{figure}[H]
         \caption{#3}
         \centering
         \includegraphics[width=#4 \columnwidth,keepaspectratio]{figures/#1}
         \label{#2}
     \end{figure}
+  \else
+    \begin{figure}
+        \caption{#3}
+        \centering
+        \includegraphics[width=#4 \columnwidth,keepaspectratio]{figures/#1}
+        \label{#2}
+    \end{figure}
+  \fi
 }

@@ -1,13 +1,17 @@
 \ProvidesPackage{preamble}
 
+\iflncs
 \usepackage[pdftex]{graphicx}
 % \usepackage[linesnumbered,ruled,noend]{algorithm2e}
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{algorithm}
+\fi
 \usepackage{algpseudocode}
+\iflncs
 \let\proof\relax
 \let\endproof\relax
+\fi
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{amssymb}
