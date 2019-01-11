@@ -262,6 +262,8 @@ TSWLatexianTemp*
 # standalone packages
 *.sta
 
+*.vtc
+
 # General
 .DS_Store
 .AppleDouble
