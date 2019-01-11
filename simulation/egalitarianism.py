@@ -40,6 +40,8 @@ def main():
     hardware = []
     calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator, 'ltc': BTCCalculator, 'dcr': BTCCalculator}
     strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested}
+    currencies = {'btc': ['Bitcoin'], 'eth': ['Ethereum'], 'xmr': ['Monero'], 'ltc': ['Litecoin'], 'dcr': ['Decred']}
+
     capital = args.capital
     hours_of_operation = args.time * 30 * 24
 
@@ -75,12 +77,12 @@ def main():
     fig = plt.figure()
     fig.set_size_inches(6.2, 6.2)
 
-    plt.plot(x, y, label='Egalitarian curve')
+    plt.plot(x, y, label='{0} egalitarian curve'.format(currencies[args.currency][0]))
 
     plt.xlabel('Investment Capital (nominal 2018 USD)')
     plt.ylabel('Freshly generated ROI')
 
-    plt.title('Egalitarian curve')
+    plt.title('{0} egalitarian curve'.format(currencies[args.currency][0]))
 
     plt.legend()
 
