@@ -3,7 +3,7 @@
 
 Figure~\ref{fig:different-settings} demonstrates that the qualitative difference of egalitarianism across cryptocurrencies remains the same if the difficulty, the electricity cost and the duration is adjusted.
 
-\begin{figure}[!ht]
+\begin{figure}
   \placesubfigure{btc_dp_10K_12_months_3_diff.pdf}{fig:different_difficulty}{Difficulty}{0.75}{0.5}
   \placesubfigure{btc_dp_10K_12_months_3_kwh.pdf}{fig:different_electricity_cost}{Electricity cost}{0.75}{0.5}
   \placesubfigure{btc_dp_10K_12_months_4_time.pdf}{fig:different_duration}{Duration}{0.75}{0.5}
@@ -16,81 +16,120 @@ Figure~\ref{fig:different-settings} demonstrates that the qualitative difference
 We have analyzed several different mining machines, a summary of which is shown in Table~\ref{tbl:machines}.
 
 
-\begin{table}[!ht]
-  \centering
-  \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|c|c|c|c|c|}
-      \hline
-      Name & H / s & Watt & Price (USD) & Cryptocurrency\\
-      \hhline{|=|=|=|=|=|}
-        Bitmain Antminer T15 & 23,000,000,000,000.00 & 1,541.00 & 913.00 & Bitcoin \\
-        Bitmain Antminer S15 & 28,000,000,000,000.00 & 1,596.00 & 1,475.00 & Bitcoin \\
-        Bitmain Antminer S11 & 20,500,000,000,000.00 & 1,530.00 & 545.00 & Bitcoin \\
-        Ebang Ebit E11++ & 44,000,000,000,000.00 & 1,980.00 & 2,024.00 & Bitcoin \\
-        Ebang Ebit E11+ 37T & 37,000,000,000,000.00 & 2,035.00 & 1,517.00 & Bitcoin \\
-        Ebang Ebit E11 & 30,000,000,000,000.00 & 1,950.00 & 1,110.00 & Bitcoin \\
-        ASICMiner 8 Nano & 44,000,000,000,000.00 & 2,100.00 & 1,790.00 & Bitcoin \\
-        ASICMiner 8 Nano Pro & 76,000,000,000,000.00 & 4,000.00 & 6,000.00 & Bitcoin \\
-        Innosilicon T3 43T & 43,000,000,000,000.00 & 2,100.00 & 2,279.00 & Bitcoin \\
-        Innosilicon T2T-32T & 32,000,000,000,000.00 & 2,200.00 & 1,568.00 & Bitcoin \\
-        MicroBT Whatsminer M10 & 33,000,000,000,000.00 & 2,145.00 & 1,448.00 & Bitcoin \\
-        MicroBT Whatsminer M10S & 55,000,000,000,000.00 & 3,500.00 & 2,558.00 & Bitcoin \\
-        Innosilicon A10 EthMaster & 485,000,000.00 & 850 & 5,399.00 & Ethereum \\
-        Innosilicon A10 EthMaster & 432,000,000.00 & 740 & 4,799.00 & Ethereum \\
-        Innosilicon A10 EthMaster & 365,000,000.00 & 650 & 4,099.00 & Ethereum \\
-        Nvidia GeForce RTX 2080Ti & 55,000,000.00 & 155 & 1,499.00 & Ethereum \\
-        Nvidia GeForce RTX 2080 & 41,000,000.00 & 105 & 749.99 & Ethereum \\
-        Nvidia GeForce RTX 2070 & 38,500,000.00 & 140 & 529.99 & Ethereum \\
-        Nvidia GeForce GTX TITAN V & 82,000,000.00 & 250 & 3,399.00 & Ethereum \\
-        Nvidia GeForce GTX TITAN X & 40,000,000.00 & 250 & 1,699.00 & Ethereum \\
-        Nvidia GeForce GTX 1080Ti & 55,000,000.00 & 190 & 747.12 & Ethereum \\
-        Nvidia GeForce GTX 1080 & 37,000,000.00 & 120 & 574.99 & Ethereum \\
-        Nvidia GeForce GTX 1070Ti & 32,000,000.00 & 100 & 519.00 & Ethereum \\
-        Nvidia GeForce GTX 1070 & 32,000,000.00 & 100 & 349.99 & Ethereum \\
-        Nvidia P104-100 & 38,000,000.00 & 125 & 524.14 & Ethereum \\
-        AMD RX 580 & 30,000,000.00 & 110 & 219.99 & Ethereum \\
-        AMD RX 570 & 27,900,000.00 & 90 & 208.99 & Ethereum \\
-        AMD RX 480 & 29,500,000.00 & 135 & 214.60 & Ethereum \\
-        Bitmain Antminer E3 & 190,000,000.00 & 760 & 654.24 & Ethereum \\
-        Shark Mining Shark Extreme 2 (8 x AMD RX 580) & 240,000,000.00 & 1100 & 4,590.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (8 x NVIDIA GTX 1080 Ti) & 420,000,000.00 & 1500 & 9,779.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (8 x NVIDIA RTX 2080 Ti) & 424,000,000.00 & 1800 & 17,779.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (6 x AMD RX 580) & 180,000,000.00 & 825 & 3,790.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (6 x NVIDIA GTX 1080 Ti) & 300,000,000.00 & 1125 & 8,029.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (6 x NVIDIA RTX 2080 Ti) & 318,000,000.00 & 1350 & 14,029.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (4 x AMD RX 580) & 120,000,000.00 & 550 & 2,590.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (4 x NVIDIA GTX 1080 Ti) & 210,000,000.00 & 750 & 4,979.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (4 x NVIDIA RTX 2080 Ti) & 212,000,000.00 & 900 & 7,679.00 & Ethereum \\
-        MineShop Ethereum Mining Rig (8x NVIDIA 1080 8gb GPU) & 310,000,000.00 & 1100 & 6,267.50 & Ethereum \\
-        MineShop Ethereum Mining Rig (8x AMD MSI RX 580 GPU) & 240,000,000.00 & 1000 & 3,453.85 & Ethereum \\
-        MineShop Ethereum Mining Rig (8x AMD MSI RX 570 GPU) & 220,000,000.00 & 950 & 3,225.93 & Ethereum \\
-        MineShop Ethereum Mining Rig (6x AMD MSI RX 580 GPU) & 170,000,000.00 & 750 & 2,156.46 & Ethereum \\
-        MineShop Ethereum Mining Rig (6x AMD MSI RX 560) & 80,000,000.00 & 370 & 1,823.14 & Ethereum \\
-        Innosilicon A4+ LTCMaster & 620,000,000.00 & 750 & 1,500.00 & Litecoin \\
-        Innosilicon A6 LTCMaster & 1,230,000,000.00 & 1500 & 3,000.00 & Litecoin \\
-        FutureBit Apollo LTC Pod & 140,000,000.00 & 196 & 299.99 & Litecoin \\
-        Shark Mining Shark Extreme 2 (8 x AMD Vega 56) & 14800 & 1700 & 6,879.00 & Monero \\
-        Shark Mining Shark Extreme 2 (6 x AMD RX 580) & 5160 & 825 & 3,790.00 & Monero \\
-        Shark Mining Shark Extreme 2 (6 x AMD Vega 56) & 11000 & 1275 & 5,829.00 & Monero \\
-        Shark Mining Shark Extreme 2 (4 x AMD RX 580) & 3440 & 550 & 2,590.00 & Monero \\
-        Nvidia GeForce GTX 2070 & 880 & 140 & 747.12 & Monero \\
-        Nvidia GeForce GTX 1060 & 520 & 80 & 279.99 & Monero \\
-        Nvidia GeForce GTX 1050Ti & 637 & 70 & 170.00 & Monero \\
-        AMD RX Vega 64 & 2040 & 140 & 429.00 & Monero \\
-        AMD RX Vega 56 & 2034 & 140 & 399.99 & Monero \\
-        AMD RX 580 & 1050 & 110 & 219.99 & Monero \\
-        AMD RX 570 & 900 & 90 & 208.99 & Monero \\
-        AMD RX 480 & 830 & 130 & 214.60 & Monero \\
-        AMD Ryzen 5 2600 & 627.3 & 65 & 154.99 & Monero \\
-        Intel i7-3770 & 287 & 43 & 459.99 & Monero \\
-        Bitmain Antminer DR5 & 35,000,000,000,000.00 & 1610 & 1,282.00 & Decred \\
-        MicroBT Whatsminer D1 & 48,000,000,000,000.00 & 2200 & 2,500.00 & Decred \\
-        MicroBT Whatsminer DCR & 44,000,000,000,000.00 & 2200 & 2,100.00 & Decred \\
-        StrongU STU-U1+ & 12,800,000,000,000.00 & 1850 & 1,579.00 & Decred \\
-        StrongU STU-U1 & 11,000,000,000,000.00 & 1600 & 1,389.00 & Decred \\
-      \hline
-    \end{tabular}
-   }
-  \caption{Machines used in experiments}
-  \label{tbl:machines}
-\end{table}
+\begin{longtable}{|p{.35\textwidth}|p{.22\textwidth}|p{.08\textwidth}|p{.08\textwidth}|p{.15\textwidth}|}
+    \hline
+    Name & H / s & Watt & Price (USD) & Cryptocurrency\\
+    \hhline{|=|=|=|=|=|}
+  \hline
+  Bitmain Antminer S9-Hydro & 18,000,000,000,000.00 & 1,728.00 & 636.00 & Bitcoin \\
+  Bitmain Antminer S9i & 14,000,000,000,000.00 & 1,314.00 & 307.00 & Bitcoin \\
+  Bitmain Antminer T15 & 23,000,000,000,000.00 & 1,541.00 & 913.00 & Bitcoin \\
+  Bitmain Antminer S9j & 14,000,000,000,000.00 & 1,314.00 & 294.00 & Bitcoin \\
+  Bitmain Antminer S15 & 28,000,000,000,000.00 & 1,596.00 & 1,475.00 & Bitcoin \\
+  Bitmain Antminer S11 & 20,500,000,000,000.00 & 1,530.00 & 545.00 & Bitcoin \\
+  Canaan AvalonMiner 821 & 11,500,000,000,000.00 & 1,200.00 & 179.00 & Bitcoin \\
+  Canaan AvalonMiner 841 & 13,600,000,000,000.00 & 1,290.00 & 249.00 & Bitcoin \\
+  Canaan AvalonMiner 851 & 15,000,000,000,000.00 & 1,450.00 & 380.00 & Bitcoin \\
+  Canaan AvalonMiner 921 & 20,000,000,000,000.00 & 1,800.00 & 742.00 & Bitcoin \\
+  Ebang Ebit E11++ & 44,000,000,000,000.00 & 1,980.00 & 2,024.00 & Bitcoin \\
+  Ebang Ebit E11+ 37T & 37,000,000,000,000.00 & 2,035.00 & 1,517.00 & Bitcoin \\
+  Ebang Ebit E11 & 30,000,000,000,000.00 & 1,950.00 & 1,110.00 & Bitcoin \\
+  Ebang Ebit E10 & 18,000,000,000,000.00 & 1,650.00 & 2,799.99 & Bitcoin \\
+  ASICMiner 8 Nano & 44,000,000,000,000.00 & 2,100.00 & 1,790.00 & Bitcoin \\
+  ASICMiner 8 Nano Pro & 76,000,000,000,000.00 & 4,000.00 & 6,000.00 & Bitcoin \\
+  Innosilicon T3 43T & 43,000,000,000,000.00 & 2,100.00 & 2,279.00 & Bitcoin \\
+  Innosilicon T2T-25T & 25,000,000,000,000.00 & 2,050.00 & 1,150.00 & Bitcoin \\
+  Innosilicon T2T-32T & 32,000,000,000,000.00 & 2,200.00 & 1,568.00 & Bitcoin \\
+  Innosilicon T2T-24T & 24,000,000,000,000.00 & 1,980.00 & 1,350.00 & Bitcoin \\
+  Innosilicon T2 Terminator & 17,200,000,000,000.00 & 1,570.00 & 1,118.00 & Bitcoin \\
+  MicroBT Whatsminer M10 & 33,000,000,000,000.00 & 2,145.00 & 1,448.00 & Bitcoin \\
+  MicroBT Whatsminer M10S & 55,000,000,000,000.00 & 3,500.00 & 2,558.00 & Bitcoin \\
+  Holic H22 & 22,000,000,000,000.00 & 1,600.00 & 1,720.00 & Bitcoin \\
+  Holic H28 & 28,000,000,000,000.00 & 1,700.00 & 1,720.00 & Bitcoin \\
+  Aladdin Miner 16Th/s Bitcoin & 16,000,000,000,000.00 & 1,400.00 & 800.00 & Bitcoin \\
+  Bitfily Snow Panther B1+ & 24,500,000,000,000.00 & 2,100.00 & 580.00 & Bitcoin \\
+  GMO miner B2 & 24,000,000,000,000.00 & 1,950.00 & 1,999.00 & Bitcoin \\
+  Halong Mining DragonMint T1 & 16,000,000,000,000.00 & 1,480.00 & 355.00 & Bitcoin \\
+  Innosilicon A10 EthMaster & 485,000,000.00 & 850.00 & 5,399.00 & Ethereum \\
+  Innosilicon A10 EthMaster & 432,000,000.00 & 740.00 & 4,799.00 & Ethereum \\
+  Innosilicon A10 EthMaster & 365,000,000.00 & 650.00 & 4,099.00 & Ethereum \\
+  Nvidia GeForce RTX 2080Ti & 55,000,000.00 & 155.00 & 1,499.00 & Ethereum \\
+  Nvidia GeForce RTX 2080 & 41,000,000.00 & 105.00 & 749.99 & Ethereum \\
+  Nvidia GeForce RTX 2070 & 38,500,000.00 & 140.00 & 529.99 & Ethereum \\
+  Nvidia GeForce GTX TITAN V & 82,000,000.00 & 250.00 & 3,399.00 & Ethereum \\
+  Nvidia GeForce GTX TITAN X & 40,000,000.00 & 250.00 & 1,699.00 & Ethereum \\
+  Nvidia GeForce GTX 1080Ti & 55,000,000.00 & 190.00 & 747.12 & Ethereum \\
+  Nvidia GeForce GTX 1080 & 37,000,000.00 & 120.00 & 574.99 & Ethereum \\
+  Nvidia GeForce GTX 1070Ti & 32,000,000.00 & 100.00 & 519.00 & Ethereum \\
+  Nvidia GeForce GTX 1070 & 32,000,000.00 & 100.00 & 349.99 & Ethereum \\
+  Nvidia GeForce GTX 1060 & 30,000,000.00 & 110.00 & 279.99 & Ethereum \\
+  Nvidia GeForce GTX 1050Ti & 13,900,000.00 & 75.00 & 170.00 & Ethereum \\
+  Nvidia P104-100 & 38,000,000.00 & 125.00 & 524.14 & Ethereum \\
+  AMD RX Vega 64 & 44,000,000.00 & 230.00 & 429.00 & Ethereum \\
+  AMD RX Vega 56 & 36,500,000.00 & 210.00 & 399.99 & Ethereum \\
+  AMD RX 580 & 30,000,000.00 & 110.00 & 219.99 & Ethereum \\
+  AMD RX 570 & 27,900,000.00 & 90.00 & 208.99 & Ethereum \\
+  AMD RX 480 & 29,500,000.00 & 135.00 & 214.60 & Ethereum \\
+  AMD RX 470 & 29,000,000.00 & 60.00 & 199.99 & Ethereum \\
+  AMD R9 390 & 33,000,000.00 & 210.00 & 277.00 & Ethereum \\
+  AMD R9 380X & 25,000,000.00 & 150.00 & 208.99 & Ethereum \\
+  AMD R9 380 & 24,000,000.00 & 150.00 & 89.95 & Ethereum \\
+  AMD R9 290 & 20,200,000.00 & 135.00 & 189.00 & Ethereum \\
+  Bitmain Antminer G2 & 220,000,000.00 & 1,200.00 & 3,799.00 & Ethereum \\
+  Bitmain Antminer G1 & 200,000,000.00 & 1,000.00 & 2,000.00 & Ethereum \\
+  Bitmain Antminer E3 & 190,000,000.00 & 760.00 & 654.24 & Ethereum \\
+  Shark Mining Shark Extreme 2 (8 x AMD RX 580) & 240,000,000.00 & 1,100.00 & 4,590.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (8 x AMD Vega 56) & 290,000,000.00 & 1,700.00 & 6,879.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (8 x NVIDIA GTX 1070) & 244,000,000.00 & 1,400.00 & 6,480.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (8 x NVIDIA GTX 1070 Ti 8 GB) & 245,000,000.00 & 1,400.00 & 6,679.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (8 x NVIDIA GTX 1080 Ti) & 420,000,000.00 & 1,500.00 & 9,779.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (8 x NVIDIA RTX 2080 Ti) & 424,000,000.00 & 1,800.00 & 17,779.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (6 x AMD RX 580) & 180,000,000.00 & 825.00 & 3,790.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (6 x AMD Vega 56) & 220,000,000.00 & 1,275.00 & 5,829.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (6 x NVIDIA GTX 1070 Ti 8 GB) & 185,000,000.00 & 1,050.00 & 5,380.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (6 x NVIDIA GTX 1080 Ti) & 300,000,000.00 & 1,125.00 & 8,029.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (6 x NVIDIA RTX 2080 Ti) & 318,000,000.00 & 1,350.00 & 14,029.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (4 x AMD RX 580) & 120,000,000.00 & 550.00 & 2,590.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (4 x NVIDIA GTX 1070 Ti 8 GB) & 122,000,000.00 & 700.00 & 3,580.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (4 x NVIDIA GTX 1080 Ti) & 210,000,000.00 & 750.00 & 4,979.00 & Ethereum \\
+  Shark Mining Shark Extreme 2 (4 x NVIDIA RTX 2080 Ti) & 212,000,000.00 & 900.00 & 7,679.00 & Ethereum \\
+  MiningStore Maximus+ (8 x 1080TI) & 370,000,000.00 & 2,200.00 & 7,520.00 & Ethereum \\
+  MiningStore ULTRON (8 x P104) & 320,000,000.00 & 1,700.00 & 5,338.20 & Ethereum \\
+  MiningStore IMPERIUM+ (8 x RX 570/580) & 230,000,000.00 & 1,300.00 & 3,577.00 & Ethereum \\
+  MineShop Ethereum Mining Rig (8x NVIDIA 1080 8gb GPU) & 310,000,000.00 & 1,100.00 & 6,267.50 & Ethereum \\
+  MineShop Ethereum Mining Rig (12x AMD RX 570 GPU) & 320,000,000.00 & 1,600.00 & 4,345.47 & Ethereum \\
+  MineShop Ethereum Mining Rig (8x AMD MSI RX 580 GPU) & 240,000,000.00 & 1,000.00 & 3,453.85 & Ethereum \\
+  MineShop Ethereum Mining Rig (8x AMD MSI RX 570 GPU) & 220,000,000.00 & 950.00 & 3,225.93 & Ethereum \\
+  MineShop Ethereum Mining Rig (6x AMD RX580 8gb GPU) & 180,000,000.00 & 900.00 & 2,342.32 & Ethereum \\
+  MineShop Ethereum Mining Rig (6x AMD MSI RX 580 GPU) & 175,000,000.00 & 860.00 & 1,967.77 & Ethereum \\
+  MineShop Ethereum Mining Rig (6x AMD MSI RX 580 GPU) & 170,000,000.00 & 750.00 & 2,156.46 & Ethereum \\
+  MineShop Ethereum Mining Rig (6x AMD MSI RX 560) & 80,000,000.00 & 370.00 & 1,823.14 & Ethereum \\
+  Bitmart Zodiac 6-1060 GPU & 120,780,000.00 & 750.00 & 3,222.89 & Ethereum \\
+  Bitmart Thorium 6570 GPU & 144,000,000.00 & 750.00 & 3,974.92 & Ethereum \\
+  Bitmart Thorium 6580 GPU & 160,200,000.00 & 700.00 & 4,297.21 & Ethereum \\
+  Innosilicon A4+ LTCMaster & 620,000,000.00 & 750.00 & 1,500.00 & Litecoin \\
+  Innosilicon A6 LTCMaster & 1,230,000,000.00 & 1,500.00 & 3,000.00 & Litecoin \\
+  FutureBit Apollo LTC Pod & 140,000,000.00 & 196.00 & 299.99 & Litecoin \\
+  Shark Mining Shark Extreme 2 (8 x AMD Vega 56) & 14,800.00 & 1,700.00 & 6,879.00 & Monero \\
+  Shark Mining Shark Extreme 2 (6 x AMD RX 580) & 5,160.00 & 825.00 & 3,790.00 & Monero \\
+  Shark Mining Shark Extreme 2 (6 x AMD Vega 56) & 11,000.00 & 1,275.00 & 5,829.00 & Monero \\
+  Shark Mining Shark Extreme 2 (4 x AMD RX 580) & 3,440.00 & 550.00 & 2,590.00 & Monero \\
+  Nvidia GeForce GTX 2070 & 880.00 & 140.00 & 747.12 & Monero \\
+  Nvidia GeForce GTX 1060 & 520.00 & 80.00 & 279.99 & Monero \\
+  Nvidia GeForce GTX 1050Ti & 637.00 & 70.00 & 170.00 & Monero \\
+  AMD RX Vega 64 & 2,040.00 & 140.00 & 429.00 & Monero \\
+  AMD RX Vega 56 & 2,034.00 & 140.00 & 399.99 & Monero \\
+  AMD RX 580 & 1,050.00 & 110.00 & 219.99 & Monero \\
+  AMD RX 570 & 900.00 & 90.00 & 208.99 & Monero \\
+  AMD RX 480 & 830.00 & 130.00 & 214.60 & Monero \\
+  AMD Ryzen 5 2600 & 627.30 & 65.00 & 154.99 & Monero \\
+  Intel i7-3770 & 287.00 & 43.00 & 459.99 & Monero \\
+  Bitmain Antminer DR5 & 35,000,000,000,000.00 & 1,610.00 & 1,282.00 & Decred \\
+  MicroBT Whatsminer D1 & 48,000,000,000,000.00 & 2,200.00 & 2,500.00 & Decred \\
+  MicroBT Whatsminer DCR & 44,000,000,000,000.00 & 2,200.00 & 2,100.00 & Decred \\
+  StrongU STU-U1+ & 12,800,000,000,000.00 & 1,850.00 & 1,579.00 & Decred \\
+  StrongU STU-U1 & 11,000,000,000,000.00 & 1,600.00 & 1,389.00 & Decred \\
+  \hline
+\caption{Machines used in experiments}
+\label{tbl:machines}
+\end{longtable}
