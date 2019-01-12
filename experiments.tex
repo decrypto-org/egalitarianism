@@ -72,23 +72,25 @@ terms of egalitarianism.
 
 \begin{table}
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-    Variable & Description & Unit & BTC & ETH & LTC & XMR & DCR\\
-    \hhline{|=|=|=|=|=|=|=|=|}
-    $d$ & duration of investment & years & \multicolumn{5}{c|}{$1$} \\
-    \hline
-    $\ec$ & electricity cost & USD / kWh & \multicolumn{5}{c|}{$0.10$} \\
-    \hline
-    $\bgr(c)$ & block generation rate & Hz & 1 / 600 & 1 / 12.5 & ? & ? & ?\\
-    \hline
-    $\thr(c)$ & total hash rate & Hz & ? & ? & ? & ? & ?\\
-    \hline
-    $\br(c)$ & reward per block & tokens & 12.5 & ? & ? & ? & ?\\
-    \hline
-    $\tp(c)$ & token price & token / USD & ? & ? & ? & ? & ?\\
-    \hline
-  \end{tabular}
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+      \hline
+      Variable & Description & Unit & BTC & ETH & LTC & XMR & DCR\\
+      \hhline{|=|=|=|=|=|=|=|=|}
+      $d$ & duration of investment & years & \multicolumn{5}{c|}{$1$} \\
+      \hline
+      $\ec$ & electricity cost & USD / kWh & \multicolumn{5}{c|}{$0.11$} \\
+      \hline
+      $\bgr(c)$ & block generation rate & Hz & 1 / 600 & 1 / 14.7 & 1 / 150 & 1 / 122 & 1 / 298\\
+      \hline
+      $\thr(c)$ & total hash rate & Th / s & 34,727,437 & 179.50374 & 174.537 & 0.00033859 & 178,760\\
+      \hline
+      $\br(c)$ & reward per block & tokens & 12.5 & 3 & 25 & 3.37 & 11.38\\
+      \hline
+      $\tp(c)$ & token price & token / USD & 4,074.25 & 126.12 & 32.10 & 47.27 & 18.62\\
+      \hline
+    \end{tabular}
+  }
   \caption{The parameters to our proof-of-work mining simulations. Some depend on the cryptocurrency $c$.}
   \label{tbl:work-constants}
 \end{table}
