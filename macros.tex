@@ -152,4 +152,15 @@
   \fi
 }
 
+\newcommand{\placesubfigure}[5]{
+  \begin{subfigure}[b]{#5\linewidth}
+    \centering
+    \includegraphics[width=#4\columnwidth,keepaspectratio]{figures/#1}
+    \captionsetup{justification=centering}
+    \caption{#3}
+    \label{#2}
+    \vspace{4ex}
+  \end{subfigure}%%
+}
+
 \newcommand{\hash}{\mathsf{H}}
