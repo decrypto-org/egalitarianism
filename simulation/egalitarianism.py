@@ -34,6 +34,7 @@ def main():
     parser.add_argument('-p', '--capital', required=True, type=int, help='Capital of invenstment (required)')
     parser.add_argument('-t', '--time', default='12', type=int, help='Total time of operation in months (default: %(default)s)')
     parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
+    parser.add_argument('--export', action='store_true', default=False, help='Export hardware (latex table format)')
     parser.add_argument('--version', action='version', version='%(prog)s 0.1')
     args = parser.parse_args()
 
@@ -88,6 +89,14 @@ def main():
 
     plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
     pp.close()
+
+    if args.export:
+        calculator = Calculator(configuration)
+        with open('machines_profitable.txt', 'a') as file:
+            for h in hardware:
+                if calculator.net(h) > 0:
+                    line = '{0} & {1:,.2f} & {2:,.2f} & {3:,.2f} & {4} \\\\\n'.format(h.name, h.hash_s, h.watt, h.price, currencies[args.currency][0])
+                    file.write(line)
 
 
 if __name__ == '__main__':
