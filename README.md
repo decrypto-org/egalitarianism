@@ -63,7 +63,7 @@ optional arguments:
 
 #### LTC
 
-`pipenv run python egalitarianism.py -f ./data/ltc.csv -c ltc -d 44453209154 -b 25 -k 0.11 -r 32.10 -p 10000`
+`pipenv run python egalitarianism.py -f ./data/ltc.csv -c ltc -d 5980879 -b 25 -k 0.11 -r 32.10 -p 10000`
 
 #### DCR
 
