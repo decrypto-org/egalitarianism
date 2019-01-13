@@ -26,7 +26,7 @@ def parseMininingHardware(file):
 def main():
     parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
     parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr', 'ltc', 'dcr'], help='Currency (default: %(default)s)')
-    parser.add_argument('-s', '--strategy', default='tech', choices=['tech', 'electricity', 'dp', 'reinvest'], help='Strategy of invenstment (default: %(default)s)')
+    parser.add_argument('-s', '--strategy', default='dp', choices=['tech', 'electricity', 'dp', 'reinvest'], help='Strategy of invenstment (default: %(default)s)')
     parser.add_argument('-d', '--difficulty', required=True, type=float, help='Block difficulty (required)')
     parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
     parser.add_argument('-k', '--kwh', required=True, type=float, help='Price per kilowatt per hour (required)')
