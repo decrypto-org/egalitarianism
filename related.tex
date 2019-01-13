@@ -31,14 +31,13 @@ assumed that handing out rewards in exact proportion to computational power is
 
 \emph{Egalitarianism}, in the way considered in the paper, has been studied in
 proof-of-work systems from a technological point of view with respect to
-\emph{memory-hard functions} in~\cite{alwen2017depth,biryukov2016egalitarian}.  However, the question
+\emph{memory-hard functions} in~\cite{alwen2017depth,biryukov2016egalitarian}.
+However, the question
 of whether computational power grows proportionally to capital invested, \ie
 whether accumulated wealth results in more than proportional rewards, has not
 been previously studied. Therefore, our work aims at filling this gap by
-studying the effects of economies of scale when applied to cryptocurrency coin
+studying the effects of economies of scale when applied to cryptocurrency
 generation.
-
-\dionyziz{verify monero ASIC-less claim above}
 
 \noindent\textbf{Equitability of cryptocurrencies.}
 An analysis of economic fairness of
@@ -46,33 +45,32 @@ blockchain reward functions was recently studied by Fanti \textit{et al.} in~\ci
 introduces the notion of \emph{equitability}. This work studies the evolution
 of a blockchain system after a series of rounds, putting forth the
 ---desirable--- property that stake ownership remains proportionally the same
-both before and after the rewards of a fixed period of time have been awarded.
+both \emph{before} and \emph{after} the rewards of a fixed period of time have been awarded.
 For example, if an
 investor initially owns $20\%$ of the total funds, an equitable system ensures that they
 own $20\%$ of the total funds eventually, \ie including
 rewards. By studying the behaviour of the returns' \emph{variance} under the
 randomness of executions, they show that the distribution of capital
-follows a Pòlya process and propose a variance reduction mechanism
+follows a Pólya process and propose a variance reduction mechanism
 by the introduction of a \emph{geometric reward} function.
-We note that, in contrast, our work studies the \emph{expectation} of rewards given different
-initial capital.
+We note that, in contrast, our work quantifies the \emph{expectation} of rewards
+under the randomness of executions and then studies the variance under the
+randomness of initial capital allocation.
 
-This work makes two simplifying assumptions.
+Their work makes two simplifying assumptions.
 First, they assume that the \emph{expectation} of returns is proportional to the
 invested capital. As we show in this work, this is only
-approximately true for some proof-of-stake systems, specifically the perfectly egalitarian. For proof-of-work, they
+approximately true for some proof-of-stake systems, specifically those which are perfectly egalitarian. For proof-of-work, they
 correctly assume that the expectation of returns is proportional to computational
 power expended, but do not study the relationship between computational power and
 capital, which, as we show in this work, is far from linear. Second, they assume that
 proof-of-work miners do not reinvest their proceeds in the
 mining operation, while proof-of-stake minters do. This is the critical assumption which allows the authors to
-conclude that proof-of-stake minting behaves like Pòlya's urn and
+conclude that proof-of-stake minting behaves like Pólya's urn and
 proof-of-work mining does not. As we show in this work, this
 is highly unlikely, as this strategy is not profitable to proof-of-work
 miners. In fact, empirical data show that large-scale miners pay for electricity
-directly using their proceeds~\footnote{See:
-\url{https://www.bloomberg.com/news/articles/2018-04-18/bitcoin-miners-facing-a-shakeout-as-profitability-becomes-harder}
-[Online: December 2018]}. Hence, their model applies to both proof-of-work and
+directly using their proceeds~\cite{kharif2018}. Hence, their model applies to both proof-of-work and
 proof-of-stake systems, meaning that they are both equally unequitable.
 
 We note that \emph{egalitarianism} and \emph{equitability} are orthogonal
@@ -83,6 +81,4 @@ using a geometric reward function in conjuction with a proof-of-work function
 which lends itself to economies of scale and allows the construction of
 specialized hardware. Naturally, the ideal cryptocurrency would be both
 \emph{perfectly egalitarian} and \emph{maximally equitable}, \eg by adopting
-proof-of-stake under a geometric reward function.
-
-\dionyziz{Cite Adam Hayes' work on the inherent worth of proof-of-work?}
+correctly parameterized proof-of-stake under a geometric reward function.
