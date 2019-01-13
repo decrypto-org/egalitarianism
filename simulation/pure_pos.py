@@ -41,3 +41,7 @@ plt.gca().set_yticklabels(['{:.0f}\%'.format(i*100) for i in plt.gca().get_ytick
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
 
 pp.close()
+
+variance = np.var(y)
+
+print('Variance: {0}'.format(variance))

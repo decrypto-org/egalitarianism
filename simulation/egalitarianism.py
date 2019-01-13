@@ -90,6 +90,10 @@ def main():
     plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
     pp.close()
 
+    variance = np.var(y)
+
+    print('Variance: {0}'.format(variance))
+
     if args.export:
         calculator = Calculator(configuration)
         with open('machines_profitable.txt', 'a') as file:
