@@ -2,7 +2,6 @@ from matplotlib import rc
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_pdf import PdfPages
-import sys
 
 
 plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
@@ -81,7 +80,7 @@ fig.set_size_inches(6.2, 6.2)
 plt.ylim(0, 0.2)
 plt.plot(x, y, label='Decred staking egalitarian curve')
 
-plt.xlabel('Investment Capital (nominal 2018 USD)')
+plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
 
 # plt.title('Proof-of-stake egalitarian curve for Decred')
