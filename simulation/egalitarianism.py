@@ -80,7 +80,7 @@ def main():
 
     plt.plot(x, y, label='{0} egalitarian curve'.format(currencies[args.currency][0]))
 
-    plt.xlabel('Investment Capital (nominal 2018 USD)')
+    plt.xlabel('Investment Capital (USD)')
     plt.ylabel('Freshly generated ROI')
 
     plt.title('{0} egalitarian curve'.format(currencies[args.currency][0]))
