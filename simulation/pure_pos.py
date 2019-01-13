@@ -17,13 +17,13 @@ rc(
 )
 
 MAX_CAPITAL = 100000
-CAPITAL_COST = 10
+CAPITAL_COST = 0.01
 PRICE = 1
-COINS_PER_BLOCK = 2  # coin returns per block
-PRODUCTION_RATE_PER_COIN = 10  # the number of blocks a single coin mints per year
+COINS_PER_BLOCK = 0.15  # coin returns per block
+PRODUCTION_RATE_PER_COIN = 7  # the number of blocks a single coin mints per year
 
-x = np.linspace(1, MAX_CAPITAL + 1, MAX_CAPITAL)
-y = [((COINS_PER_BLOCK * PRODUCTION_RATE_PER_COIN * capital) - (capital + CAPITAL_COST)) / (capital + CAPITAL_COST) for capital in x]
+x = np.linspace(0, MAX_CAPITAL, MAX_CAPITAL)
+y = [0] + [((COINS_PER_BLOCK * PRODUCTION_RATE_PER_COIN * capital) - (capital + CAPITAL_COST)) / (capital + CAPITAL_COST) for capital in x[1:]]
 
 fig = plt.figure()
 fig.set_size_inches(6.2, 6.2)
