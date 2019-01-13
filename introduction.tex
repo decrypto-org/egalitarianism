@@ -20,7 +20,7 @@ computational power to solve cryptographic puzzles. On the other hand, the most
 prominent alternative mechanism is \emph{proof-of-stake}. In proof-of-stake
 block generation is called \emph{minting} and blocks are produced by
 \emph{minters} who ``stake'' their coins, \ie users who own a set of coins and
-participate in the consensus protocol via them. Intuitively, in both cases a
+use them to participate in the consensus protocol. Intuitively, in both cases a
 leader is drawn at regular intervals at random from the block generators
 population, with a probability of selection proportional to their computational
 power or stake respectively.
@@ -56,9 +56,9 @@ lacking a comparable metric, the question of whether some cryptocurrencies are
 more \emph{egalitarian} than others remains open. This paper aims at solving this open question by
 putting forth the first definition of egalitarianism, in a way which is
 generic and can be applied to any cryptocurrency.
-Our definition also provides a quantitative metric, which can be practically measured and used
+Our definition provides a quantitative metric which can be practically measured and used
 to compare different cryptocurrencies.
-Using our model, we then measure the egalitarianism of
+Using our model, we measure the egalitarianism of
 four indicative proof-of-work-based
 cryptocurrencies: Bitcoin, Litecoin~\cite{lee2011litecoin}, Ethereum~\cite{wood2014ethereum}, and Monero~\cite{van2013cryptonote}. Bitcoin, being the first and most successful cryptocurrency to date, was chosen as
 the baseline of comparison. Ethereum is the most promising ``altcoin'', as cryptocurrencies beyond
@@ -73,15 +73,15 @@ We assess their claims and find them in agreement with our data, thus presenting
 % egalitarian cryptocurrencies.
 On the pure proof-of-stake side, as will soon become clear, egalitarian
 behavior is similar across all coins regardless of implementation. Therefore,
-it suffices to perform a case study of an indicative proof-of-stake protocol.
+it suffices to perform a case study of indicative proof-of-stake protocols.
 We study the case of pure proof-of-stake, applied on a protocol consistent with Ouroboros~\cite{C:KRDO17},
 as well as a hybrid proof-of-work/proof-of-stake cryptocurrency,
-Decred \footnote{See: \url{https://www.decred.org/} [Online: December 2018]}. We find that pure proof-of-stake coins are perfectly
+Decred\footnote{See: \url{https://www.decred.org/} [Online: December 2018]}. We find that pure proof-of-stake coins are perfectly
 egalitarian, contrary to their proof-of-work counterparts. However, we should
 note that variations of proof-of-stake, such as ``delegated proof-of-stake'',
 may not be perfectly egalitarian, since the delegates, \ie the leaders of
 the stake pools which are formed, typically earn extra profits for managing the
-stake pools.
+stake pools~\cite{stouka-koutsoupias-kiayias}.
 
 \dionyziz{Ensure Monero and Litecoin are more egalitarian than Bitcoin and Ethereum as claimed in the above paragraph}
 
@@ -97,7 +97,7 @@ Specifically, the contributions of our research are summarized as follows:
   \item We define an exact measure of cryptocurrency
         \emph{egalitarianism}; to do this, we first define the \emph{egalitarian curve} of a
         cryptocurrency from which we extract the measure.
-  \item We measure and compare the egalitarianism curve and level of egalitarianism of
+  \item We measure and compare the egalitarian curve and egalitarianism of
         four indicative proof-of-work cryptocurrencies, one representative
         proof-of-stake cryptocurrency, and a hybrid cryptocurrency, using
         current market data.
