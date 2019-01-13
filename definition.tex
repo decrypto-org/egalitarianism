@@ -46,11 +46,11 @@ compared only if they use the same duration.
     duration $d$ covering the range of capital $[v_0, \dots, v_1]$ as:
 
     \[
-        f_{c,d,v_0,v_1}(v) = \frac{\underset{B \leftarrow \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
+        f_{c,d,v_0,v_1}(v) = \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
     \]
 \end{definition}
 
-The value $\max_B{\mathbb{E}[B(v)]}$ identifies the maximum expectation of
+The value $\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]}$ identifies the maximum expectation of
 returns across all investment strategies, \ie the --- maximum --- amount of
 returns which the optimal strategy ensures for a given initial capital $v$.
 The expectation is taken with the blockchain execution as a random variable,
