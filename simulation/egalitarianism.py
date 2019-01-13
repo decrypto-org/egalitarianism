@@ -78,7 +78,7 @@ def main():
     fig = plt.figure()
     fig.set_size_inches(6.2, 6.2)
 
-    plt.plot(x, y, label='{0} egalitarian curve'.format(currencies[args.currency][0]))
+    plt.plot(x, y)
 
     plt.xlabel('Investment Capital (USD)')
     plt.ylabel('Freshly generated ROI')

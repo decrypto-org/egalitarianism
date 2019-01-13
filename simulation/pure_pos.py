@@ -28,7 +28,7 @@ y = [0] + [((COINS_PER_BLOCK * PRODUCTION_RATE_PER_COIN * capital) - (capital + 
 fig = plt.figure()
 fig.set_size_inches(6.2, 6.2)
 
-plt.plot(x, y, label='Pure PoS egalitarian curve')
+plt.plot(x, y)
 
 plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
