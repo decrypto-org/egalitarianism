@@ -8,12 +8,13 @@ plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
 pp = PdfPages('../figures/ideal.pdf')
 
-rc('text', usetex=True, **{'latex.unicode': True})
+rc('text', usetex=True)
 rc(
     'font',
     family='serif',
     serif=['Computer Modern Roman'],
-    monospace=['Computer Modern Typewriter']
+    monospace=['Computer Modern Typewriter'],
+    size=27
 )
 
 MAX_CAPITAL = 1000000
@@ -30,9 +31,6 @@ plt.plot(x, y)
 plt.xlabel('Investment Capital (nominal 2018 USD)')
 plt.ylabel('Freshly generated ROI')
 
-plt.title('Ideal egalitarian curve')
-
-plt.legend()
 plt.gca().set_yticklabels(['{:.0f}\%'.format(x*100) for x in plt.gca().get_yticks()])
 
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')

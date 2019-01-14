@@ -8,12 +8,13 @@ plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
 pp = PdfPages('../figures/decred-stake.pdf')
 
-rc('text', usetex=True, **{'latex.unicode': True})
+rc('text', usetex=True)
 rc(
     'font',
     family='serif',
     serif=['Computer Modern Roman'],
-    monospace=['Computer Modern Typewriter']
+    monospace=['Computer Modern Typewriter'],
+    size=27
 )
 
 DAYS = 24 # hours
@@ -82,9 +83,6 @@ plt.plot(x, y)
 plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
 
-plt.title('Proof-of-stake Decred egalitarian curve')
-
-plt.legend()
 plt.gca().set_yticklabels(['{:.0f}\%'.format(x*100) for x in plt.gca().get_yticks()])
 
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')

@@ -8,12 +8,13 @@ plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
 pp = PdfPages('../figures/pure-pos.pdf')
 
-rc('text', usetex=True, **{'latex.unicode': True})
+rc('text', usetex=True)
 rc(
     'font',
     family='serif',
     serif=['Computer Modern Roman'],
-    monospace=['Computer Modern Typewriter']
+    monospace=['Computer Modern Typewriter'],
+    size=27
 )
 
 MAX_CAPITAL = 100000
@@ -33,9 +34,6 @@ plt.plot(x, y)
 plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
 
-plt.title('Pure Proof-of-stake egalitarian curve')
-
-plt.legend()
 plt.gca().set_yticklabels(['{:.0f}\%'.format(i * 100) for i in plt.gca().get_yticks()])
 
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
