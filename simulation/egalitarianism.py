@@ -89,7 +89,7 @@ def main():
 
     variance = np.var(y)
 
-    print('Variance: {0}'.format(variance))
+    print('Variance of {0}: {1}'.format(currencies[args.currency][0], variance))
 
     if args.export:
         calculator = Calculator(configuration)
