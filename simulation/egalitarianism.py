@@ -58,7 +58,7 @@ def main():
     r = simulator.simulate(capital, hardware)
 
     x = np.linspace(0, capital, capital)
-    y = [(r[i]) / i if i > 0 else r[i] for i in range(0, capital)]
+    y = [(r[i] - i) / i if i > 0 else -1 for i in range(0, capital)]
 
     filename = '../figures/{0}_{1}_{2}K_{3}_months_big.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
     desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)
