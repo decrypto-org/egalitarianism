@@ -84,8 +84,6 @@ def main():
     plt.xlabel('Investment Capital (USD)')
     plt.ylabel('Freshly generated ROI')
 
-    plt.title('{0} egalitarian curve'.format(currencies[args.currency][0]))
-
     plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
     pp.close()
 
