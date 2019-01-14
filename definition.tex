@@ -87,7 +87,41 @@ allows a rich investor to split their investment into smaller ones.  Thus, if
 the curve were ever to have a negative slope, the sum of the smaller splits of
 the rich investment would achieve a higher gain. By the definition of the
 curve, which mandates that it depicts the ROI of an \emph{optimal} investment,
-this would be a contradiction.
+this would be a contradiction. The following theorem is a formal definition of
+the above discussion:
+
+\begin{theorem}
+    Given capital $v$, for every natural number $i \in \mathbb{N}^\star$, it
+    holds that $f_{c,d,v_0,v_1}(v) \leq f_{c,d,v_0,v_1}(i \cdot v)$.
+\end{theorem}
+
+\begin{proof}
+    We prove the statement via contradiction. Assume that for capital $v$
+    exists a natural number $i \in \mathbb{N}^\star$ such that
+    $f_{c,d,v_0,v_1}(v) > f_{c,d,v_0,v_1}(i \cdot v)$. Also assume that for
+    capital $v$ the optimal strategy is $B'$, so: $\underset{B \in
+    \mathbb{B}}{\max}{\mathbb{E}[B(v)]} = \mathbb{E}[B'(v)]$. Then, for capital
+    $i \cdot v$ exists a strategy $B''$, such that the capital is split into $i$
+    equally-sized parts and the strategy $B'$ is applied on each part. Given
+    that the executions of the substrategies on these parts are independent,
+    then the expected returns for the strategy $B''$ are:
+    \begin{align}\label{eq:break-strategy}
+        \mathbb{E}[B''(i \cdot v)] = i \cdot \mathbb{E}[B'(v)]  = i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]}
+    \end{align}
+    It also holds that $B''$ is at best the optimal strategy, so:
+    \begin{align}\label{eq:multi-strategy}
+        \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} \geq \mathbb{E}[B''(i \cdot v)] \xRightarrow{\text{(\ref{eq:break-strategy})}}
+        \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} \geq i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]}
+    \end{align}
+    However, it should hold that:
+    \begin{alignat}{2}
+        f_{c,d,v_0,v_1}(v) &> f_{c,d,v_0,v_1}(i \cdot v) \Rightarrow \notag\\
+        \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} - i \cdot v}{i \cdot v} \xRightarrow{\text{(\ref{eq:multi-strategy})}} \notag\\
+        \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - i \cdot v}{i \cdot v} \Rightarrow \notag\\
+        \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
+    \end{alignat}
+    which is impossible.
+\end{proof}
 
 Using our definition of the egalitarian curve, we now define egalitarianism as
 a concrete number. We begin by considering the initial capital $v$ as a random
