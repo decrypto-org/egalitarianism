@@ -85,8 +85,6 @@ def main():
 
     plt.title('{0} egalitarian curve'.format(currencies[args.currency][0]))
 
-    plt.legend()
-
     plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
     pp.close()
 
