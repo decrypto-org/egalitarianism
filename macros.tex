@@ -12,7 +12,7 @@
 %----- Comments ----------------------------------------------------------------
 \RequirePackage{totcount}
 \RequirePackage{color}
-\RequirePackage[colorinlistoftodos]{todonotes}
+\RequirePackage[disable]{todonotes}
 
 \newtotcounter{notecount}
 \newcommand{\notewarning}{%
@@ -32,23 +32,6 @@
 \makeatletter
 \def\myaddcontentsline#1#2#3{%
   \addtocontents{#1}{\protect\contentsline{#2}{#3}{Section \thesubsection\ at p. \thepage}{}}}
-\renewcommand{\@todonotes@addElementToListOfTodos}{%
-    \if@todonotes@colorinlistoftodos%
-        \myaddcontentsline{tdo}{todo}{{%
-            \colorbox{\@todonotes@currentbackgroundcolor}%
-                {\textcolor{\@todonotes@currentbackgroundcolor}{o}}%
-            \ \@todonotes@caption}}%
-    \else%
-        \myaddcontentsline{tdo}{todo}{{\@todonotes@caption}}%
-   \fi}%
-\newcommand*\mylistoftodos{%
-  \begingroup
-       \setbox\@tempboxa\hbox{Section 9.9 at p. 99}%
-       \renewcommand*\@tocrmarg{\the\wd\@tempboxa}%
-       \renewcommand*\@pnumwidth{\the\wd\@tempboxa}%
-       \listoftodos%
-  \endgroup
-}
 \makeatother
 \definecolor{lightgreen}{rgb}{0.86, 0.93, 0.78}
 \definecolor{bordergreen}{rgb}{0.55, 0.76, 0.74}
