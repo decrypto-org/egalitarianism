@@ -42,4 +42,4 @@ pp.close()
 
 variance = np.var(y)
 
-print('Variance: {0}'.format(variance))
+print('Pure PoS Variance: {0}'.format(variance))
