@@ -43,16 +43,16 @@ compared only if they use the same duration.
 
 \begin{definition}[Egalitarian curve]
     Given a cryptocurrency $c$, an investment period interval $d$, the set of
-    all possible investment strategies $\mathbb{B}$, we define the \emph{egalitarian curve}
+    all possible investment strategies $\mathcal{B}$, we define the \emph{egalitarian curve}
     $f_{c,d}: \mathbb{R}^+ \longrightarrow \mathbb{R}^+$ of $c$ for
     investment period $d$ as:
 
     \[
-        f_{c,d}(v) = \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
+        f_{c,d}(v) = \frac{\underset{B \in \mathcal{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
     \]
 \end{definition}
 
-The value $\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]}$ identifies the maximum expectation of
+The value $\underset{B \in \mathcal{B}}{\max}{\mathbb{E}[B(v)]}$ identifies the maximum expectation of
 returns across all investment strategies, \ie the amount of
 returns which the \emph{optimal} strategy ensures for a given initial capital $v$.
 The expectation is taken with the blockchain execution as a random variable,
