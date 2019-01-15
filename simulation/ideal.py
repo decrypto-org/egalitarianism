@@ -28,7 +28,7 @@ fig.set_size_inches(6.2, 6.2)
 plt.ylim(0, 0.2)
 plt.plot(x, y)
 
-plt.xlabel('Investment Capital (nominal 2018 USD)')
+plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
 
 plt.gca().set_yticklabels(['{:.0f}\%'.format(i * 100) for i in plt.gca().get_yticks()])
