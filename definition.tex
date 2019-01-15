@@ -43,13 +43,12 @@ compared only if they use the same duration.
 
 \begin{definition}[Egalitarian curve]
     Given a cryptocurrency $c$, an investment period interval $d$, the set of
-    all possible investment strategies $\mathbb{B}$, a minimum capital $v_0$
-    and a maximum capital $v_1$, we define the \emph{egalitarian curve}
-    $f_{c,d,v_0,v_1}: [v_0, v_1] \longrightarrow \mathbb{R}^+$ of $c$ for
-    duration $d$ covering the range of capital $[v_0, \dots, v_1]$ as:
+    all possible investment strategies $\mathbb{B}$, we define the \emph{egalitarian curve}
+    $f_{c,d}: \mathbb{R}^+ \longrightarrow \mathbb{R}^+$ of $c$ for
+    investment period $d$ as:
 
     \[
-        f_{c,d,v_0,v_1}(v) = \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
+        f_{c,d}(v) = \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
     \]
 \end{definition}
 
@@ -96,13 +95,13 @@ theorem:
 
 \begin{theorem}\label{thm:sybil}
     Given capital $v$, for every natural number $i \in \mathbb{N}^\star$, it
-    holds that $f_{c,d,v_0,v_1}(v) \leq f_{c,d,v_0,v_1}(i \cdot v)$.
+    holds that $f_{c,d}(v) \leq f_{c,d}(i \cdot v)$.
 \end{theorem}
 
 \begin{proof}
     We prove the statement via contradiction. Assume that for capital $v$
     exists a natural number $i \in \mathbb{N}^\star$ such that
-    $f_{c,d,v_0,v_1}(v) > f_{c,d,v_0,v_1}(i \cdot v)$. Also assume that for
+    $f_{c,d}(v) > f_{c,d}(i \cdot v)$. Also assume that for
     capital $v$ the optimal strategy is $B'$, so: $\underset{B \in
     \mathbb{B}}{\max}{\mathbb{E}[B(v)]} = \mathbb{E}[B'(v)]$. Then, for capital
     $i \cdot v$ exists a strategy $B''$, such that the capital is split into $i$
@@ -119,7 +118,7 @@ theorem:
     \end{align}
     However, it should hold that:
     \begin{alignat}{2}
-        f_{c,d,v_0,v_1}(v) &> f_{c,d,v_0,v_1}(i \cdot v) \Rightarrow \notag\\
+        f_{c,d}(v) &> f_{c,d}(i \cdot v) \Rightarrow \notag\\
         \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} - i \cdot v}{i \cdot v} \xRightarrow{\text{(\ref{eq:multi-strategy})}} \notag\\
         \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - i \cdot v}{i \cdot v} \Rightarrow \notag\\
         \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
