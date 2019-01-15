@@ -56,7 +56,9 @@ The value $\underset{B \in \mathcal{B}}{\max}{\mathbb{E}[B(v)]}$ identifies the 
 returns across all investment strategies, \ie the amount of
 returns which the \emph{optimal} strategy ensures for a given initial capital $v$.
 The expectation is taken with the blockchain execution as a random variable,
-since returns vary by execution.
+since returns vary by execution (the randomness of the execution can affect the
+returns of the strategy, as the same strategy can bring larger returns if the
+participant is ``lucky'' and happens to produce many blocks).
 
 We remark that we do allow strategies to reinvest capital. For instance,
 returns earned from mining rewards can be reinvested in electricity costs for
