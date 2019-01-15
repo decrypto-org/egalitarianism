@@ -144,20 +144,12 @@ There are many possible configurations for technology investments. Each
 configuration comprises of a number of copies $n \in \mathbb{N}$ of every
 machine type $m \in \mathbb{M}$. Therefore, we define each configuration as
 $\overline{m} \subseteq \mathbb{M} \times \mathbb{N}$, with
-total initial cost of investment for such configuration being:
-
-\[
-  \ic(\overline{m}) = \sum_{(m, n) \in \overline{m}}{n \cdot \ic(m)}
-\]
+total initial cost of investment for such configuration being
+$\ic(\overline{m}) = \sum_{(m, n) \in \overline{m}}{n \cdot \ic(m)}$.
 
 The above figure is given in USD per hour and, since the initial capital should
-suffice to buy the machines of the configuration, we require that the following
-holds:
-
-\[
-    \ic(\overline{m}) \leq \mathcal{C}
-\]
-
+suffice to buy the machines of the configuration, we require that
+$\ic(\overline{m}) \leq \mathcal{C}$,
 where $\mathsf{C}$ is the initial available capital at the beginning of the simulation.
 
 Now, in order to identify the \emph{optimal} strategy's reported net income for the
