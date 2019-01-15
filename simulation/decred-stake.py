@@ -77,7 +77,7 @@ for capital in x:
 fig = plt.figure()
 fig.set_size_inches(6.2, 6.2)
 
-plt.ylim(0, 0.2)
+# plt.ylim(0, 0.2)
 plt.plot(x, y)
 
 plt.xlabel('Investment Capital (USD)')
