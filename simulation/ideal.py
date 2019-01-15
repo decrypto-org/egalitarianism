@@ -19,8 +19,8 @@ rc(
 
 MAX_CAPITAL = 1000000
 
-x = np.linspace(0, MAX_CAPITAL, MAX_CAPITAL)
-y = [0] + [0.07 for _ in range(MAX_CAPITAL-1)]
+x = np.linspace(1, MAX_CAPITAL, MAX_CAPITAL - 1)
+y = [0.07 for _ in x]
 
 fig = plt.figure()
 fig.set_size_inches(6.2, 6.2)
@@ -31,7 +31,7 @@ plt.plot(x, y)
 plt.xlabel('Investment Capital (nominal 2018 USD)')
 plt.ylabel('Freshly generated ROI')
 
-plt.gca().set_yticklabels(['{:.0f}\%'.format(x*100) for x in plt.gca().get_yticks()])
+plt.gca().set_yticklabels(['{:.0f}\%'.format(i * 100) for i in plt.gca().get_yticks()])
 
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
 
