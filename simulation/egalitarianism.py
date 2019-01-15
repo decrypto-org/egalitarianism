@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
+from collections import namedtuple
 from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
 from helpers import slugify
 from mining_hardware import Hardware
@@ -23,45 +24,76 @@ def parseMininingHardware(file):
     return hardware
 
 
+def create_figure(filename, plots, legend=False):
+    pp = PdfPages(filename)
+
+    fig = plt.figure()
+    fig.set_size_inches(6.2, 6.2)
+
+    for p in plots:
+        plt.plot(p[0], p[1], label=p[2])
+
+    plt.xlabel('Investment Capital (USD)')
+    plt.ylabel('Freshly generated ROI')
+
+    if legend:
+        plt.legend(fontsize=11)
+
+    plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
+    pp.close()
+
+
+def get_roi(simulator, capital, hardware):
+    r = simulator.simulate(capital, hardware)
+    x = np.linspace(0, capital, capital)
+    y = [(r[i] - i) / i if i > 0 else -1 for i in range(0, capital)]
+
+    return (x, y)
+
+
+def create_differencies(args, diff_args, hardware):
+    for da in diff_args:
+        plots = []
+        for i, s in enumerate(da.simulators):
+            plot = get_roi(s, args.capital, hardware) + ('{0}: {1:.2f}'.format(da.label, da.values[i]),)
+            plots.append(plot)
+
+        filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.name)
+        create_figure(filename, plots, legend=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
     parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr', 'ltc', 'dcr'], help='Currency (default: %(default)s)')
     parser.add_argument('-s', '--strategy', default='dp', choices=['tech', 'electricity', 'dp', 'reinvest'], help='Strategy of invenstment (default: %(default)s)')
-    parser.add_argument('-d', '--difficulty', required=True, type=float, help='Block difficulty (required)')
+    parser.add_argument('-d', '--difficulty', required=True, type=float, nargs='+', help='Block difficulty (required)')
     parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
-    parser.add_argument('-k', '--kwh', required=True, type=float, help='Price per kilowatt per hour (required)')
-    parser.add_argument('-r', '--rate', required=True, type=float, help='Currency price in fiat (required)')
+    parser.add_argument('-k', '--kwh', required=True, type=float, nargs='+', help='Price per kilowatt per hour (required)')
+    parser.add_argument('-r', '--rate', required=True, type=float, nargs='+', help='Currency price in fiat (required)')
     parser.add_argument('-p', '--capital', required=True, type=int, help='Capital of invenstment (required)')
-    parser.add_argument('-t', '--time', default='12', type=int, help='Total time of operation in months (default: %(default)s)')
+    parser.add_argument('-t', '--time', default='12', type=int, nargs='+', help='Total time of operation in months (default: %(default)s)')
     parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
     parser.add_argument('--export', action='store_true', default=False, help='Export hardware (latex table format)')
+    parser.add_argument('--difference', action='store_true', default=False, help='Create difference figure')
     parser.add_argument('--version', action='version', version='%(prog)s 0.1')
     args = parser.parse_args()
 
-    hardware = []
     calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator, 'ltc': BTCCalculator, 'dcr': BTCCalculator}
     strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested}
     currencies = {'btc': ['Bitcoin'], 'eth': ['Ethereum'], 'xmr': ['Monero'], 'ltc': ['Litecoin'], 'dcr': ['Decred']}
 
+    hardware = []
+
+    base_difficulty = args.difficulty[0]
+    base_kwh = args.kwh[0]
+    base_rate = args.rate[0]
+    base_time = args.time[0]
+
     capital = args.capital
-    hours_of_operation = args.time * 30 * 24
+    hours_of_operation = base_time * 30 * 24
 
     Strategy = strategies[args.strategy]
     Calculator = calculators[args.currency]
-
-    # btc: 5106422924659.82, 12.5, 0.11, 4074.25
-    # eth: 2529724525783320, 3, 0.11, 126.12
-    configuration = Configuration(args.difficulty, args.coinbase, args.kwh, args.rate)
-
-    hardware = parseMininingHardware(args.file)
-    simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
-    r = simulator.simulate(capital, hardware)
-
-    x = np.linspace(0, capital, capital)
-    y = [(r[i] - i) / i if i > 0 else -1 for i in range(0, capital)]
-
-    filename = '../figures/{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), args.time)
-    desc = 'difficulty: {0} \ncoinbase: {1} \nkwh: {2} \nrate: ${3} \nmonths of operation: {4}'.format(args.difficulty, args.coinbase, args.kwh, args.rate, args.time)
 
     plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
@@ -74,21 +106,43 @@ def main():
         size=27
     )
 
-    pp = PdfPages(filename)
+    hardware = parseMininingHardware(args.file)
 
-    fig = plt.figure()
-    fig.set_size_inches(6.2, 6.2)
+    if args.difference:
+        DiffArg = namedtuple('Args', ['name', 'simulators', 'label', 'values'])
+        diff_args = [DiffArg('difficulty', [], 'Difficulty', []), DiffArg('kwh', [], 'Electricity cost', []), DiffArg('rate', [], 'Price (USD)', []), DiffArg('time', [], 'Duration', [])]
 
-    plt.plot(x, y)
+        for d in args.difficulty:
+            configuration = Configuration(d, args.coinbase, base_kwh, base_rate)
+            diff_args[0].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
+            diff_args[0].values.append(d)
 
-    plt.xlabel('Investment Capital (USD)')
-    plt.ylabel('Freshly generated ROI')
+        for k in args.kwh:
+            configuration = Configuration(base_difficulty, args.coinbase, k, base_rate)
+            diff_args[1].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
+            diff_args[1].values.append(k)
 
-    plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
-    pp.close()
+        for r in args.rate:
+            configuration = Configuration(base_difficulty, args.coinbase, base_kwh, r)
+            diff_args[2].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
+            diff_args[2].values.append(r)
 
-    variance = np.var(y)
+        for t in args.time:
+            configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
+            diff_args[3].simulators.append(Simulator(Strategy(t * 30 * 24), Calculator(configuration)))
+            diff_args[3].values.append(t)
 
+        create_differencies(args, diff_args, hardware)
+
+        return
+
+    filename = '../figures/{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), base_time)
+    configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
+    simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
+    cords = get_roi(simulator, capital, hardware) + ('',)
+    create_figure(filename, [cords])
+
+    variance = np.var(cords[1])
     print('Variance of {0}: {1}'.format(currencies[args.currency][0], variance))
 
     if args.export:
