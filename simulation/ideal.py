@@ -17,7 +17,7 @@ rc(
     size=27
 )
 
-MAX_CAPITAL = 1000000
+MAX_CAPITAL = 10000
 
 x = np.linspace(1, MAX_CAPITAL, MAX_CAPITAL - 1)
 y = [0.07 for _ in x]
