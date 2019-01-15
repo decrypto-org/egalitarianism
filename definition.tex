@@ -97,7 +97,8 @@ this would be a contradiction. We formalize the above intuition in the following
 theorem:
 
 \begin{theorem}[Sybil strategies]\label{thm:sybil}
-    Given capital $v$, for every natural number $i \in \mathbb{N}^\star$, it
+    Fix a cryptocurrency $c$ and an investment interval $d$. Given capital $v$,
+    for every natural number $i \in \mathbb{N}^\star$, it
     holds that $f_{c,d}(v) \leq f_{c,d}(i \cdot v)$.
 \end{theorem}
 
@@ -142,7 +143,7 @@ given distribution.
   as follows:
 
   \[
-    e_{c,d,\mathcal{D}} = -\textsf{Var}_{v \gets \mathcal{D}}[f(v)]
+    e_{c,d,\mathcal{D}} = -\textsf{Var}_{v \gets \mathcal{D}}[f_{c,d}(v)]
   \]
 
   where $f$ is the egalitarian curve of $c$ for duration $d$ and the support of
