@@ -60,7 +60,7 @@ block rewards in proportion to their computational power. The difference
 between revenue per unit of time and cost of operation per unit of time
 produces an \emph{income rate}, which is measured in USD per hour.
 
-For our experiments, we use a duration of investment of $d = 1$ year. Although
+For our experiments, we use an interval of investment with $|d| = 1$ year. Although
 this choice is arbitrary, it corresponds to the usual definition of ROI in
 traditional finance. Again this parameter does not make a qualitative
 difference in our metrics.
@@ -98,7 +98,7 @@ others, is an interesting problem which needs be considered in future work.
       \hline
       Variable & Description & Unit & BTC & ETH & LTC & XMR & DCR\\
       \hhline{|=|=|=|=|=|=|=|=|}
-      $d$ & duration of investment & years & \multicolumn{5}{c|}{$1$} \\
+      $|d|$ & duration of investment & years & \multicolumn{5}{c|}{$1$} \\
       \hline
       $\ec$ & electricity cost & USD / kWh & \multicolumn{5}{c|}{$0.08$} \\
       \hline
@@ -161,7 +161,7 @@ holds:
 where $\mathsf{C}$ is the initial available capital at the beginning of the simulation.
 
 Now, in order to identify the \emph{optimal} strategy's reported net income for the
-duration $d$, we iterate over all possible machine configurations, for which
+interval $d$, we iterate over all possible machine configurations, for which
 the above inequality holds, and choose the one with the maximum returns:
 
 \[
