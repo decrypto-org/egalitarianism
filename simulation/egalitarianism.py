@@ -71,7 +71,7 @@ def main():
     parser.add_argument('-k', '--kwh', required=True, type=float, nargs='+', help='Price per kilowatt per hour (required)')
     parser.add_argument('-r', '--rate', required=True, type=float, nargs='+', help='Currency price in fiat (required)')
     parser.add_argument('-p', '--capital', required=True, type=int, help='Capital of invenstment (required)')
-    parser.add_argument('-t', '--time', default='12', type=int, nargs='+', help='Total time of operation in months (default: %(default)s)')
+    parser.add_argument('-t', '--time', default=[12], type=int, nargs='+', help='Total time of operation in months (default: %(default)s)')
     parser.add_argument('-f', '--file', required=True, help='The path of the file that contains the specs of each hardware (required). Each hardware should contain the following fields: product, hash / s, watt, price')
     parser.add_argument('--export', action='store_true', default=False, help='Export hardware (latex table format)')
     parser.add_argument('--difference', action='store_true', default=False, help='Create difference figure')
