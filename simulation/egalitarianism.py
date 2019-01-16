@@ -4,9 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
-from collections import namedtuple
 from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
-from helpers import slugify
+from helpers import slugify, MultiArgument, Plot
 from mining_hardware import Hardware
 from configuration import Configuration
 from calculator import BTCCalculator, ETHCalculator, XMRCalculator
@@ -31,7 +30,7 @@ def create_figure(filename, plots, legend=False):
     fig.set_size_inches(6.2, 6.2)
 
     for p in plots:
-        plt.plot(p[0], p[1], label=p[2])
+        plt.plot(p.x, p.y, label=p.label)
 
     plt.xlabel('Investment Capital (USD)')
     plt.ylabel('Freshly generated ROI')
@@ -43,19 +42,20 @@ def create_figure(filename, plots, legend=False):
     pp.close()
 
 
-def get_roi(simulator, capital, hardware):
+def generate_plot(simulator, capital, hardware):
     r = simulator.simulate(capital, hardware)
     x = np.linspace(0, capital, capital)
     y = [(r[i] - i) / i if i > 0 else -1 for i in range(0, capital)]
 
-    return (x, y)
+    return Plot(x, y)
 
 
 def create_differencies(args, diff_args, hardware):
     for da in diff_args:
         plots = []
         for i, s in enumerate(da.simulators):
-            plot = get_roi(s, args.capital, hardware) + ('{0}: {1:.2f}'.format(da.label, da.values[i]),)
+            plot = generate_plot(s, args.capital, hardware)
+            plot.label = '{0}: {1:.2f}'.format(da.label, da.values[i])
             plots.append(plot)
 
         filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.name)
@@ -109,28 +109,36 @@ def main():
     hardware = parseMininingHardware(args.file)
 
     if args.difference:
-        DiffArg = namedtuple('Args', ['name', 'simulators', 'label', 'values'])
-        diff_args = [DiffArg('difficulty', [], 'Difficulty', []), DiffArg('kwh', [], 'Electricity cost', []), DiffArg('rate', [], 'Price (USD)', []), DiffArg('time', [], 'Duration', [])]
+        diff_args = []
+
+        diff_args.append(MultiArgument('difficulty'))
+        diff_args.append(MultiArgument('kwh'))
+        diff_args.append(MultiArgument('rate'))
+        diff_args.append(MultiArgument('time'))
 
         for d in args.difficulty:
             configuration = Configuration(d, args.coinbase, base_kwh, base_rate)
             diff_args[0].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
             diff_args[0].values.append(d)
+            diff_args[0].label = 'Difficulty'
 
         for k in args.kwh:
             configuration = Configuration(base_difficulty, args.coinbase, k, base_rate)
             diff_args[1].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
             diff_args[1].values.append(k)
+            diff_args[1].label = 'Electricity cost'
 
         for r in args.rate:
             configuration = Configuration(base_difficulty, args.coinbase, base_kwh, r)
             diff_args[2].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
             diff_args[2].values.append(r)
+            diff_args[2].label = 'Price (USD)'
 
         for t in args.time:
             configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
             diff_args[3].simulators.append(Simulator(Strategy(t * 30 * 24), Calculator(configuration)))
             diff_args[3].values.append(t)
+            diff_args[3].label = 'Duration'
 
         create_differencies(args, diff_args, hardware)
 
@@ -139,10 +147,10 @@ def main():
     filename = '../figures/{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), base_time)
     configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
     simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
-    cords = get_roi(simulator, capital, hardware) + ('',)
-    create_figure(filename, [cords])
+    plot = generate_plot(simulator, capital, hardware)
+    create_figure(filename, [plot])
 
-    variance = np.var(cords[1])
+    variance = np.var(plot.y)
     print('Variance of {0}: {1}'.format(currencies[args.currency][0], variance))
 
     if args.export:
