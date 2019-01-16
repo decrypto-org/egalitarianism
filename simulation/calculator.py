@@ -5,6 +5,10 @@ class Calculator(metaclass=abc.ABCMeta):
     def __init__(self, configuration):
         self.configuration = configuration
 
+    @property
+    def rate(self):
+            return self.configuration.rate
+
     def cost_per_hour(self, h):
         return h.watt * (self.configuration.kwh / 1000)
 

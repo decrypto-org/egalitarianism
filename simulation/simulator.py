@@ -126,14 +126,10 @@ class Reinvested(Strategy):
 class DP(Strategy):
     def construct_solution(self, capital, gain_velocity, items):
         solution = []
-        initial_capital = capital
 
-        for i in range(capital, 0, -1):
-            if gain_velocity[i - 1] < gain_velocity[i]:
-                initial_capital -= int(items[i].price)
-
-                if items[i] and initial_capital >= 0:
-                    solution.append(items[i])
+        while items[capital] and items[capital].price <= capital:
+            solution.append(items[capital])
+            capital -= int(items[capital].price)
 
         return solution
 
@@ -165,5 +161,45 @@ class DP(Strategy):
 
         for x in range(initial_capital + 1):
             r[x] = gain_velocity[x] * self._hours_of_operation
+
+        return (r)
+
+
+class DPReinvested(DP):
+    def simulate(self, initial_capital, hardware, calculator):
+        r = [0 for _ in range(initial_capital + 1)]
+        sorted_hardware = [h for h in sorted(hardware, key=lambda h: calculator.net(h), reverse=True) if calculator.net(h) > 0]
+        g = self.gain_velocity(initial_capital, sorted_hardware, calculator)
+        solution = []
+        revenue_velocity = []
+        cost_velocity = []
+        price = []
+
+        total_gain_velocity = g[0]
+        total_items = g[1]
+
+        for capital in range(initial_capital + 1):
+            solution.append(self.construct_solution(capital, total_gain_velocity, total_items))
+            revenue_velocity.append(sum(calculator.expected_income(h) * calculator.rate for h in solution[capital]))
+            cost_velocity.append(sum(calculator.cost_per_hour(h) for h in solution[capital]))
+            price.append(int(sum(h.price for h in solution[capital])))
+
+        for capital in range(initial_capital + 1):
+            optimal_income = 0
+
+            for v_tech in range(capital + 1):
+
+                if not solution[v_tech]:
+                    continue
+
+                v_pocket = capital - price[v_tech]
+                gain_velocity = total_gain_velocity[v_tech]
+                available_hours = v_pocket / cost_velocity[v_tech]
+                available_hours = min(self._hours_of_operation, available_hours)
+
+                income = available_hours * revenue_velocity[v_tech] + (self._hours_of_operation - available_hours) * gain_velocity
+                optimal_income = max(optimal_income, income)
+
+            r[capital] = optimal_income
 
         return (r)

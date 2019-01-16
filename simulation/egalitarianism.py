@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
-from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
+from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested, DPReinvested
 from helpers import slugify, MultiArgument, Plot
 from mining_hardware import Hardware
 from configuration import Configuration
@@ -65,7 +65,7 @@ def create_differencies(args, diff_args, hardware):
 def main():
     parser = argparse.ArgumentParser(description='Cryptocurrency egalitarianism: A quantitative approach')
     parser.add_argument('-c', '--currency', default='btc', choices=['btc', 'eth', 'xmr', 'ltc', 'dcr'], help='Currency (default: %(default)s)')
-    parser.add_argument('-s', '--strategy', default='dp', choices=['tech', 'electricity', 'dp', 'reinvest'], help='Strategy of invenstment (default: %(default)s)')
+    parser.add_argument('-s', '--strategy', default='dp', choices=['tech', 'electricity', 'dp', 'reinvest', 'dp-reinvest'], help='Strategy of invenstment (default: %(default)s)')
     parser.add_argument('-d', '--difficulty', required=True, type=float, nargs='+', help='Block difficulty (required)')
     parser.add_argument('-b', '--coinbase', required=True, type=float, help='Coinbase (required)')
     parser.add_argument('-k', '--kwh', required=True, type=float, nargs='+', help='Price per kilowatt per hour (required)')
@@ -79,7 +79,7 @@ def main():
     args = parser.parse_args()
 
     calculators = {'btc': BTCCalculator, 'eth': ETHCalculator, 'xmr': XMRCalculator, 'ltc': BTCCalculator, 'dcr': BTCCalculator}
-    strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested}
+    strategies = {'tech': GreedyTechnologyFirst, 'electricity': GreedyElectricityFirst, 'dp': DP, 'reinvest': Reinvested, 'dp-reinvest': DPReinvested}
     currencies = {'btc': ['Bitcoin'], 'eth': ['Ethereum'], 'xmr': ['Monero'], 'ltc': ['Litecoin'], 'dcr': ['Decred']}
 
     hardware = []
