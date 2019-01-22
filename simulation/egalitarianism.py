@@ -108,6 +108,22 @@ def main():
 
     hardware = parseMininingHardware(args.file)
 
+    if args.export:
+        calculator = Calculator(configuration)
+        with open('machines_profitable.txt', 'a') as file:
+            line = ('\\hline \n'
+                    '\\multicolumn{{4}}{{|c|}}{{\\textbf{{{0}}}}} \\\\ \n'
+                    '\\hline \n'
+                    'Name & Hashes / s & Watt & Price (USD) \\\\ \n'
+                    '\\hhline{{|=|=|=|=|}} \n'
+                    ).format(currencies[args.currency][0])
+            file.write(line)
+            for h in hardware:
+                if calculator.net(h) > 0:
+                    line = '{0} & {1:,.2f} & {2:,.2f} & {3:,.2f} \\\\\n'.format(h.name, h.hash_s, h.watt, h.price)
+                file.write(line)
+        return
+
     if args.difference:
         diff_args = []
 
