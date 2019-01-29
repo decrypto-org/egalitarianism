@@ -1,4 +1,5 @@
 import re
+from math import floor, log10
 
 
 # https://github.com/django/django/blob/92053acbb9160862c3e743a99ed8ccff8d4f8fd6/django/utils/text.py#L417
@@ -20,3 +21,22 @@ class Plot():
         self.x = x
         self.y = y
         self.label = ''
+
+
+def sci_notation(num, decimal_digits=1, precision=None, exponent=None):
+    """
+    Returns a string representation of the scientific
+    notation of the given number formatted for use with
+    LaTeX or Mathtext, with specified number of significant
+    decimal digits and precision (number of decimal digits
+    to show). The exponent to be used can also be specified
+    explicitly.
+    """
+    if not exponent:
+        exponent = int(floor(log10(abs(num))))
+    coeff = round(num / float(10**exponent), decimal_digits)
+    if not precision:
+        precision = decimal_digits
+
+    coeff = '{0:.{1}f}'.format(coeff, precision).rstrip('0').rstrip('.')
+    return r"${0} \cdot 10^{{{1:d}}}$".format(coeff, exponent, precision)

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
 from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
-from helpers import slugify, MultiArgument, Plot
+from helpers import slugify, MultiArgument, Plot, sci_notation
 from mining_hardware import Hardware
 from configuration import Configuration
 from calculator import BTCCalculator, ETHCalculator, XMRCalculator
@@ -57,7 +57,6 @@ def create_differencies(args, diff_args, hardware):
             plot = generate_plot(s, args.capital, hardware)
             plot.label = '{0}: {1:.2f}'.format(da.label, da.values[i])
             plots.append(plot)
-
         filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.attribute)
         create_figure(filename, plots, legend=True)
 
@@ -122,10 +121,29 @@ def main():
                     '\\hhline{{|=|=|=|=|}} \n'
                     ).format(currencies[args.currency][0])
             file.write(line)
-            for h in hardware:
+
+            sorted_hardware = sorted(hardware, key=lambda h: h.hash_s, reverse=True)
+
+            for h in sorted_hardware:
                 if calculator.net(h) > 0:
-                    line = '{0} & {1:,.2f} & {2:,.2f} & {3:,.2f} \\\\\n'.format(h.name, h.hash_s, h.watt, h.price)
-                file.write(line)
+                    hash = h.hash_s
+
+                    if 'btc' in args.currency or 'dcr' in args.currency:
+                        hash = sci_notation(h.hash_s, 2, 2, 12)
+
+                    if 'xmr' in args.currency:
+                        hash = '{0:,.2f}'.format(hash)
+
+                    if 'ltc' in args.currency:
+                        hash = sci_notation(h.hash_s, 2, 2, 7)
+
+                    if 'eth' in args.currency:
+                        hash = sci_notation(h.hash_s, 2, 2, 6)
+
+                    watt = '{0:,.2f}'.format(h.watt).rstrip('0').rstrip('.')
+                    price = '{0:,.2f}'.format(h.price).rstrip('0').rstrip('.')
+                    line = '{0} & {1} & {2} & {3} \\\\\n'.format(h.name, hash, watt, price)
+                    file.write(line)
         return
 
     if args.difference:
