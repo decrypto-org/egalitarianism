@@ -58,7 +58,7 @@ def create_differencies(args, diff_args, hardware):
             plot.label = '{0}: {1:.2f}'.format(da.label, da.values[i])
             plots.append(plot)
 
-        filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.name)
+        filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.attribute)
         create_figure(filename, plots, legend=True)
 
 
@@ -94,6 +94,10 @@ def main():
 
     Strategy = strategies[args.strategy]
     Calculator = calculators[args.currency]
+
+    filename = '../figures/{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), base_time)
+    configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
+    simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
 
     plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
@@ -160,22 +164,11 @@ def main():
 
         return
 
-    filename = '../figures/{0}_{1}_{2}K_{3}_months.pdf'.format(args.currency, args.strategy, str(int(capital / 1000)), base_time)
-    configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
-    simulator = Simulator(Strategy(hours_of_operation), Calculator(configuration))
     plot = generate_plot(simulator, capital, hardware)
     create_figure(filename, [plot])
 
     variance = np.var(plot.y)
     print('Variance of {0}: {1}'.format(currencies[args.currency][0], variance))
-
-    if args.export:
-        calculator = Calculator(configuration)
-        with open('machines_profitable.txt', 'a') as file:
-            for h in hardware:
-                if calculator.net(h) > 0:
-                    line = '{0} & {1:,.2f} & {2:,.2f} & {3:,.2f} & {4} \\\\\n'.format(h.name, h.hash_s, h.watt, h.price, currencies[args.currency][0])
-                    file.write(line)
 
 
 if __name__ == '__main__':
