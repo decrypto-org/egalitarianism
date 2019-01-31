@@ -112,9 +112,8 @@ investment, as well as small fluctuations in price and difficulty do not qualita
 
 \dionyziz{confirm that changing the total hash rate maintains curve shapes and argue about it in the main text}
 
-Using the constant values from table\ref{tbl:work-constants} we now define the
-computation of egalitarianism in our experiments.  Let $\mathbb{M}$ denote the set of
-all available mining machines. For each machine $m \in \mathbb{M}$, our empirically
+Let $\mathcal{M}$ denote the set of
+all available mining machines. For each machine $m \in \mathcal{M}$, our empirically
 collected data specifies the following parameters:
 \begin{inparaenum}[i)]
     \item the energy consumption rate $\ecr(m)$ in Watts,
@@ -136,8 +135,8 @@ KWh:
 
 There are many possible configurations for technology investments. Each
 configuration comprises of a number of copies $n \in \mathbb{N}$ of every
-machine type $m \in \mathbb{M}$. Therefore, we define each configuration as
-$\overline{m} \subseteq \mathbb{M} \times \mathbb{N}$, with
+machine type $m \in \mathcal{M}$. Therefore, we define each configuration as
+$\overline{m} \subseteq \mathcal{M} \times \mathbb{N}$, with
 total initial cost of investment for such configuration being
 $\ic(\overline{m}) = \sum_{(m, n) \in \overline{m}}{n \cdot \ic(m)}$.
 
@@ -157,7 +156,7 @@ the above inequality holds, and choose the one with the maximum returns:
     \{
       \sum_{(m, n) \in \overline{m}}
       {d\mathbb{E}[\ir(m)]}:
-      \overline{m} \subseteq \mathbb{M} \times \mathbb{N}
+      \overline{m} \subseteq \mathcal{M} \times \mathbb{N}
       \land
       \ic(\overline{m}) \leq v
     \}
