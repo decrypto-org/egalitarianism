@@ -118,13 +118,12 @@ collected data specifies the following parameters:
 \begin{inparaenum}[i)]
     \item the energy consumption rate $\ecr(m)$ in Watts,
     \item an initial cost of purchase $\ic(m)$ in USD, and
-    \item a hash rate $\hr(m)$ in Th per second.
+    \item a hash rate $\hr(m)$ in Terahashes per second.
 \end{inparaenum}
 Given the above, we can now calculate the expected income rate per hour
 $\mathbb{E}[\ir(m)]$ for a given machine $m$ and a cryptocurrency $c$. In the
 following equation, the first part identifies the income per hour, \ie the
-amount of tokens (denominated in USD) which the machine produces per second
-multiplied by $3600$ ($60$ seconds per minute times $60$ minutes per hour),
+amount of tokens (denominated in USD) which the machine produces per hour,
 whereas the second part of the equation identifies the electricity cost, \ie
 the product of the consumed electricity multiplied by the price of a single
 KWh:
@@ -142,8 +141,8 @@ $\ic(\overline{m}) = \sum_{(m, n) \in \overline{m}}{n \cdot \ic(m)}$.
 
 The above figure is given in USD per hour and, since the initial capital should
 suffice to buy the machines of the configuration, we require that
-$\ic(\overline{m}) \leq \mathcal{C}$,
-where $\mathsf{C}$ is the initial available capital at the beginning of the simulation.
+$\ic(\overline{m}) \leq v$,
+where $v$ is the initial available capital at the beginning of the simulation.
 
 Now, in order to identify the \emph{optimal} strategy's reported net income for the
 interval $d$, we iterate over all possible machine configurations, for which
@@ -155,7 +154,7 @@ the above inequality holds, and choose the one with the maximum returns:
   \max{
     \{
       \sum_{(m, n) \in \overline{m}}
-      {d\mathbb{E}[\ir(m)]}:
+      {|d|\mathbb{E}[\ir(m)]}:
       \overline{m} \subseteq \mathcal{M} \times \mathbb{N}
       \land
       \ic(\overline{m}) \leq v
@@ -188,12 +187,11 @@ The egalitarianism of Bitcoin, Ethereum, Litecoin and Monero are shown in
 Figures~\ref{fig:btc_dp_10K_12_months}, ~\ref{fig:eth_dp_10K_12_months},
 ~\ref{fig:ltc_dp_10K_12_months}, and~\ref{fig:xmr_dp_10K_12_months}
 respectively.
-
 Finally, Decred is a hybrid proof-of-work/proof-of-stake cryptocurrency, in
 which block generation is a collaboration between miners and minters.
 Specifically, each block which is mined via proof-of-work needs to be
-``vouched'' for by a certain number of minters, who give it a vote of
-confidence. Both the miners and the minters whoc participate in block
+``vouched for'' by a certain number of minters, who give it a vote of
+confidence. Both the miners and the minters who participate in block
 generation are rewarded. An investor can therefore choose to participate in
 Decred by either investing in mining hardware and performing proof-of-work, or
 by purchasing stake and performing proof-of-stake (or a combination thereof).
@@ -212,7 +210,7 @@ It is evident from all figures that the ROI is ``capped'' by a maximum value,
 which is observed in specified intervals. Indeed, this value identifies the
 ROI of the \emph{best available} machine and is in line with Lemma~\ref{lem:sybil}. In other words, as long as an
 investor is able to buy the machine which returns the most profits, then they
-observe the best possible ROI. In case an investor does not have enough capital
+achieve the best possible ROI. In case an investor does not have enough capital
 to buy the best mining product, they may buy a less profitable machine and
 observe less, though still positive, ROI. This observation explains the small
 spikes in ROI which may be seen \eg in Bitcoin's figure for capital in the
