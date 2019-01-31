@@ -132,7 +132,7 @@ def main():
                         hash = sci_notation(h.hash_s, 2, 2, 12)
 
                     if 'xmr' in args.currency:
-                        hash = '{0:,.2f}'.format(hash)
+                        hash = '{0:,.2f}'.format(hash).rstrip('0').rstrip('.')
 
                     if 'ltc' in args.currency:
                         hash = sci_notation(h.hash_s, 2, 2, 7)
