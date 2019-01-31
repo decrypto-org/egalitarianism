@@ -66,14 +66,16 @@ traditional finance. Again this parameter does not make a qualitative
 difference in our metrics.
 
 To find the optimal investment strategy, we employ the following algorithm. The
-initial available capital is allocated to an --- upfront --- technology
-investment, in which an integer instance of the ``Knapsack'' problem
+initial available capital is allocated to an upfront technology
+investment, in which an integer instance of the Unbounded Knapsack problem
 \cite{mathews1896partition} is solved to optimize the total cashflow.
 Subsequently, as long as the cashflow is positive, the purchased machines
 operate for the indicated total duration, reinvesting part of the freshly
 minted coins in electricity costs, in order to generate more coins. Eventually,
 this strategy produces an income of freshly generated coins, which have not
-been spent and are reported as the strategy's income.
+been spent and are reported as the strategy's income. We remark here that the
+general problem of mining hardware allocation is computationally
+hard~\cite{karp1972reducibility}.
 
 To calculate our concrete numbers, we employ the constants shown in
 Table~\ref{tbl:work-constants}. We use the expected block generation rates for
