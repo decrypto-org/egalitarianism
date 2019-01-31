@@ -4,7 +4,7 @@
 
 Having established the basics of consensus mechanisms, we now propose the first
 definition of an economic measure of \emph{egalitarianism} in cryptocurrencies.
-Before we present our definition, let us first state the desiderata of such a
+Before we present our definition, let us first state the \emph{desiderata} of such a
 definition. First of all, we want to allow concrete measurements to be
 performed on cryptocurrencies and data to be extracted in a manner that is
 quantitative and not vague. Thus far, the claims for egalitarianism in various
@@ -14,19 +14,19 @@ others, without demonstrating the claims or provide conclusive arguments.
 Secondly, a definition of egalitarianism must measure the block generation
 returns of a ``rich dollar'' compared to that of a ``poor dollar.''
 We thus desire a
-measure which, for a particular cryptocurrency, extracts a value where a smaller
-value indicates a \emph{lack of egalitarianism}, \ie a
-case where a certain level of wealth is a prerequisite in order to generate
-blocks, while a larger value indicates \emph{perfect egalitarianism}, where
+measure which, for a particular cryptocurrency, extracts a smaller value
+to indicate a \emph{lack of egalitarianism} (\ie a
+case where large wealth generates blocks disproportionately faster than
+small wealth) and a larger value to indicate \emph{perfect egalitarianism} (where
 every invested dollar has exactly equal power in terms of cryptocurrency
-generation.
+generation).
 
 As a means towards establishing our egalitarianism definition, we define the
 \emph{egalitarian curve} $f$ of a cryptocurrency. The horizontal axis of this
 curve plots the financial capital which is available for investment denominated
-in USD (given that we explore
+in USD\footnote{Given that we explore
 a small investment duration, it makes little difference whether these are
-nominal USD or real USD, as long as they are the same when applying comparisons).  The
+nominal USD or real USD, as long as they are the same when applying comparisons}.  The
 vertical axis plots the Return On Investment (ROI), which measures the
 cryptocurrency amount that is freshly generated in the investment period and
 remains unspent at the end of the investment period,
@@ -53,17 +53,17 @@ compared only if they use the same duration.
 \end{definition}
 
 The value $\underset{B \in \mathcal{B}}{\max}{\mathbb{E}[B(v)]}$ identifies the maximum expectation of
-returns across all investment strategies, \ie the amount of
+returns across all investment strategies $\mathcal{B}$, \ie the amount of
 returns which the \emph{optimal} strategy ensures for a given initial capital $v$.
 The expectation is taken with the blockchain execution as a random variable,
 since returns vary by execution (the randomness of the execution can affect the
 returns of the strategy, as the same strategy can bring larger returns if the
-participant is ``lucky'' and happens to produce many blocks).
+participant is ``lucky'' and happens to produce many blocks~\cite{equitability}).
 
 We remark that we do allow strategies to reinvest capital. For instance,
 returns earned from mining rewards can be reinvested in electricity costs for
 future mining. Furthermore, for unit consistency, we assume the strategy
-$B(v)$ returns the freshly generated coins in the same units as the capital $v$
+$B(v)$ returns the freshly generated coins denominated in the same units as the capital $v$
 was given in, such that $f$ represents a ROI; thus, we denominate the
 generated cryptocurrencies in USD using the market exchange rate.
 
@@ -85,7 +85,7 @@ curve.
 As an interesting thought experiment, consider the egalitarian curve which is
 decreasing. In this case, the poor would receive proportionally more newly
 created cryptocurrencies for every dollar they invest, \ie it would be a
-perfectly fair redistribution of wealth from the rich to the poor. However, one
+redistribution of wealth from the rich to the poor. However, one
 can quickly see that, in decentralized cryptocurrencies where the identities of
 the participants are unknown, it is impossible to
 hope for something better than the constant curve. Indeed, the fact that
@@ -100,7 +100,7 @@ more precise:
 
 \begin{restatable}[Sybil strategies]{lemma}{restateLemSybilStrategies}
 \label{lem:sybil}
-    Fix a cryptocurrency $c$ and an investment interval $d$. Given capital $v$,
+    Fix a cryptocurrency $c$ and an investment period interval $d$. Given capital $v$,
     for every natural number $i \in \mathbb{N}^\star$, it
     holds that $f_{c,d}(v) \leq f_{c,d}(i \cdot v)$.
 \end{restatable}
@@ -124,7 +124,7 @@ given distribution.
     e_{c,d,\mathcal{D}} = -\textsf{Var}_{v \gets \mathcal{D}}[f_{c,d}(v)]
   \]
 
-  where $f$ is the egalitarian curve of $c$ for an investment interval $d$.
+  where $f$ is the egalitarian curve of $c$.
 \end{definition}
 
 The intuition behind this definition is that, to have egalitarianism, the ROI
