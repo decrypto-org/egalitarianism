@@ -2,7 +2,7 @@
 
 Having established our theoretical framework, we now provide experimental
 results on the egalitarianism of various cryprocurrencies. Our experiments
-utilize the \emph{egalitarian curve} definition of section~\ref{sec:definition}
+utilize the \emph{egalitarian curve} definition of Section~\ref{sec:definition}
 in order to concretely confirm --- or disprove --- the egalitarianism claims of
 some of the major, both proof-of-work and proof-of-stake, cryptocurrencies.
 
@@ -28,7 +28,7 @@ memory-hard function. Ethereum is one of the most promising alternative
 cryptocurrencies, the first to support smart contracts, and the second largest
 by market cap; its work function is different from both Bitcoin and Litecoin.
 Finally, Monero is special with claims of strong egalitarianism due to its
-memory-hard mining function, Cryptonight. Furthermore, its protocol is often
+memory-hard mining function, Cryptonight~\cite{van2013cryptonote}. Furthermore, its protocol is often
 updated to maintain
 egalitarianism~\cite{monero-hard-asic}.
 
@@ -59,11 +59,9 @@ of all honest blockchain protocol executions. As such, each party is awarded
 block rewards in proportion to their computational power. The difference
 between revenue per unit of time and cost of operation per unit of time
 produces an \emph{income rate}, which is measured in USD per hour.
-
 For our experiments, we use an interval of investment with $|d| = 1$ year. Although
 this choice is arbitrary, it corresponds to the usual definition of ROI in
-traditional finance. Again this parameter does not make a qualitative
-difference in our metrics.
+traditional finance.
 
 To find the optimal investment strategy, we employ the following algorithm. The
 initial available capital is allocated to an upfront technology
