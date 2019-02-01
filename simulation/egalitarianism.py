@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc
 from matplotlib.backends.backend_pdf import PdfPages
 from simulator import Simulator, GreedyTechnologyFirst, GreedyElectricityFirst, DP, Reinvested
-from helpers import slugify, MultiArgument, Plot, sci_notation
+from helpers import slugify, MultiArgument, Plot, sci_notation, MultiPlot
 from mining_hardware import Hardware
 from configuration import Configuration
 from calculator import BTCCalculator, ETHCalculator, XMRCalculator
@@ -23,20 +23,22 @@ def parseMininingHardware(file):
     return hardware
 
 
-def create_figure(filename, plots, legend=False):
+def create_figure(filename, plot, legend=False):
     pp = PdfPages(filename)
 
-    fig = plt.figure()
-    fig.set_size_inches(6.2, 6.2)
+    plt.rcParams['font.size'] = plot.fontSize
 
-    for p in plots:
+    fig = plt.figure()
+    fig.set_size_inches(plot.figureSize[0], plot.figureSize[1])
+
+    for p in plot.plots:
         plt.plot(p.x, p.y, label=p.label)
 
-    plt.xlabel('Investment Capital (USD)')
-    plt.ylabel('Freshly generated ROI')
+    plt.xlabel(plot.xlabel)
+    plt.ylabel(plot.ylabel)
 
     if legend:
-        plt.legend(fontsize=11)
+        plt.legend(fontsize=plot.legend['size'], loc=plot.legend['location'])
 
     plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
     pp.close()
@@ -52,13 +54,13 @@ def generate_plot(simulator, capital, hardware):
 
 def create_differencies(args, diff_args, hardware):
     for da in diff_args:
-        plots = []
         for i, s in enumerate(da.simulators):
             plot = generate_plot(s, args.capital, hardware)
+            # plot.y = [y / (i + 1) if y > -1 else y for y in plot.y]
             plot.label = da.labels[i]
-            plots.append(plot)
+            da.multiPlot.plots.append(plot)
         filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.attribute)
-        create_figure(filename, plots, legend=True)
+        create_figure(filename, da.multiPlot, legend=True)
 
 
 def main():
@@ -105,8 +107,7 @@ def main():
         'font',
         family='serif',
         serif=['Computer Modern Roman'],
-        monospace=['Computer Modern Typewriter'],
-        size=27
+        monospace=['Computer Modern Typewriter']
     )
 
     hardware = parseMininingHardware(args.file)
@@ -154,6 +155,13 @@ def main():
         diff_args.append(MultiArgument('rate'))
         diff_args.append(MultiArgument('time'))
 
+        for d in diff_args:
+            d.multiPlot.legend['size'] = 32
+            d.multiPlot.fontSize = 32
+            d.multiPlot.figureSize = (9, 10)
+
+        diff_args[3].multiPlot.ylabel = 'Freshly generated annual ROI'
+
         for i, d in enumerate(args.difficulty):
             configuration = Configuration(d, args.coinbase, base_kwh, base_rate)
             diff_args[0].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
@@ -179,7 +187,9 @@ def main():
         return
 
     plot = generate_plot(simulator, capital, hardware)
-    create_figure(filename, [plot])
+    multiPlot = MultiPlot()
+    multiPlot.plots.append(plot)
+    create_figure(filename, multiPlot)
 
     variance = np.var(plot.y)
     print('Variance of {0}: {1}'.format(currencies[args.currency][0], variance))

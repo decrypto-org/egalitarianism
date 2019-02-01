@@ -13,6 +13,7 @@ class MultiArgument():
         self.attribute = attribute
         self.simulators = []
         self.labels = []
+        self.multiPlot = MultiPlot()
 
 
 class Plot():
@@ -20,6 +21,16 @@ class Plot():
         self.x = x
         self.y = y
         self.label = ''
+
+
+class MultiPlot():
+    def __init__(self):
+        self.plots = []
+        self.xlabel = 'Investment Capital (USD)'
+        self.ylabel = 'Freshly generated ROI'
+        self.legend = {'size': 11, 'location': 'lower right'}
+        self.fontSize = 27
+        self.figureSize = (6.2, 6.2)
 
 
 def sci_notation(num, decimal_digits=1, precision=None, exponent=None):
