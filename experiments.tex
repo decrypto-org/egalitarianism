@@ -256,21 +256,23 @@ available per ticket pool, a parameter inherent in their protocol. Perfect
 egalitarianism could in principle be achieved by making the ticket price
 approach $0$.
 
-In the case of pure proof-of-stake, every coin has the same probability of
-being chosen for eligibility. When a coin is eligible for block generation, its
-owner can create a block by providing a proof of ownership of the chosen coin.
-Consider the case of a cryptocurrency with $N$ coins in circulation. When a
-block needs to be created, a coin is chosen at random from the set of $N$
-coins. Therefore, each coin may be chosen with $1 \over N$ probability. Then
-the address which owns the chosen coin, in other words the stakeholder which
-controls this coin, is eligible to generate a block and receive the block
-rewards associated. In our experiments, we assume that every block is
-associated with a constant reward, which pertains to newly minted coins.
-Furthermore, since computational power does not affect the rate of block
-production, it is reasonable to assume that both the electricity and the
-hardware equipment's price is constant for all users, regardless of stake
-accumulation, so all users can participate using --- relatively --- cheap
-resources.
+In the case of Ouroboros, every coin has the same probability of
+being chosen for eligibility~\cite{C:KRDO17}. When a coin is eligible for block
+generation, its owner can create a block by providing a proof of ownership of
+the chosen coin. Consider the case of a cryptocurrency with $N$ coins in
+circulation. When a block needs to be created, a coin is chosen at random from
+the set of $N$ coins. Therefore, each coin may be chosen with $1 \over N$
+probability. Then the address which owns the chosen coin, in other words the
+stakeholder which controls this coin, is eligible to generate a block and
+receive the block rewards associated with it\footnote{This slightly deviates
+from the work of~\cite{C:KRDO17} in the fact that the payout in our case is due
+to freshly minted coins and not fees. However, the reward schedule is
+identical.}. In our experiments, we assume that every block is associated with a
+constant reward, which pertains to newly minted coins. Furthermore, since
+computational power does not affect the rate of block production, it is
+reasonable to assume that both the electricity and the hardware equipment's
+price is constant for all users, regardless of stake accumulation, so all users
+can participate using --- relatively --- cheap resources (cf. Remark~\ref{rmk:pow-scale}).
 
 Figure~\ref{fig:pure-pos-stake} depicts the simulation of a pure proof-of-stake
 system. In this case, the users pay a set fee which represents the hardware and
