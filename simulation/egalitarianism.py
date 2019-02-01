@@ -55,7 +55,7 @@ def create_differencies(args, diff_args, hardware):
         plots = []
         for i, s in enumerate(da.simulators):
             plot = generate_plot(s, args.capital, hardware)
-            plot.label = '{0}: {1:.2f}'.format(da.label, da.values[i])
+            plot.label = da.labels[i]
             plots.append(plot)
         filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.attribute)
         create_figure(filename, plots, legend=True)
@@ -154,29 +154,25 @@ def main():
         diff_args.append(MultiArgument('rate'))
         diff_args.append(MultiArgument('time'))
 
-        for d in args.difficulty:
+        for i, d in enumerate(args.difficulty):
             configuration = Configuration(d, args.coinbase, base_kwh, base_rate)
             diff_args[0].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
-            diff_args[0].values.append(d)
-            diff_args[0].label = 'Difficulty'
+            diff_args[0].labels.append('Difficulty: {0}'.format(sci_notation(d, 2, 2, 12)))
 
-        for k in args.kwh:
+        for i, k in enumerate(args.kwh):
             configuration = Configuration(base_difficulty, args.coinbase, k, base_rate)
             diff_args[1].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
-            diff_args[1].values.append(k)
-            diff_args[1].label = 'Electricity cost'
+            diff_args[1].labels.append('Electricity cost: \${0:,.2f}'.format(k))
 
-        for r in args.rate:
+        for i, r in enumerate(args.rate):
             configuration = Configuration(base_difficulty, args.coinbase, base_kwh, r)
             diff_args[2].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
-            diff_args[2].values.append(r)
-            diff_args[2].label = 'Price (USD)'
+            diff_args[2].labels.append('Price: \${0:,.0f}'.format(r))
 
-        for t in args.time:
+        for i, t in enumerate(args.time):
             configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
             diff_args[3].simulators.append(Simulator(Strategy(t * 30 * 24), Calculator(configuration)))
-            diff_args[3].values.append(t)
-            diff_args[3].label = 'Duration'
+            diff_args[3].labels.append('Duration: {0} year(s)'.format(int(t / 12)))
 
         create_differencies(args, diff_args, hardware)
 

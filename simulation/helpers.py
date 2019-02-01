@@ -12,8 +12,7 @@ class MultiArgument():
     def __init__(self, attribute):
         self.attribute = attribute
         self.simulators = []
-        self.label = ''
-        self.values = []
+        self.labels = []
 
 
 class Plot():
