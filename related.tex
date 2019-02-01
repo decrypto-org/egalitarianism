@@ -39,45 +39,25 @@ studying the effects of economies of scale when applied to cryptocurrency
 generation.
 
 \noindent\textbf{Equitability of cryptocurrencies.}
-An analysis of economic fairness of
-blockchain reward functions was recently studied by Fanti \textit{et al.} in~\cite{equitability}, which
-introduces the notion of \emph{equitability}. Their work studies the evolution
-of a blockchain system after a series of rounds, putting forth the
----desirable--- property that stake ownership remains proportionally the same
-both \emph{before} and \emph{after} the rewards of a fixed period of time have been awarded.
-For example, if an
-investor initially owns $20\%$ of the total funds, an equitable system ensures that they
-own $20\%$ of the total funds eventually, \ie including
-rewards. By studying the behaviour of the returns' \emph{variance} under the randomness of executions,
-they show that the distribution of capital
-follows a Pólya process and propose a variance reduction mechanism
-by the introduction of a \emph{geometric reward} function.
-We note that, in contrast, our work quantifies the \emph{expectation} of rewards
- and then studies the variance under the
-randomness of initial capital allocation.
-
-Their work makes two simplifying assumptions.
-First, they assume that the \emph{expectation} of returns is proportional to the
-invested capital. As we show in this work, this is only
-approximately true for some proof-of-stake systems, specifically those which are perfectly egalitarian. For proof-of-work, they
-correctly assume that the expectation of returns is proportional to computational
-power expended, but do not study the relationship between computational power and
-capital, which, as we show in this work, is far from linear. Second, they assume that
-proof-of-work miners do not reinvest their proceeds in the
-mining operation, while proof-of-stake minters do.
-This is the critical assumption which allows the authors to
-conclude that proof-of-stake minting behaves like Pólya's urn and
-proof-of-work mining does not. Empirical data show that large-scale miners pay for electricity
-directly using their proceeds~\cite{kharif2018}. Hence, both proof-of-work mining
-and proof-of-stake minting follows a Pólya process and both can be equally unequitable.
-
-We note that \emph{egalitarianism} and \emph{equitability} are orthogonal
-notions. In fact, a proof-of-stake cryptocurrency can be perfectly egalitarian
-and poorly equitable, \eg if it uses a constant or decreasing reward function.
-Similarly, a cryptocurrency may not be egalitarian but maximally equitable, \eg
-using a geometric reward function in conjuction with a proof-of-work function
-which lends itself to economies of scale and allows the construction of
-specialized hardware.
-We note that it is possible to obtain a perfectly egalitarian and maximally
-equitable cryptocurrency, \eg by adopting
-correctly parameterized proof-of-stake under a geometric reward function.
+Fanti \textit{et al.} analyze economic blockchain fairness
+in~\cite{equitability}, where they define \emph{equitability}. They study the
+evolution of a system after a series of rounds, putting forth the property that
+stake ownership remains in proportion \emph{before} and \emph{after} rewards
+have been awarded. By studying the behaviour of the returns' \emph{variance}
+under the randomness of executions, they show that the distribution of capital
+follows a Pólya process. Our work augments their results by quantifying the \emph{expectation}
+of rewards and then studying the variance under the randomness of initial capital
+allocation. In our work, we show that
+computational power is not proportional to the invested capital, and hence the
+analogy between proof-of-work computational power and proof-of-stake capital
+breaks down, and a more detailed study is needed. Additionally, we remark that
+proof-of-work miners also reinvest their proceeds in the mining operation,
+albeit slowly, as proof-of-stake minters do. For example, empirical data show
+that large-scale miners pay for electricity using their
+proceeds~\cite{kharif2018}. Hence, both mining and minting follow Pólya
+processes as modelled by their paper.
+Regardless, \emph{egalitarianism} and \emph{equitability} are orthogonal. A
+cryptocurrency can be perfectly egalitarian and poorly equitable and vice versa.
+It is possible to obtain a cryptocurrency both egalitarian and equitable by
+adopting correctly parameterized proof-of-stake under a geometric reward
+function.
