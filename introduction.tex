@@ -27,11 +27,10 @@ power or stake respectively.
 
 Block generators are incentivized to produce blocks by receiving a
 \emph{reward} for each block they successfully produce and which is
-subsequently adopted in the resulting blockchain. \aggelos{added the following sentence and did
-minor edits in the remaining paragraph}
-In many cryptocurrencies, the rewards serve a dual purpose: incentivise the 
+subsequently adopted in the resulting blockchain.
+In many cryptocurrencies, the rewards serve a dual purpose: incentivise the
 the miners/minters but also create and distribute the underlying cryptocurrency
-to the system's maintainers. 
+to the system's maintainers.
 % These rewards follow various schedules that are designed based on the
 % macroeconomic desiderada envisioned by the architects of the cryptocurrency. For
 % example, the rate of coin production is \emph{halved} every $210\,000$ blocks in
@@ -45,21 +44,18 @@ comparison of the \emph{expected} returns of investors with different
 purchasing power. The central economic property which arises is that of
 cryptocurrency \emph{egalitarianism}. In an ideal world, investing a certain
 amount of capital to produce blocks should result in rewards proportional to
-that capital; that is, a \emph{poor investor} should receive proportionally
-equal rewards as a \emph{rich investor}. In this point of view egalitarianism would suggest
-that despite the fact that  larger
-investments do bear larger risk,   wealthy investors should not be rewarded
-with ``bonuses'', so that everybody has equal opportunities to both participate
+that capital; that is, both a \emph{poor} investor and a \emph{rich} investor
+should receive returns in proportion to their investment in expectation.
+In this point of view,
+wealthy investors should not be rewarded
+with disproportionate rewards and everybody should have equal opportunity to both participate
 and earn rewards. As we will see, this is far from true with most cryptocurrencies
 today.
 
-\dionyziz{Fix comma typesetting in monetary values above (should not have a space after the comma)}
-
-Until now, the term \emph{egalitarianism} has been left undefined \todo{some references to e.g. the bitcoin forum would
-be appropriate here}, although
-several cryptocurrencies claim to be more egalitarian than others. However,
+Until now, the term \emph{egalitarianism} has been left undefined, although
+several cryptocurrencies claim to be more egalitarian than others~\cite{van2013cryptonote,mcmillan2013}. However,
 lacking a quantifiable metric, the question of whether some cryptocurrencies are
-more \emph{egalitarian} than others remains ill posed. Our paper aims at 
+more \emph{egalitarian} than others remains ill posed. Our paper aims at
 putting forth the first concrete definition of egalitarianism, in a way which is
 generic and can be applied to any cryptocurrency.
 Our definition provides a metric, which can be practically measured and used
@@ -81,16 +77,13 @@ behavior is similar across all coins independently of externalities such as hard
 it suffices to perform a case study of an indicative proof-of-stake protocol.
 We study the case of pure proof-of-stake, applied on a protocol consistent with Ouroboros~\cite{C:KRDO17},
 as well as a hybrid proof-of-work/proof-of-stake cryptocurrency,
-Decred \footnote{See: \url{https://www.decred.org/} [Online: December 2018]}. 
-We find that, in an open market,  pure proof-of-stake coins are perfectly
-egalitarian, contrary to their proof-of-work counterparts. However, we should
-note that variations of proof-of-stake, such as ``delegated proof-of-stake'',
+Decred~\cite{decred}.
+We find that, in an open market, pure proof-of-stake coins can be perfectly
+egalitarian, contrary to their proof-of-work counterparts. However, we
+note that variations of proof-of-stake, such as ``delegated proof-of-stake,''
 may not be perfectly egalitarian, since the delegates, \ie the leaders of
 the stake pools which are formed, typically earn extra profits for managing the
-stake pools.
-
-\dionyziz{Ensure Monero and Litecoin are more egalitarian than Bitcoin and Ethereum as claimed in the above paragraph}
-
+stake pools~\cite{bkks2018}.
 
 \textbf{Our Contributions and Roadmap.}
 This work provides a quantitative evaluation of cryptocurrency egalitarianism.
