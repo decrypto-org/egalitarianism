@@ -1,75 +1,71 @@
 \section{Preliminaries}\label{sec:preliminaries}
 
-Before researching the egalitarianism of different cryptocurrency models, we
+Before studying the egalitarianism of different cryptocurrency consensus mechanisms, we
 provide a description of the leader election process, which is a central part
-of each blockchain consensus algorithm. Although various protocols have
-proposed a number of protocols for determining the eligible block producer,
-based on different ``proofs of activity'', the two most common methods are
-proof-of-work mining and proof-of-stake minting. In this section we give an
-overview of the details of both, in order to establish an understanding of the
+of each blockchain consensus algorithm. We give an
+overview of the details of the two most common decentralized consensus mechanisms,
+proof-of-work and proof-of-stake, in order to establish an understanding of the
 differences in egalitarianism between the two models.
 
 \noindent\textbf{Proof-of-work.}
 The core idea behind proof-of-work cryptocurrencies is solving the
 proof-of-work inequality.  Specifically, the mining hardware is provided with
 two constants, $\textsc{previd}$ and $\textsc{data}$, \ie the id of the
-existing blockchain and the data which need to be appended to it.  The mining
+tip of the adopted blockchain and the data which need to be appended to it.  The mining
 device then \emph{brute-force} searches for some string \textsc{nonce}, such
 that $\hash(\textsc{previd} || \textsc{data} || \textsc{nonce}) \leq T$ for
 some hash function $\hash$ defined by the system. Here, $T$ is a
 ---relatively--- small number called the \emph{difficulty target}, which is
 adjusted in order to ensure a stable block production rate, although typically
-remains constant for periods of consecutive blocks called \emph{epochs} - for
-example, in Bitcoin, epochs are $2016$ blocks long. Because the search for
+remains constant for periods of consecutive blocks called \emph{epochs} --- for
+example, in Bitcoin, epochs are $2016$ blocks long~\cite{SP:BMCNKF15}. Because the search for
 solutions is brute-forced, the expected number of solutions found by a given
 miner is proportional to the number of evaluations of the
 hash function $\hash$ she can obtain in a given timeframe.
-
-\dionyziz{Verify that modifying the difficulty retains the shape of our curves}
 
 The number of hash evaluations is one of the several critical parameters to
 consider when purchasing mining hardware. Other important parameters include
 the price of a mining unit, as well as its electricity consumption.  Mining
 hardware is divided in various tiers based on performance, namely CPU miners,
-GPU miners, FPGA miners, and specialized ASIC miners.  Although the pricing of
+GPU miners, FPGA miners, and specialized ASIC miners~\cite{taylor2013bitcoin}.  Although the pricing of
 such devices may be similar, the hashing rate and, in turn, the return on
-investment, is highly dependent on the hardware's tier.  For example, as of
-now, the mining hardware ``Whatsminer M10'' produced by the company ``MicroBT''
-costs $\$1,448.00$ per unit and produces $\$0.039916$ per hour of operation in
-net gains, \ie average mined Bitcoins denominated in US dollars with today's
+investment, is highly dependent on the hardware's tier.  For example,
+the mining hardware ``Whatsminer M10'' produced by the company ``MicroBT''
+costs $\$1{,}022.00$ per unit and produces $\$0.104266$ per hour of operation in
+net gains, \ie average mined Bitcoins per hour denominated in US dollars with today's
 prices (December 2018) minus the electricity costs. On the other hand, the
 mining hardware ``8 Nano Pro'' produced by the company ``ASICMiner'' costs
-$\$47,500.00$ per unit, but produces $\$0.195327$ per hour of operation in net
-gains, \ie almost five times the hourly net gains of its cheaper competitor.
+$\$6{,}000.00$ per unit, but produces $\$0.315327$ per hour of operation in net
+gains, \ie almost three times the hourly net gains of its cheaper competitor.
 Thus, if one can afford to purchase the more expensive hardware, each of their
 subsequent dollar invested in electricity returns more mined coins.
 
 It has long been folklore knowledge in the blockchain community that mining
 becomes more egalitarian by using a memory-hard proof-of-work function. This
 intuition is correct, the core reason being the difficulty to construct
-specialized hardware for memory-hard functions - for example, no ASICs
+specialized hardware for memory-hard functions. For example, no ASICs
 currently exist for Monero mining.  Therefore, the only way to scale mining
 operations is by purchasing more hardware. However, since the mining hardware
 in this case varies little, both in terms of cost and performance, scaling
-returns proportionally to investments.  To the best of our knowledge, this
-paper is the first to formally confirm this correspondence between the
+returns become proportional to investments.  To the best of our knowledge, this
+paper is the first to confirm this correspondence between the
 memory-hardness of proof-of-work hash functions and the economics of mining.
 
 \begin{remark}[Proof-of-work at scale]\label{rmk:pow-scale}
 We only analyze the scaling of the economics of proof-of-work mining with
-respect to hardware and electricity costs. However, a multitude of
+respect to hardware. However, a multitude of
 additional factors play important roles for mining operations, such as
-rental costs, machine cooling and maintenance costs, as well as bulk
+space rental costs, machine cooling and maintenance costs, as well as bulk
 electricity purchase.  As is common in economies of scale, these relative
 costs are reduced for large-scale operations, although they are similar for
 all proof-of-work cryptocurrencies and thus do not affect relative
 comparisons between them. We also remark that we analyze mining costs for
 small capital investments. If larger capital, \eg above a few million US
 dollars, is available, corporations can develop their own specialized
-hardware and gain a competitive advantage by treating it as a trade secret.
+hardware and gain a competitive advantage by treating it as a trade secret~\cite{taylor2013bitcoin}.
 Indeed, these details make our comparison in favour of proof-of-stake
 \emph{more pronounced}, as proof-of-stake operations do not incur such
-types of costsand do not lend themselves to specialized mining hardware
+types of costs and do not lend themselves to specialized mining hardware
 research. We leave the analysis and calculation of egalitarianism under
 these parameters for future work.
 \end{remark}
@@ -78,13 +74,13 @@ these parameters for future work.
 In proof-of-stake, a minter is selected in proportion to the stake they hold,
 which is to say proportionally to the amount of money they own. There exist a
 number of flavours of this process. In one case, all coins automatically
-participate in the leader election process - this is the case for Ouroboros~\cite{C:KRDO17} and
+participate in the leader election process --- this is the case for Ouroboros~\cite{C:KRDO17} and
 Ethereum's Casper~\cite{buterin2017casper}. In a second flavour, the stake has
-to opt-in to participate in the election by a special process, such as
+to \emph{opt-in} to participate in the election by a special process, such as
 purchasing a \emph{ticket} or becoming a delegate of the stake of other users.
-This is the case for cryptocurrencies such as Decred~\cite{decred} and EOS. Among those
+This is the case for cryptocurrencies such as Decred~\cite{decred} and EOS~\cite{eos}. Among those
 participating in the election, a leader is elected at random, in proportion to
-their stake or the stake that has been delegated to them.
+their stake.
 
 % While some protocols such as Ouroboros elect \emph{exactly one} leader, there
 % are protocols, in both the work and stake setting, such as Bitcoin and Ouroboros
@@ -106,7 +102,7 @@ a closed rich club cannot be formed.
 % have a minuscule chance of generating a block with computational power by mining
 % with pencil and paper~\cite{paper-mining}, or by building one's own computer.
 Although this argument seems agreeable at first, the results of our work contradict it.
-In fact, stake-based systems are much more egalitarian than work-based.
+In fact, correctly parameterized stake-based systems are much more egalitarian than work-based ones.
 
 It is instructive to dispell the above argument intuively, before we support
 our position with data. Firstly, the argument that money can be exclusively
@@ -115,9 +111,21 @@ in the case of a peculiar oligopoly, where a small faction of parties mutually
 agrees to never sell to outsiders, despite external demand. However, in an open
 market, both money and computational power can be freely purchased and, in
 fact, any non-negligible amount of computational power must be necessarily
-purchased that way. Therefore, given that both money and computational power
-are purchasable, we now need consider the funds one needs to invest either in
+purchased that way.
+In the present work, \textbf{we assume an open market} for both mining hardware
+and financial capital which allows participation in the respective systems.
+Therefore, given that both money and computational power
+are purchasable, we now need to consider the funds one needs to invest either in
 technology or in financial capital in order to maximize the returns from a
-cryptocurrency's block generation mechanisms. Now, the amount of cryptocurrency
+cryptocurrency's block generation mechanisms. The amount of cryptocurrency
 generated by a given investment can be concretely measured and compared, thus
 the question can now be analyzed quantitatively and answered concretely.
+
+We should
+note that variations of proof-of-stake, such as ``delegated proof-of-stake,''
+may not be perfectly egalitarian, since the delegates, \ie the leaders of
+the stake pools which are formed, typically earn extra profits for managing the
+stake pools~\cite{bkks2018}. In this paper, we only concern
+ourselves with non-delegated variants, \ie \emph{pure} proof-of-stake protocols.
+We leave the study of the contrast between pool formation mechanism truthfulness
+(or Sybil-resilience) and egalitarianism for future work.

@@ -12,7 +12,7 @@
 %----- Comments ----------------------------------------------------------------
 \RequirePackage{totcount}
 \RequirePackage{color}
-\RequirePackage[colorinlistoftodos]{todonotes}
+\RequirePackage[disable]{todonotes}
 
 \newtotcounter{notecount}
 \newcommand{\notewarning}{%
@@ -32,23 +32,6 @@
 \makeatletter
 \def\myaddcontentsline#1#2#3{%
   \addtocontents{#1}{\protect\contentsline{#2}{#3}{Section \thesubsection\ at p. \thepage}{}}}
-\renewcommand{\@todonotes@addElementToListOfTodos}{%
-    \if@todonotes@colorinlistoftodos%
-        \myaddcontentsline{tdo}{todo}{{%
-            \colorbox{\@todonotes@currentbackgroundcolor}%
-                {\textcolor{\@todonotes@currentbackgroundcolor}{o}}%
-            \ \@todonotes@caption}}%
-    \else%
-        \myaddcontentsline{tdo}{todo}{{\@todonotes@caption}}%
-   \fi}%
-\newcommand*\mylistoftodos{%
-  \begingroup
-       \setbox\@tempboxa\hbox{Section 9.9 at p. 99}%
-       \renewcommand*\@tocrmarg{\the\wd\@tempboxa}%
-       \renewcommand*\@pnumwidth{\the\wd\@tempboxa}%
-       \listoftodos%
-  \endgroup
-}
 \makeatother
 \definecolor{lightgreen}{rgb}{0.86, 0.93, 0.78}
 \definecolor{bordergreen}{rgb}{0.55, 0.76, 0.74}
@@ -131,8 +114,8 @@
 \newcommand{\hr}{\textsc{hr}}
 \newcommand{\ir}{\textsc{ir}}
 \newcommand{\ic}{\textsc{ic}}
-\newcommand{\eg}{\textit{e.g.} }
-\newcommand{\ie}{\textit{i.e.} }
+\newcommand{\eg}{e.g. }
+\newcommand{\ie}{i.e., }
 
 \newcommand{\placefigure}[4]{
   \iflncs
@@ -156,7 +139,7 @@
   \begin{subfigure}[b]{#5\linewidth}
     \centering
     \includegraphics[width=#4\columnwidth,keepaspectratio]{figures/#1}
-    \captionsetup{justification=centering}
+    \captionsetup{labelformat=simple, justification=centering}
     \caption{#3}
     \label{#2}
     \vspace{4ex}
@@ -164,3 +147,5 @@
 }
 
 \newcommand{\hash}{\mathsf{H}}
+
+\renewcommand\thesubfigure{(\alph{subfigure})}

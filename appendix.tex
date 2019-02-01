@@ -1,96 +1,220 @@
 \appendix
-\section{Qualitative difference}\label{sec:appendix-qualitative-difference}
 
-Figure~\ref{fig:different-settings} demonstrates that the qualitative difference of egalitarianism across cryptocurrencies remains the same if the difficulty, the electricity cost and the duration is adjusted.
+\section{Proofs}\label{sec:proofs}
 
-\begin{figure}[!ht]
-  \placesubfigure{btc_dp_10K_12_months_3_diff.pdf}{fig:different_difficulty}{Difficulty}{0.75}{0.5}
-  \placesubfigure{btc_dp_10K_12_months_3_kwh.pdf}{fig:different_electricity_cost}{Electricity cost}{0.75}{0.5}
-  \placesubfigure{btc_dp_10K_12_months_4_time.pdf}{fig:different_duration}{Duration}{0.75}{0.5}
-  \caption{Qualitative difference of egalitarianism}
+\restateLemSybilStrategies*
+\begin{proof}
+    We prove the statement via contradiction. Assume that for capital $v$
+    exists a natural number $i \in \mathbb{N}^\star$ such that
+    $f_{c,d}(v) > f_{c,d}(i \cdot v)$. Also assume that for
+    capital $v$ the optimal strategy is $B'$, so: $\underset{B \in
+    \mathbb{B}}{\max}{\mathbb{E}[B(v)]} = \mathbb{E}[B'(v)]$. Then, for capital
+    $i \cdot v$ exists a strategy $B''$, such that the capital is split into $i$
+    equally-sized parts and the strategy $B'$ is applied on each part. Given
+    that the executions of the substrategies on these parts are independent,
+    then the expected returns for the strategy $B''$ are:
+    \begin{align}\label{eq:break-strategy}
+        \mathbb{E}[B''(i \cdot v)] = i \cdot \mathbb{E}[B'(v)]  = i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]}
+    \end{align}
+    It also holds that $B''$ is at best the optimal strategy, so:
+    \begin{align}\label{eq:multi-strategy}
+        \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} \geq \mathbb{E}[B''(i \cdot v)] \xRightarrow{\text{(\ref{eq:break-strategy})}}
+        \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} \geq i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]}
+    \end{align}
+    However, it should hold that:
+    \begin{alignat}{2}
+        f_{c,d}(v) &> f_{c,d}(i \cdot v) \Rightarrow \notag\\
+        \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(i \cdot v)]} - i \cdot v}{i \cdot v} \xRightarrow{\text{(\ref{eq:multi-strategy})}} \notag\\
+        \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{i \cdot \underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - i \cdot v}{i \cdot v} \Rightarrow \notag\\
+        \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v} &> \frac{\underset{B \in \mathbb{B}}{\max}{\mathbb{E}[B(v)]} - v}{v}
+    \end{alignat}
+    which is impossible.
+\end{proof}
+
+\section{Parameters affecting egalitarianism}\label{sec:appendix-qualitative-difference}
+
+Throughout this paper, we have assumed certain parameters (cryptocurrency
+prices, electricity prices, duration of investment and mining difficulty) remain
+constant throughout the investment period. Furthermore, we have taken into account
+current market values to the best of our knowledge. We note that, while the
+actual egalitarianism numbers may change depending on these parameters, the
+general shape of egalitarian curves and the qualitative comparison between
+different cryptocurrencies remains the same. To illustrate this point, we have
+measured the egalitarian curve of Bitcoin for varying parameters values. Our
+results are demonstrated in Figure~\ref{fig:different-settings}.
+
+\begin{figure}
+  \placesubfigure{btc_dp_10K_diff_difficulty.pdf}{fig:different_difficulty}{Difficulty}{0.9}{0.5}
+  \placesubfigure{btc_dp_10K_diff_kwh.pdf}{fig:different_electricity_cost}{Electricity cost}{0.9}{0.5}
+  \placesubfigure{btc_dp_10K_diff_time.pdf}{fig:different_duration}{Investment duration}{0.9}{0.5}
+  \placesubfigure{btc_dp_10K_diff_rate.pdf}{fig:different_price}{Cryptocurrency price}{0.9}{0.5}
+  \caption{Bitcoin egalitarian curves under varying parameters}
   \label{fig:different-settings}
 \end{figure}
 
 \section{Machines}\label{sec:appendix-data}
 
-We have analyzed several different mining machines, a summary of which is shown in Table~\ref{tbl:machines}.
+Data for mining machines was obtained from a multitude of resources on the
+Internet\footnote{An exhaustive list of our resources includes the online
+stores \url{https://whattomine.com/}, \url{https://cryptominer.deals/},
+\url{https://www.asicminervalue.com/},
+\url{https://www.xmrstak.com/tag/monero/}, \url{https://gpustats.com/},
+\url{https://www.ethmonitoring.com/benchmark},
+\url{https://monerobenchmarks.info/}, \url{https://www.reddit.com},
+\url{https://www.newegg.com/}, \url{https://www.amazon.com/},
+\url{https://shop.bitmain.com.cn}, \url{https://www.cryptouniverse.at},
+\url{https://canaan.io}, \url{http://miner.ebang.com.cn},
+\url{https://swminershop.com}, \url{https://asicminer.co},
+\url{https://estrahash.com}, \url{http://www.innosilicon.com},
+\url{https://pangolinminer.com}, \url{https://www.bitfily.io},
+\url{https://hashdeploy.net/}, \url{https://www.pantech.company},
+\url{https://www.cryptominerbros.com}, \url{https://pandaminer.com},
+\url{https://minersdeals.com}, \url{https://sharkmining.com},
+\url{https://shop.miningstore.com}, \url{https://mineshop.eu},
+\url{https://www.bitmart.co.za}, \url{https://shop.futurebit.io},
+\url{https://www.aliexpress.com}, \url{https://bitech-mining.com},
+\url{https://asicminermarket.com}, \url{https://www.baikalminer.com},
+\url{https://prominerz.com}}. Data for graphics processing unit (GPU) and
+central processing unit (CPU) was obtained by calculating the median of
+multiple user benchmarks when available. The price of each machine is the
+current price of machine at date of access. When a new machine is not available
+for sale the price of used or refurbished machine is used. For reproducibility
+purposes, our complete data set is openly available in our repository. For
+reference, we provide a summary of those machines which provide a
+\emph{positive net gain per hour} after purchase (and can thus be profitable
+under our assumed parameter values) in Table~\ref{tbl:machines}.
 
-
-\begin{table}[!ht]
-  \centering
-  \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|c|c|c|c|c|}
-      \hline
-      Name & H / s & Watt & Price (USD) & Cryptocurrency\\
-      \hhline{|=|=|=|=|=|}
-        Bitmain Antminer T15 & 23,000,000,000,000.00 & 1,541.00 & 913.00 & Bitcoin \\
-        Bitmain Antminer S15 & 28,000,000,000,000.00 & 1,596.00 & 1,475.00 & Bitcoin \\
-        Bitmain Antminer S11 & 20,500,000,000,000.00 & 1,530.00 & 545.00 & Bitcoin \\
-        Ebang Ebit E11++ & 44,000,000,000,000.00 & 1,980.00 & 2,024.00 & Bitcoin \\
-        Ebang Ebit E11+ 37T & 37,000,000,000,000.00 & 2,035.00 & 1,517.00 & Bitcoin \\
-        Ebang Ebit E11 & 30,000,000,000,000.00 & 1,950.00 & 1,110.00 & Bitcoin \\
-        ASICMiner 8 Nano & 44,000,000,000,000.00 & 2,100.00 & 1,790.00 & Bitcoin \\
-        ASICMiner 8 Nano Pro & 76,000,000,000,000.00 & 4,000.00 & 6,000.00 & Bitcoin \\
-        Innosilicon T3 43T & 43,000,000,000,000.00 & 2,100.00 & 2,279.00 & Bitcoin \\
-        Innosilicon T2T-32T & 32,000,000,000,000.00 & 2,200.00 & 1,568.00 & Bitcoin \\
-        MicroBT Whatsminer M10 & 33,000,000,000,000.00 & 2,145.00 & 1,448.00 & Bitcoin \\
-        MicroBT Whatsminer M10S & 55,000,000,000,000.00 & 3,500.00 & 2,558.00 & Bitcoin \\
-        Innosilicon A10 EthMaster & 485,000,000.00 & 850 & 5,399.00 & Ethereum \\
-        Innosilicon A10 EthMaster & 432,000,000.00 & 740 & 4,799.00 & Ethereum \\
-        Innosilicon A10 EthMaster & 365,000,000.00 & 650 & 4,099.00 & Ethereum \\
-        Nvidia GeForce RTX 2080Ti & 55,000,000.00 & 155 & 1,499.00 & Ethereum \\
-        Nvidia GeForce RTX 2080 & 41,000,000.00 & 105 & 749.99 & Ethereum \\
-        Nvidia GeForce RTX 2070 & 38,500,000.00 & 140 & 529.99 & Ethereum \\
-        Nvidia GeForce GTX TITAN V & 82,000,000.00 & 250 & 3,399.00 & Ethereum \\
-        Nvidia GeForce GTX TITAN X & 40,000,000.00 & 250 & 1,699.00 & Ethereum \\
-        Nvidia GeForce GTX 1080Ti & 55,000,000.00 & 190 & 747.12 & Ethereum \\
-        Nvidia GeForce GTX 1080 & 37,000,000.00 & 120 & 574.99 & Ethereum \\
-        Nvidia GeForce GTX 1070Ti & 32,000,000.00 & 100 & 519.00 & Ethereum \\
-        Nvidia GeForce GTX 1070 & 32,000,000.00 & 100 & 349.99 & Ethereum \\
-        Nvidia P104-100 & 38,000,000.00 & 125 & 524.14 & Ethereum \\
-        AMD RX 580 & 30,000,000.00 & 110 & 219.99 & Ethereum \\
-        AMD RX 570 & 27,900,000.00 & 90 & 208.99 & Ethereum \\
-        AMD RX 480 & 29,500,000.00 & 135 & 214.60 & Ethereum \\
-        Bitmain Antminer E3 & 190,000,000.00 & 760 & 654.24 & Ethereum \\
-        Shark Mining Shark Extreme 2 (8 x AMD RX 580) & 240,000,000.00 & 1100 & 4,590.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (8 x NVIDIA GTX 1080 Ti) & 420,000,000.00 & 1500 & 9,779.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (8 x NVIDIA RTX 2080 Ti) & 424,000,000.00 & 1800 & 17,779.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (6 x AMD RX 580) & 180,000,000.00 & 825 & 3,790.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (6 x NVIDIA GTX 1080 Ti) & 300,000,000.00 & 1125 & 8,029.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (6 x NVIDIA RTX 2080 Ti) & 318,000,000.00 & 1350 & 14,029.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (4 x AMD RX 580) & 120,000,000.00 & 550 & 2,590.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (4 x NVIDIA GTX 1080 Ti) & 210,000,000.00 & 750 & 4,979.00 & Ethereum \\
-        Shark Mining Shark Extreme 2 (4 x NVIDIA RTX 2080 Ti) & 212,000,000.00 & 900 & 7,679.00 & Ethereum \\
-        MineShop Ethereum Mining Rig (8x NVIDIA 1080 8gb GPU) & 310,000,000.00 & 1100 & 6,267.50 & Ethereum \\
-        MineShop Ethereum Mining Rig (8x AMD MSI RX 580 GPU) & 240,000,000.00 & 1000 & 3,453.85 & Ethereum \\
-        MineShop Ethereum Mining Rig (8x AMD MSI RX 570 GPU) & 220,000,000.00 & 950 & 3,225.93 & Ethereum \\
-        MineShop Ethereum Mining Rig (6x AMD MSI RX 580 GPU) & 170,000,000.00 & 750 & 2,156.46 & Ethereum \\
-        MineShop Ethereum Mining Rig (6x AMD MSI RX 560) & 80,000,000.00 & 370 & 1,823.14 & Ethereum \\
-        Innosilicon A4+ LTCMaster & 620,000,000.00 & 750 & 1,500.00 & Litecoin \\
-        Innosilicon A6 LTCMaster & 1,230,000,000.00 & 1500 & 3,000.00 & Litecoin \\
-        FutureBit Apollo LTC Pod & 140,000,000.00 & 196 & 299.99 & Litecoin \\
-        Shark Mining Shark Extreme 2 (8 x AMD Vega 56) & 14800 & 1700 & 6,879.00 & Monero \\
-        Shark Mining Shark Extreme 2 (6 x AMD RX 580) & 5160 & 825 & 3,790.00 & Monero \\
-        Shark Mining Shark Extreme 2 (6 x AMD Vega 56) & 11000 & 1275 & 5,829.00 & Monero \\
-        Shark Mining Shark Extreme 2 (4 x AMD RX 580) & 3440 & 550 & 2,590.00 & Monero \\
-        Nvidia GeForce GTX 2070 & 880 & 140 & 747.12 & Monero \\
-        Nvidia GeForce GTX 1060 & 520 & 80 & 279.99 & Monero \\
-        Nvidia GeForce GTX 1050Ti & 637 & 70 & 170.00 & Monero \\
-        AMD RX Vega 64 & 2040 & 140 & 429.00 & Monero \\
-        AMD RX Vega 56 & 2034 & 140 & 399.99 & Monero \\
-        AMD RX 580 & 1050 & 110 & 219.99 & Monero \\
-        AMD RX 570 & 900 & 90 & 208.99 & Monero \\
-        AMD RX 480 & 830 & 130 & 214.60 & Monero \\
-        AMD Ryzen 5 2600 & 627.3 & 65 & 154.99 & Monero \\
-        Intel i7-3770 & 287 & 43 & 459.99 & Monero \\
-        Bitmain Antminer DR5 & 35,000,000,000,000.00 & 1610 & 1,282.00 & Decred \\
-        MicroBT Whatsminer D1 & 48,000,000,000,000.00 & 2200 & 2,500.00 & Decred \\
-        MicroBT Whatsminer DCR & 44,000,000,000,000.00 & 2200 & 2,100.00 & Decred \\
-        StrongU STU-U1+ & 12,800,000,000,000.00 & 1850 & 1,579.00 & Decred \\
-        StrongU STU-U1 & 11,000,000,000,000.00 & 1600 & 1,389.00 & Decred \\
-      \hline
-    \end{tabular}
-   }
-  \caption{Machines used in experiments}
-  \label{tbl:machines}
-\end{table}
+\begin{longtable}{|p{.60\textwidth}|r|r|r|}
+  \hline
+  \multicolumn{4}{|c|}{\textbf{Bitcoin}} \\
+  \hline
+  Name & Hashes / s & Watt & Price (USD) \\
+  \hhline{|=|=|=|=|}
+  8 Nano Pro & $76 \cdot 10^{12}$ & 4,000 & 6,000 \\
+  Whatsminer M10S & $55 \cdot 10^{12}$ & 3,500 & 2,558 \\
+  Ebit E11++ & $44 \cdot 10^{12}$ & 1,980 & 2,024 \\
+  8 Nano & $44 \cdot 10^{12}$ & 2,100 & 1,790 \\
+  T3 43T & $43 \cdot 10^{12}$ & 2,100 & 2,279 \\
+  Ebit E11+ 37 & $37 \cdot 10^{12}$ & 2,035 & 1,517 \\
+  WX6 & $34 \cdot 10^{12}$ & 3,200 & 1,275 \\
+  Whatsminer M10 & $33 \cdot 10^{12}$ & 2,145 & 1,022 \\
+  T2T-32T & $32 \cdot 10^{12}$ & 2,200 & 1,568 \\
+  Ebit E11 & $30 \cdot 10^{12}$ & 1,950 & 1,110 \\
+  Antminer S15 (28T) & $28 \cdot 10^{12}$ & 1,596 & 1,249 \\
+  Antminer S15 (27T) & $27 \cdot 10^{12}$ & 1,539 & 1,363.16 \\
+  T2T-25T & $25 \cdot 10^{12}$ & 2,050 & 1,150 \\
+  Snow Panther B1+ & $24.5 \cdot 10^{12}$ & 2,100 & 580 \\
+  T2T-24T & $24 \cdot 10^{12}$ & 1,980 & 1,350 \\
+  S11i & $24 \cdot 10^{12}$ & 2,300 & 937 \\
+  Antminer T15 & $23 \cdot 10^{12}$ & 1,541 & 840 \\
+  Antminer S11 & $20.5 \cdot 10^{12}$ & 1,435 & 512 \\
+  AvalonMiner 921 & $20 \cdot 10^{12}$ & 1,800 & 415.78 \\
+  Antminer S9-Hydro & $18 \cdot 10^{12}$ & 1,728 & 713.45 \\
+  Ebit E10 & $18 \cdot 10^{12}$ & 1,650 & 2,999 \\
+  T2 Terminator & $17.2 \cdot 10^{12}$ & 1,570 & 1,118 \\
+  DragonMint T1 & $16 \cdot 10^{12}$ & 1,480 & 1,600 \\
+  AvalonMiner 851 & $15 \cdot 10^{12}$ & 1,450 & 380 \\
+  Antminer S9i & $14.5 \cdot 10^{12}$ & 1,365 & 440.68 \\
+  Antminer S9j & $14.5 \cdot 10^{12}$ & 1,365 & 307 \\
+  AvalonMiner 841 & $13.6 \cdot 10^{12}$ & 1,290 & 354.44 \\
+  SX6i & $11 \cdot 10^{12}$ & 900 & 419 \\
+  \hline
+  \multicolumn{4}{|c|}{\textbf{Ethereum}} \\
+  \hline
+  Name & Hashes / s & Watt & Price (USD) \\
+  \hhline{|=|=|=|=|}
+  A10 EthMaster & $485 \cdot 10^{6}$ & 850 & 5,399 \\
+  A10 EthMaster & $432 \cdot 10^{6}$ & 740 & 4,799 \\
+  Shark Extreme 2 (8 x NVIDIA GTX 1080 Ti) & $420 \cdot 10^{6}$ & 1,500 & 9,779 \\
+  Maximus+ (8 x 1080TI) & $370 \cdot 10^{6}$ & 2,200 & 7,520 \\
+  A10 EthMaster & $365 \cdot 10^{6}$ & 650 & 4,099 \\
+  Ethereum Mining Rig (12x AMD RX 570 GPU) & $360 \cdot 10^{6}$ & 1,600 & 4,345.47 \\
+  ULTRON (8 x P104) & $320 \cdot 10^{6}$ & 1,700 & 5,338.2 \\
+  Ethereum Mining Rig (8x NVIDIA 1080 8GB GPU) & $310 \cdot 10^{6}$ & 1,100 & 6,267.5 \\
+  Shark Extreme 2 (6 x NVIDIA GTX 1080 Ti) & $300 \cdot 10^{6}$ & 1,200 & 7,880 \\
+  Shark Extreme 2 (8 x AMD Vega 56) & $290 \cdot 10^{6}$ & 1,700 & 6,879 \\
+  Shark Extreme 2 (8 x NVIDIA GTX 1070 Ti 8 GB) & $245 \cdot 10^{6}$ & 1,400 & 6,679 \\
+  Shark Extreme 2 (8 x AMD RX 580) & $240 \cdot 10^{6}$ & 1,100 & 4,590 \\
+  Ethereum Mining Rig (8x AMD MSI RX 580 GPU) & $240 \cdot 10^{6}$ & 1,000 & 3,453.85 \\
+  IMPERIUM+ (8 x RX 570/580) & $230 \cdot 10^{6}$ & 1,300 & 3,577 \\
+  Antminer G2 & $220 \cdot 10^{6}$ & 1,200 & 3,799 \\
+  Shark Extreme 2 (6 x AMD Vega 56) & $220 \cdot 10^{6}$ & 1,275 & 5,680 \\
+  Ethereum Mining Rig (8x AMD MSI RX 570 GPU) & $220 \cdot 10^{6}$ & 950 & 3,225.93 \\
+  Shark Extreme 2 (4 x NVIDIA GTX 1080 Ti) & $210 \cdot 10^{6}$ & 800 & 4,979 \\
+  Antminer E3 & $190 \cdot 10^{6}$ & 760 & 654.24 \\
+  Shark Extreme 2 (6 x NVIDIA GTX 1070 Ti 8 GB) & $185 \cdot 10^{6}$ & 1,050 & 5,480 \\
+  Shark Extreme 2 (6 x AMD RX 580) & $180 \cdot 10^{6}$ & 825 & 3,890 \\
+  Ethereum Mining Rig (6x AMD RX580 8gb GPU) & $180 \cdot 10^{6}$ & 900 & 2,342.32 \\
+  Ethereum Mining Rig (6x AMD MSI RX 580 GPU) & $175 \cdot 10^{6}$ & 860 & 1,967.77 \\
+  Ethereum Mining Rig (6x AMD MSI RX 580 GPU) & $170 \cdot 10^{6}$ & 750 & 2,156.46 \\
+  Thorium 6580 GPU & $160.2 \cdot 10^{6}$ & 700 & 4,297.21 \\
+  Thorium 6570 GPU & $144 \cdot 10^{6}$ & 750 & 3,974.92 \\
+  Shark Extreme 2 (4 x NVIDIA GTX 1070 Ti 8 GB) & $122 \cdot 10^{6}$ & 600 & 3,580 \\
+  Zodiac 6-1060 GPU & $120.78 \cdot 10^{6}$ & 750 & 3,222.89 \\
+  Shark Extreme 2 (4 x AMD RX 580) & $120 \cdot 10^{6}$ & 550 & 2,590 \\
+  Ethereum Mining Rig (6x AMD MSI RX 560) & $80 \cdot 10^{6}$ & 370 & 1,823.14 \\
+  GeForce RTX 2080Ti & $55 \cdot 10^{6}$ & 155 & 1,249.99 \\
+  GeForce GTX 1080Ti & $51.11 \cdot 10^{6}$ & 175 & 999.99 \\
+  RX Vega 64 & $44 \cdot 10^{6}$ & 230 & 399.99 \\
+  GeForce RTX 2080 & $41 \cdot 10^{6}$ & 105 & 699.99 \\
+  GeForce GTX TITAN X & $40 \cdot 10^{6}$ & 250 & 1,099 \\
+  P104-100 & $38.89 \cdot 10^{6}$ & 127 & 569.99 \\
+  RX Vega 56 & $38.75 \cdot 10^{6}$ & 210 & 339.99 \\
+  GeForce RTX 2070 & $38.5 \cdot 10^{6}$ & 140 & 499.99 \\
+  GeForce GTX 1080 & $34.07 \cdot 10^{6}$ & 121 & 633.18 \\
+  RX 580 & $31.3 \cdot 10^{6}$ & 110 & 185.99 \\
+  GeForce GTX 1070 & $31.1 \cdot 10^{6}$ & 108 & 319.99 \\
+  GeForce GTX 1070Ti & $30.83 \cdot 10^{6}$ & 107 & 489 \\
+  RX 570 & $29.85 \cdot 10^{6}$ & 65 & 142.99 \\
+  RX 480 & $29.71 \cdot 10^{6}$ & 70 & 237.99 \\
+  RX 470 & $29 \cdot 10^{6}$ & 60 & 340.92 \\
+  GeForce GTX 1060 (6GB) & $23.81 \cdot 10^{6}$ & 95 & 264.99 \\
+  GeForce GTX 1060 (3GB) & $19.32 \cdot 10^{6}$ & 69 & 189.99 \\
+  GeForce GTX 1050Ti & $13.18 \cdot 10^{6}$ & 75 & 169.99 \\
+  \hline
+  \multicolumn{4}{|c|}{\textbf{Litecoin}} \\
+  \hline
+  Name & Hashes / s & Watt & Price (USD) \\
+  \hhline{|=|=|=|=|}
+  A6 LTCMaster & $123 \cdot 10^{7}$ & 1,500 & 3,000 \\
+  A4+ LTCMaster & $62 \cdot 10^{7}$ & 750 & 1,500 \\
+  Apollo LTC Pod & $10 \cdot 10^{7}$ & 100 & 299.99 \\
+  \hline
+  \hline
+  \multicolumn{4}{|c|}{\textbf{Monero}} \\
+  \hline
+  Name & Hashes / s & Watt & Price (USD) \\
+  \hhline{|=|=|=|=|}
+  Shark Extreme 2 (8 x AMD Vega 56) & 14,800 & 1,700 & 6,879 \\
+  Shark Extreme 2 (6 x AMD Vega 56) & 11,000 & 1,275 & 5,680 \\
+  Shark Extreme 2 (8 x AMD RX 580) & 6,880 & 1,100 & 4,590 \\
+  Shark Extreme 2 (6 x AMD RX 580) & 5,160 & 825 & 3,890 \\
+  Shark Extreme 2 (4 x AMD RX 580) & 3,440 & 550 & 2,590 \\
+  RX Vega 64 & 2,020 & 140 & 399.99 \\
+  RX Vega 56 & 1,920 & 140 & 339.99 \\
+  GeForce RTX 2080Ti & 1,200 & 150 & 1,249.99 \\
+  RX 580 & 976 & 89 & 185.99 \\
+  RX 480 & 965 & 140 & 237.99 \\
+  Ryzen Threadripper 1920X & 955 & 140 & 435.1 \\
+  GeForce RTX 2080 & 898 & 132 & 699.99 \\
+  GeForce GTX 2070 & 880 & 140 & 499.99 \\
+  RX 470 & 840 & 120 & 340.92 \\
+  GeForce GTX 1070 & 777.50 & 112.5 & 319.99 \\
+  RX 570 & 740.50 & 90 & 142.99 \\
+  Ryzen 7 2700X & 715.50 & 105 & 309.99 \\
+  Ryzen 5 1600X & 532 & 47.5 & 179.99 \\
+  Ryzen 5 1600 & 531 & 65 & 159.99 \\
+  \hline
+  \multicolumn{4}{|c|}{\textbf{Decred}} \\
+  \hline
+  Name & Hashes / s & Watt & Price (USD) \\
+  \hhline{|=|=|=|=|}
+  Whatsminer D1 & $44 \cdot 10^{12}$ & 2,200 & 1,588 \\
+  Whatsminer DCR & $44 \cdot 10^{12}$ & 2,200 & 1,890 \\
+  Antminer DR5 & $35 \cdot 10^{12}$ & 1,610 & 1,282 \\
+  STU-U1+ & $12.8 \cdot 10^{12}$ & 1,850 & 1,560 \\
+  STU-U1 & $11 \cdot 10^{12}$ & 1,600 & 1,389 \\
+  \hline
+\caption{Machines used in experiments}
+\label{tbl:machines}
+\end{longtable}

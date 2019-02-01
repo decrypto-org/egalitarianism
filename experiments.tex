@@ -1,70 +1,89 @@
 \section{Experimental results}\label{sec:experiments}
 
-\noindent\textbf{Proof-of-work}
+Having established our theoretical framework, we now provide experimental
+results on the egalitarianism of various cryprocurrencies. Our experiments
+utilize the \emph{egalitarian curve} definition of Section~\ref{sec:definition}
+in order to concretely confirm --- or disprove --- the egalitarianism claims of
+some of the major, both proof-of-work and proof-of-stake, cryptocurrencies.
 
+In conducting our experiments we assume a somewhat static environment.
+Specifically, we assume that the token prices, as well as the distribution of
+funds which are available for purchasing mining hardware are static and follow
+the snapshot of the world which we took at the time of writing. Furthermore, we
+assume that our mining operation would not substantially affect these
+parameters if it were to be applied on this environment. Finally, we assume
+that the set of available strategies $\mathcal{B}$ comprises of the honest
+strategies, \eg not including selfish mining which could provide better ROI
+by diverging from the protocol.
+
+\noindent\textbf{Proof-of-work.}
 \noindent
-We have experimentally analyzed the egalitarianism of proof-of-work coins
-Bitcoin, Litecoin, Ethereum, and Monero. We chose these four as a representative
-sample among the thousands of existing cryptocurrencies. Bitcoin represents the
-largest and most successful cryptocurrency by market cap. Litecoin is the first
-cryptocurrency which aimed to become more egalitarian by replacing Bitcoin's
-SHA256 work function with scrypt, a more memory-hard function. Ethereum is one
-of the most promising cryptocurrencies, the first to support smart contracts,
-and second largest by market cap; their work function is different from both
-Bitcoin and Litecoin. Finally, Monero is a special case, because it claims
-strong egalitarianism due to its memory-hard mining function, Cryptonight.
-Furthermore, its protocol is often updated to maintain egalitarianism.
+We have experimentally analyzed the egalitarianism of the following
+proof-of-work coins: Bitcoin, Litecoin, Ethereum, and Monero. These
+cryptocurrencies act as a representative sample among the thousands of existing
+cryptocurrencies. Bitcoin is the largest and most successful cryptocurrency by
+market cap. Litecoin is the first cryptocurrency aimed at becoming more
+egalitarian by replacing Bitcoin's SHA256 work function with scrypt~\cite{percival2016scrypt}, a more
+memory-hard function. Ethereum is one of the most promising alternative
+cryptocurrencies, the first to support smart contracts, and the second largest
+by market cap; its work function is different from both Bitcoin and Litecoin.
+Finally, Monero is special with claims of strong egalitarianism due to its
+memory-hard mining function, Cryptonight~\cite{van2013cryptonote}. Furthermore, its protocol is often
+updated to maintain
+egalitarianism~\cite{monero-hard-asic}.
 
-As expected, we show that Bitcoin is the least egalitarian of the four. Ethereum
-follows next. Litecoin is more egalitarian, due to its use of scrypt. Finally,
-Monero is the most egalitarian among the proof-of-work coins we have studied.
+As expected, our experiments show that Bitcoin is the least egalitarian of the
+four, with Ethereum following next. Monero is more egalitarian than both, with
+Litecoin being the most egalitarian among the proof-of-work coins
+we have studied. \todo{why?}
 
-\dionyziz{Revise above results based on experimental data.}
+For our experimental setting, we worked as follows. First, we collected
+empirical data which describe the available mining hardware options in the
+market. For each machine choice, we determined the cost of investment. This is
+comprised of its initial price (in USD) as well as its energy cost of operation
+(in Watts). The cost of operation was translated to USD per hour by considering
+the electricity cost of KWh. As a reference, we used the lowest average KWh
+cost in the United States, \ie $\$0.08$ per KWh~\cite{energy-cost}. This reference electricity cost is an estimation which
+can vary depending on the country of operation.
 
-For our experimental setting, we worked as follows. First, we collected empirical
-data which describe the available mining hardware options in the market. For
-each machine choice, we determined the cost of investment. This is comprised
-of its initial price to purchase (in USD) as well as its energy cost of
-operation (in watts). The cost of operation was translated to USD per hour by
-considering the electricity cost of KWh. As a reference, we used the average KWh cost in
-the United States in which $1$ KWh costs $0.11\$$. We remark that this reference
-electricity cost is only for estimation and can vary depending on the country of
-operation, contractual miner agreements with the power grid, or bulk pricing.
-While we do extract exact numbers using this as our experimental basis, we note
-here that the qualitative difference of egalitarianism across cryptocurrencies
-(i.e., the shape of their egalitarian curve and the order of egalitarianism of
-different cryptocurrencies) remains the same if the electricity cost is
-adjusted.
-
-We then use the reported hash rate of the machine to extract an expectation of
-the freshly mined coins it would generate per unit of time, if it were to run
-continuously. This expectation is taken over the randomness of all honest
-blockchain protocol executions. As such, each party is awarded block rewards in
-proportion to their computational power. The difference between revenue per unit
-of time and cost of operation per unit of time produces an \emph{income rate}
-which is measured in USD per hour.
-
-For our experiments, we use a duration of investment of $d = 1$
-year. This choice of parameter is made arbitrarily to correspond to the usual
-definition of ROI in traditional finance. Again this parameter does not make a
-qualitative difference in our metrics.
+Second, we use the reported hash rate of each mining hardware machine to
+extract an expectation of the freshly mined coins it would generate per hour,
+if it were to run continuously. This expectation is taken over the randomness
+of all honest blockchain protocol executions. As such, each party is awarded
+block rewards in proportion to their computational power. The difference
+between revenue per unit of time and cost of operation per unit of time
+produces an \emph{income rate}, which is measured in USD per hour.
+For our experiments, we use an interval of investment with $|d| = 1$ year. Although
+this choice is arbitrary, it corresponds to the usual definition of ROI in
+traditional finance.
 
 To find the optimal investment strategy, we employ the following algorithm. The
-initial capital available is allocated to an upfront technology investment in
-which an integer Knapsack instance is solved to optimize the total cashflow.
-Subsequently, as long as the cashflow is positive, the purchased machines are
-run for the indicated total duration, reinvesting the freshly minted coins for
-electricity costs to generate more coins. This strategy produces an income of
-freshly generated coins which have not been spent and are reported as the
-strategy's income.
+initial available capital is allocated to an upfront technology
+investment, in which an integer instance of the Unbounded Knapsack problem
+\cite{mathews1896partition} is solved to optimize the total cashflow.
+Subsequently, as long as the cashflow is positive, the purchased machines
+operate for the indicated total duration, reinvesting part of the freshly
+minted coins in electricity costs, in order to generate more coins. Eventually,
+this strategy produces an income of freshly generated coins, which have not
+been spent and are reported as the strategy's income. We remark here that the
+general problem of mining hardware allocation is computationally
+hard~\cite{karp1972reducibility}.
 
 To calculate our concrete numbers, we employ the constants shown in
-Table~\ref{tbl:work-constants}. We use the expected block generation rates
-for each cryptocurrency, as well as the reward per block, token price, and
-mining difficulty at the time of writing, all of which we assume remain
-constant. While we cannot predict future prices and difficulty, it is worth
-noting that these do not affect the relative comparison of cryptocurrencies in
-terms of egalitarianism.
+Table~\ref{tbl:work-constants}. We use the expected block generation rates for
+each cryptocurrency, as well as the reward per block, token price, and mining
+difficulty at the time of writing, all of which we assume remain constant.
+The variance of electricity cost, the duration of
+investment, as well as small fluctuations in price and difficulty do not qualitatively change the shape of our egalitarian curves (see Appendix~\ref{sec:appendix-qualitative-difference}).
+% Although small
+% changes in the constants' values will not affect the relative comparison, we
+% note that extreme changes may reorder the currencies in terms of
+% egalitarianism. For example, consider the case of Bitcoin where all mining
+% products, except a relatively cheap one, are unprofitable, a plausible scenario
+% in case \eg the price of Bitcoin drops significantly. In this case, Bitcoin
+% could become as egalitarian, or even more, as \eg Litecoin. Thus, identifying
+% the ``breaking points'' of egalitarianism for each cryptocurrency, compared to
+% others, is an interesting problem which needs be considered in future work.
 
 \begin{table}
   \centering
@@ -73,11 +92,11 @@ terms of egalitarianism.
       \hline
       Variable & Description & Unit & BTC & ETH & LTC & XMR & DCR\\
       \hhline{|=|=|=|=|=|=|=|=|}
-      $d$ & duration of investment & years & \multicolumn{5}{c|}{$1$} \\
+      $|d|$ & duration of investment & years & \multicolumn{5}{c|}{$1$} \\
       \hline
-      $\ec$ & electricity cost & USD / kWh & \multicolumn{5}{c|}{$0.11$} \\
+      $\ec$ & electricity cost & USD / kWh & \multicolumn{5}{c|}{$0.08$} \\
       \hline
-      $\bgr(c)$ & block generation rate & Hz & 1 / 600 & 1 / 14.7 & 1 / 150 & 1 / 122 & 1 / 298\\
+      $\bgr(c)$ & block generation rate & blocks / s & 1 / 600 & 1 / 14.7 & 1 / 150 & 1 / 122 & 1 / 298\\
       \hline
       $\thr(c)$ & total hash rate & Th / s & 34,727,437 & 179.50374 & 174.537 & 0.00033859 & 178,760\\
       \hline
@@ -87,34 +106,47 @@ terms of egalitarianism.
       \hline
     \end{tabular}
   }
-  \caption{The parameters to our proof-of-work mining simulations. Some depend on the cryptocurrency $c$.}
+  \caption{A list of the parameters used in our proof-of-work mining simulations. Some parameters are system-agnostic, whereas others depend on the cryptocurrency $c$.}
   \label{tbl:work-constants}
 \end{table}
 
 \dionyziz{confirm that changing the total hash rate maintains curve shapes and argue about it in the main text}
 
-Let $M$ denote the set of all available mining machine choices. For each machine
-$m$, our empirically collected data specifies the following parameters: An
-energy consumption rate $\ecr(m)$ (in Watts), an initial cost of purchase $\ic(m)$
-(in USD), as well as a hash rate $\hr(m)$ (in Hz). Given the above, we can now
-calculate the expected income rate $\mathbb{E}[\ir(m)]$ for a given machine $m$
-and a cryptocurrency $c$:
+Let $\mathcal{M}$ denote the set of
+all available mining machines. For each machine $m \in \mathcal{M}$, our empirically
+collected data specifies the following parameters:
+\begin{inparaenum}[i)]
+    \item the energy consumption rate $\ecr(m)$ in Watts,
+    \item an initial cost of purchase $\ic(m)$ in USD, and
+    \item a hash rate $\hr(m)$ in Terahashes per second.
+\end{inparaenum}
+Given the above, we can now calculate the expected income rate per hour
+$\mathbb{E}[\ir(m)]$ for a given machine $m$ and a cryptocurrency $c$. In the
+following equation, the first part identifies the income per hour, \ie the
+amount of tokens (denominated in USD) which the machine produces per hour,
+whereas the second part of the equation identifies the electricity cost, \ie
+the product of the consumed electricity multiplied by the price of a single
+KWh:
 
 \[
-\mathbb{E}[\ir(m)] = 3600 \frac{\hr(m)}{\thr(c)}\br(c)\bgr(c)\tp(c) - \ecr(m) \ec
+\mathbb{E}[\ir(m)] = 3600 \cdot \frac{\hr(m)}{\thr(c)} \cdot \br(c) \cdot \bgr(c) \cdot \tp(c) - \ecr(m) \cdot \ec
 \]
 
-There are many possible configurations for technology investments. In each
-configuration $\overline{m} \subseteq M \times \mathbb{N}$, a number of copies
-$n \in \mathbb{N}$ of every machine type $m \in M$ are purchased. The total
-initial cost of investment for such a configuration is given:
+There are many possible configurations for technology investments. Each
+configuration comprises of a number of copies $n \in \mathbb{N}$ of every
+machine type $m \in \mathcal{M}$. Therefore, we define each configuration as
+$\overline{m} \subseteq \mathcal{M} \times \mathbb{N}$, with
+total initial cost of investment for such configuration being
+$\ic(\overline{m}) = \sum_{(m, n) \in \overline{m}}{n \cdot \ic(m)}$.
 
-\[
-  \ic(\overline{m}) = \sum_{(m, n) \in \overline{m}}{n\ic(m)}
-\]
+The above figure is given in USD per hour and, since the initial capital should
+suffice to buy the machines of the configuration, we require that
+$\ic(\overline{m}) \leq v$,
+where $v$ is the initial available capital at the beginning of the simulation.
 
-The above figure is given in USD per hour. The strategy's reported net income
-for the duration $d$ is then:
+Now, in order to identify the \emph{optimal} strategy's reported net income for the
+interval $d$, we iterate over all possible machine configurations, for which
+the above inequality holds, and choose the one with the maximum returns:
 
 \[
   B_\textsc{OPT}(v)
@@ -122,121 +154,164 @@ for the duration $d$ is then:
   \max{
     \{
       \sum_{(m, n) \in \overline{m}}
-      {d\mathbb{E}[\ir(m)] - n\ic(m)}:
-      \overline{m} \subseteq M \times \mathbb{N}
+      {|d|\mathbb{E}[\ir(m)]}:
+      \overline{m} \subseteq \mathcal{M} \times \mathbb{N}
       \land
       \ic(\overline{m}) \leq v
     \}
   }
 \]
 
-Here, the maximum is taken over all possible machine configurations, yielding
-the technology investment which maximizes the income rate.
-
 As the simulation parameters are many and diverse, in order to allow others to
 run the experiments with different values, as well as for reasons of
 reproducibility and falsifiability, we openly release our mining investment
-optimizer as well as our data for public use\ifanonymous\footnote{
-  The link to our mining investment calculator and our mining hardware data,
+optimizer as well as our data for public use\ifanonymous\footnote{The link to our mining investment calculator and our mining hardware data,
   which are available under an open source license, has been redacted from this
   version for anonymity purposes.
-}\else\footnote{
-  Our mining investment calculator and our mining hardware data are available
+}\else\footnote{Our mining investment calculator and our mining hardware data are available
   under the MIT license and a Creative Commons 4.0 Attribution License
   respectively at \url{https://github.com/decrypto-org/egalitarianism}.
 }\fi.
 
-The egalitarianism of Bitcoin, Ethereum, Litecoin and Monero are shown in
-Figures ?.
-
-Decred is a hybrid proof-of-work/proof-of-stake cryptocurrency in which block
-generation happens collaboratively between miners and minters. Each block mined
-by a miner needs to be ``vouched'' by a certain number of minters, who give it a
-vote of confidence. Both the miner and the minter participating in block
-generation are rewarded. An investor can therefore choose to participate in
-Decred by either investing in mining hardware and performing proof-of-work, or
-purchasing stake and performing proof-of-stake (or a combination thereof). The
-rational choice of whether to mine or mint Decred is not always clear. While
-mining may be more profitable for a certain initial capital, the choice to mine
-can carry different risks. If the difficulty of the cryptocurrency rises, the
-hardware purchased to mine may be rendered inefficient and also hard to sell.
-Proof-of-work also carries the operational overhead discussed in
-Remark~\ref{rmk:pow-scale}. On the other hand, stake can always be sold,
-although the price may fluctuate, and carries negligible operational overhead.
-As the decision between the two is not obvious, we analyze both strategies
-independently. The egalitarianism of proof-of-work mining for Decred is shown in
-Figure~\ref{fig:xmr_dp_10K_12_months}.
-
-\dionyziz{Draw conclusions in the preceding two paragraphs}
-
-
 \begin{figure}
-  \placesubfigure{btc_dp_10K_12_months.pdf}{fig:btc_dp_10K_12_months}{The egalitarianism of Bitcoin.}{0.75}{0.5}
-  \placesubfigure{ltc_dp_10K_12_months.pdf}{fig:ltc_dp_10K_12_months}{The egalitarianism of Litecoin.}{0.75}{0.5}
-  \placesubfigure{eth_dp_10K_12_months.pdf}{fig:eth_dp_10K_12_months}{The egalitarianism of Ethereum.}{0.75}{0.5}
-  \placesubfigure{xmr_dp_10K_12_months.pdf}{fig:xmr_dp_10K_12_months}{The egalitarianism of Monero.}{0.75}{0.5}
-  \placesubfigure{dcr_dp_10K_12_months.pdf}{fig:dcr_dp_10K_12_months}{The egalitarianism of Decred.}{0.75}{0.5}
-  \caption{Egalitarian curves}
-  \label{fig:egalitarian_curves}
+  \placesubfigure{btc_dp_10K_12_months.pdf}{fig:btc_dp_10K_12_months}{The egalitarianism curve of Bitcoin.}{0.9}{0.5}
+  \placesubfigure{eth_dp_10K_12_months.pdf}{fig:eth_dp_10K_12_months}{The egalitarianism curve of Ethereum.}{0.9}{0.5}
+  \placesubfigure{ltc_dp_10K_12_months.pdf}{fig:ltc_dp_10K_12_months}{The egalitarianism curve of Litecoin.}{0.9}{0.5}
+  \placesubfigure{xmr_dp_10K_12_months.pdf}{fig:xmr_dp_10K_12_months}{The egalitarianism curve of Monero.}{0.9}{0.5}
+  \placesubfigure{dcr_dp_10K_12_months.pdf}{fig:dcr_dp_10K_12_months}{The egalitarianism curve of \emph{proof-of-work} Decred.}{0.9}{0.5}
+  \caption{The egalitarianism curves of the proof-of-work cryptocurrencies analyzed in this work.}
+  \label{fig:egalitarian_curves_pow}
 \end{figure}
 
-\noindent\textbf{Proof-of-stake}
+The egalitarianism of Bitcoin, Ethereum, Litecoin and Monero are shown in
+Figures~\ref{fig:btc_dp_10K_12_months}, ~\ref{fig:eth_dp_10K_12_months},
+~\ref{fig:ltc_dp_10K_12_months}, and~\ref{fig:xmr_dp_10K_12_months}
+respectively.
+Finally, Decred is a hybrid proof-of-work/proof-of-stake cryptocurrency, in
+which block generation is a collaboration between miners and minters.
+Specifically, each block which is mined via proof-of-work needs to be
+``vouched for'' by a certain number of minters, who give it a vote of
+confidence. Both the miners and the minters who participate in block
+generation are rewarded. An investor can therefore choose to participate in
+Decred by either investing in mining hardware and performing proof-of-work, or
+by purchasing stake and performing proof-of-stake (or a combination thereof).
+We note that the choice of whether to mine or mint Decred is not always clear.
+While mining may be more profitable for a certain initial capital, it can also
+carry various risks. For instance, if the difficulty increases, the mining
+hardware may be rendered inefficient and also hard to sell. Proof-of-work also
+carries the operational overhead discussed in Remark~\ref{rmk:pow-scale}. On
+the other hand, stake can always be sold, although the price may fluctuate, and
+carries negligible operational overhead. As the decision between the two is not
+obvious, we analyze both strategies independently. The egalitarianism of
+proof-of-work mining for Decred is shown in
+Figure~\ref{fig:xmr_dp_10K_12_months}.
 
+It is evident from all figures that the ROI is ``capped'' by a maximum value,
+which is observed in specified intervals. Indeed, this value identifies the
+ROI of the \emph{best available} machine and is in line with Lemma~\ref{lem:sybil}. In other words, as long as an
+investor is able to buy the machine which returns the most profits, then they
+achieve the best possible ROI. In case an investor does not have enough capital
+to buy the best mining product, they may buy a less profitable machine and
+observe less, though still positive, ROI. This observation explains the small
+spikes in ROI which may be seen \eg in Bitcoin's figure for capital in the
+range $[0, 2000]$. Also, in case the capital is \emph{more} than the cost of
+the machine, then the remaining capital is effectively discarded. Therefore,
+although two investors $A, B$ may start with initial capital $\mathcal{C}_A <
+\mathcal{C}_B$, if their returns, in absolute terms, are the same, then the ROI
+of $B$ will be smaller as a percentage compared to the ROI of $A$. This
+observation explains the decrease in ROI after the spikes. Finally, we observe
+that, as the capital increases, the ROI converges to a set value. This is
+explained by the fact that the ``discarded'' capital, \ie the capital which
+cannot be invested in mining hardware, is a significantly smaller percentage of
+the total capital for large investments.
+
+\begin{figure}
+  \placesubfigure{decred-stake.pdf}{fig:decred-stake}{The egalitarianism curve of \emph{proof-of-stake} Decred.}{0.9}{0.5}
+  \placesubfigure{pure-pos.pdf}{fig:pure-pos-stake}{The egalitarianism curve of a \emph{pure} proof-of-stake system, \eg pure Ouroboros.}{0.9}{0.5}
+  \caption{The egalitarianism curves of the proof-of-stake systems analyzed in this work.}
+  \label{fig:egalitarian_curves_pos}
+\end{figure}
+
+\noindent\textbf{Proof-of-stake.}
 \noindent
-We analyze the proof-of-stake egalitarianism in two settings. First, we
+We now analyze the proof-of-stake egalitarianism in two settings. First, we
 consider pure proof-of-stake, which can be applied on top of a protocol like
-Ouroboros. Second, we consider the case of mining Decred, a hybrid
-proof-of-work/proof-of-stake cryptocurrency.
+Ouroboros. In this case, \emph{pure} is in opposition to \emph{delegated}
+proof-of-stake, a setting where the stakeholders are required to delegate their
+stake to other players, namely ``stake pools'' and is deployed in
+cryptocurrencies such as EOS, Bitshares, and others. Second, we consider the
+case of minting Decred via its proof-of-stake mechanism.
 
 The egalitarian curve for \emph{staking} Decred is illustrated in
-Figure~\ref{fig:decred-stake}. The curve is almost perfectly egalitarian. Decred
-is an opt-in staking cryptocurrency in which one has to elect to stake their
-coins by purchasing so-called \emph{tickets}. Because the price of a ticket is
+Figure~\ref{fig:decred-stake}.
+% The curve is almost perfectly egalitarian.
+As mentioned above, Decred is an opt-in staking cryptocurrency, where staking
+occurs by purchasing so-called \emph{tickets}. Since the price of a ticket is
 quantized, egalitarianism is harmed for capitals which are not multiples of
-ticket prices. However, one can see from the figure that the envelope of maxima
-of this curve is perfectly egalitarian. Perfect egalitarianism is also achieved
-when one considers the distribution $\mathcal{D}$ of initial capitals that are
-multiples of the ticket price.
+ticket prices. However, one can see that the envelope of maxima of this curve
+is perfectly egalitarian. Perfect egalitarianism is also achieved when one
+considers the distribution $\mathcal{D}$ of initial capitals that are multiples
+of the ticket price.
 
-\placefigure{decred-stake.pdf}{fig:decred-stake}{The egalitarianism of \emph{staking} Decred, a hybrid cryptocurrency.}{0.75}
+In the case of pure proof-of-stake, every coin has the same probability of
+being chosen for eligibility. When a coin is eligible for block generation, its
+owner can create a block by providing a proof of ownership of the chosen coin.
+Consider the case of a cryptocurrency with $N$ coins in circulation. When a
+block needs to be created, a coin is chosen at random from the set of $N$
+coins. Therefore, each coin may be chosen with $1 \over N$ probability. Then
+the address which owns the chosen coin, in other words the stakeholder which
+controls this coin, is eligible to generate a block and receive the block
+rewards associated. In our experiments, we assume that every block is
+associated with a constant reward, which pertains to newly minted coins.
+Furthermore, since computational power does not affect the rate of block
+production, it is reasonable to assume that both the electricity and the
+hardware equipment's price is constant for all users, regardless of stake
+accumulation, so all users can participate using --- relatively --- cheap
+resources.
 
-In the case of pure proof-of-stake, every coin has the same probability of being chosen, so that its owner is eligible to create a block. Specifically, consider the case of a cryptocurrency with $N$ coins in circulation. Whenever a block needs to be created, a coin is chosen, therefore each coin may be chosen with $1 \over N$ probability. Then the address which owns the chosen coin, in other words the stakeholder which controls this coin, is eligible to generate a block and receive the rewards associated with this operation. In our experiments, we assume that every block is associated with a constant reward which pertains to newly minted coins. Furthermore, since computational power does not affect the rate of block production, it is reasonable to assume that both the electricity and the hardware equipment's price is constant, such that all users can participate using a cheap machine.
+Figure~\ref{fig:pure-pos-stake} depicts the simulation of a pure proof-of-stake
+system. In this case, the users pay a set fee which represents the hardware and
+electricity cost, whereas the rest of the initial capital is used to buy stake.
+It is evident from the figure that this system is the closest to perfect
+egalitarianism compared to the proof-of-work and hybrid cases.
 
-Figure~\ref{fig:pure-pos-stake} depicts the simulation of a pure proof-of-stake system. In this case, the users pay a set fee which represents the hardware and electricity cost, whereas the rest of the capital is used to buy coins. It is clear that this system converges much faster than both proof-of-work and the hybrid case above.
-
-\placefigure{pure-pos.pdf}{fig:pure-pos-stake}{The egalitarianism of \emph{staking} in a pure proof-of-stake cryptocurrency.}{0.75}
-
-\dionyziz{Add Ouroboros figure and discussion}
-
+\noindent\textbf{Summary.}
+\noindent
 Our findings are summarized in Table~\ref{tbl:egalitarianism}. We find that
-Bitcoin is the least egalitarian, followed by Ethereum, Litecoin, and Monero.
+Bitcoin is the least egalitarian, followed in turn by Ethereum, Litecoin, and
+Monero.
 The latter two are the most egalitarian due to their use of scrypt and
-Cryptonight respectively. Decred is a hybrid coin which can both be staked and
-mined. Mining with Decred has egalitarianism which stands between Ethereum and
-Litecoin. The most egalitarian coins involve staking. Decred staking, due to its
-quantized ticket pricing, is only approximately egalitarian. Pure proof-of-stake, which
-allows continuous staking, is perfectly egalitarian.
-
-\dionyziz{Carefully reread and revise findings of above paragraph}
+CryptoNight respectively. Decred is a hybrid coin which can both be staked and
+mined. Mining with Decred provides the worst egalitarianism of all tested
+coins. \todo{why?} However, the most egalitarian coins involve staking. Decred staking, due
+to its quantized ticket pricing, is only approximately egalitarian and comparable
+to the performance of mining Litecoin. Pure
+proof-of-stake, which allows continuous staking, is \emph{almost perfectly}
+egalitarian, its small divergence from perfect egalitarianism stemming from the
+small capital which is required to pay the transation fees\footnote{As of
+January $2019$, according to \url{https://cardanoexplorer.com/}, in the Cardano
+implementation of Ouroboros these fees are in the order of $\$0.01$.} to
+participate in the staking process.
 
 \begin{table}
   \centering
-  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|}
     \hline
-    & Bitcoin & Ethereum & Litecoin & Monero & \multicolumn{2}{c|}{Decred} & Ouroboros\\
+    Name & Consensus mechanism & Egalitarianism \\
     \hline
-    \textbf{Proof-of-work} &
-    $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & & \\
+    Bitcoin &  Proof-of-work &  -0.034490298 \\
     \hline
-    \textbf{Proof-of-stake} &
-    & & & & & $\times$ & $\times$ \\
+    Ethereum & Proof-of-work &  -0.006926114 \\
     \hline
-    \textbf{Egalitarianism} &
-    ? & ? & ? & ? & ? & ? & ? \\
+    Litecoin & Proof-of-work &  -0.000271822 \\
+    \hline
+    Monero &   Proof-of-work &  -0.002206135 \\
+    \hline
+      Decred & \begin{tabular}{c} Proof-of-work \\ Proof-of-stake \end{tabular} & \begin{tabular}{c} -0.412524642 \\ -0.000348280 \end{tabular}  \\
+    \hline
+    Ouroboros & Proof-of-stake & -0.000000295 \\
     \hline
   \end{tabular}
-  \caption{The egalitarianism of the various cryptocurrencies we studied.}
+  \caption{A comparison of the egalitarianism values of the cryptocurrencies explored in this study.}
   \label{tbl:egalitarianism}
 \end{table}
-
-\dionyziz{Fill in numbers in above table}

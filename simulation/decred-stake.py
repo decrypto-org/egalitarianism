@@ -2,19 +2,19 @@ from matplotlib import rc
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_pdf import PdfPages
-import sys
 
 
 plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
 
 pp = PdfPages('../figures/decred-stake.pdf')
 
-rc('text', usetex=True, **{'latex.unicode': True})
+rc('text', usetex=True)
 rc(
     'font',
     family='serif',
     serif=['Computer Modern Roman'],
-    monospace=['Computer Modern Typewriter']
+    monospace=['Computer Modern Typewriter'],
+    size=27
 )
 
 DAYS = 24 # hours
@@ -73,22 +73,22 @@ for capital in x:
     roi = float(net_gains) / capital
     y.append(roi)
 
-# print('y', y)
 
 fig = plt.figure()
 fig.set_size_inches(6.2, 6.2)
 
-plt.ylim(0, 0.2)
-plt.plot(x, y, label='Decred staking egalitarian curve')
+# plt.ylim(0, 0.2)
+plt.plot(x, y)
 
-plt.xlabel('Investment Capital (nominal 2018 USD)')
+plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
 
-# plt.title('Proof-of-stake egalitarian curve for Decred')
-
-plt.legend()
 plt.gca().set_yticklabels(['{:.0f}\%'.format(x*100) for x in plt.gca().get_yticks()])
 
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
 
 pp.close()
+
+variance = np.var(y)
+
+print('Variance: {0}'.format(variance))
