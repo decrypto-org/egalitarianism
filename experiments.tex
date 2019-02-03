@@ -57,10 +57,12 @@ For our experiments, we use an interval of investment with $|d| = 1$ year. Altho
 this choice is arbitrary, it corresponds to the usual definition of ROI in
 traditional finance.
 
-To find the optimal investment strategy, we employ the following algorithm. The
+Our investment strategy is as follows. The
 initial available capital is allocated to an upfront technology
 investment, in which an integer instance of the Unbounded Knapsack problem
-\cite{mathews1896partition} is solved to optimize the total cash flow.
+\cite{mathews1896partition} is solved using dynamic programming\footnote{The
+source code of our implementation for this calculation is available in our
+repository.} to optimize the total cash flow.
 Subsequently, as long as the cash flow is positive, the purchased machines
 operate for the indicated total duration, reinvesting part of the freshly
 minted coins in electricity costs, in order to generate more coins. Eventually,
