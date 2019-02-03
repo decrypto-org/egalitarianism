@@ -67,9 +67,7 @@ Subsequently, as long as the cash flow is positive, the purchased machines
 operate for the indicated total duration, reinvesting part of the freshly
 minted coins in electricity costs, in order to generate more coins. Eventually,
 this strategy produces an income of freshly generated coins, which have not
-been spent and are reported as the strategy's income. We remark here that the
-general problem of mining hardware allocation is computationally
-hard~\cite{karp1972reducibility}.
+been spent and are reported as the strategy's income.
 
 To calculate our concrete numbers, we employ the constants shown in
 Table~\ref{tbl:work-constants}. We use the expected block generation rates for
@@ -163,6 +161,15 @@ the above inequality holds, and choose the one with the maximum returns:
     \}
   }
 \]
+
+We note that this is only an approximation to the optimal (in our limited model)
+solution, which we used in our simulations. We consider this sufficiently close
+to optimal to allow for the calculation of egalitarianism. We give an integer
+programming formulation of the optimal strategy for capital allocation in
+Appendix~{app:ip}. We remark here that the general problem of mining hardware
+allocation (including our simplified approximation) is computationally
+hard~\cite{karp1972reducibility}, as both the Knapsack and the Integer
+Programming problems are NP-complete.
 
 As the simulation parameters are many and diverse, in order to allow others to
 run the experiments with different values, as well as for reasons of
