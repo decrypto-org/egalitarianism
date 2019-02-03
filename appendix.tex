@@ -31,6 +31,74 @@
     which is impossible.
 \end{proof}
 
+\section{Integer programming formulation}\label{sec:ip}
+
+In our experiments, we used a Dynamic Programming solution to solve the Knapsack
+problem in order to allocate mining machines upfront. An optimal solution could
+use the proceeds of mining not only to reinvest in electricity, but also to
+purchase new machines. This is captured by the Integer Programming
+formulation in Figure~\ref{fig:IP}, which gives the optimal investment strategy
+in the full model.
+
+This maximization problem tries to optimize the \emph{freshly} generated
+proceeds. The variables to solve for, $x_{m,t} \in \mathbb{N}$, describe the
+number of machines of type $m$ that the investor holds at time $t$. We assume
+machines cannot be sold back to the market, hence $x_{m,t-0} \leq x_{m,t}$. The
+investment starts with initial capital $v$ and no machines, hence $x_{m,0} = 0$.
+The program can then decide to purchase machines as time goes by.
+For any costs, it first uses up the initial capital $v$ to pay for
+them (this initial capital is useless to keep, as it does not contribute to
+freshly generated proceeds, which are our utility here), and subsequently uses
+the proceeds to pay for any remaining costs. Capital which is not expended to
+pay for costs is discarded by the $\max$ operator in the maximization clause.
+The condition the integer program is subject to requires that the investment has
+non-negative capital at every point in time, and hence does not run out of
+money. In this formulation, it is assumed that $d$ is a set of consecutive
+integers representing indexed \emph{hours} of execution (a more fine-grained
+solution can be obtained by increasing this temporal resolution as needed).
+
+\begin{figure}
+  \noindent\fbox{%
+      \parbox{\textwidth-2ex}{%
+        \begin{align*}
+        &\textbf{Maximize }\\
+           &\qquad \max(
+             0,
+            v - \sum_{t \in d \setminus d[0]}
+                   \sum_{m \in \overline{m}}
+                     (x_{m,t} - x_{m,t-1}) \ic(m_i)
+              - \sum_{t \in d}
+                   \sum_{m \in \overline{m}}
+                      x_{m,t} \cdot \ecr(m) \cdot \ec
+           )
+           \\
+           &\qquad +
+           \sum_{t \in d}
+             \sum_{m \in \overline{m}}
+               x_{m,t} \cdot
+               3600 \cdot \frac{\hr(m)}{\thr(c)} \cdot \br(c) \cdot \bgr(c) \cdot \tp(c)
+           \\
+        &\textbf{subject to  }\\
+          &\qquad \sum_{\substack{t' \leq t\\t' \neq d[0]}}
+            \sum_{m \in \overline{m}}
+               (x_{m,t'} - x_{m,t'-1}) (
+               -\ic(m_i)
+               +(t - t' + 1)|\mathbb{E}[\ir(m)]
+                )
+          \leq v
+          \text{ for } t \in d\\
+          &\qquad x_{m,t-1} \leq x_{m,t} \text{ for } m \in \overline{m} \text{ and } t \in d \setminus d[0]\\
+          &\qquad x_{m,d[0]} = 0 \text{ for } m \in \overline{m}\\
+        &\textbf{and }
+          x_{m,t} \in \mathbb{N} \text{ for } m \in \overline{m} \text{ and } t \in d
+        \end{align*}
+      }%
+  }
+  \caption{An Integer Programming formulation of the optimal investment strategy in our model.}
+  \label{fig:IP}
+\end{figure}
+
+
 \section{Parameters affecting egalitarianism}\label{sec:appendix-qualitative-difference}
 
 Throughout this paper, we have assumed certain parameters (cryptocurrency
