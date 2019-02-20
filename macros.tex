@@ -136,17 +136,37 @@
 }
 
 \newcommand{\placesubfigure}[5]{
+ \iflncs
+   \centering
+   \subcaptionbox[#3]{%
+      \centering
+       #3%
+       \hspace{5cm} \label{#2}%
+   }
+   [%
+       0.40\textwidth % width of caption
+   ]%
+   {%
+       \hspace*{-2.3em}
+       \includegraphics[width=0.45\textwidth]%
+       {figures/#1}%
+   }%
+   \hspace{0.05\textwidth}
+ \else
   \begin{subfigure}[b]{#5\linewidth}
-    \centering
-    \includegraphics[width=#4\columnwidth,keepaspectratio]{figures/#1}
-    \captionsetup{labelformat=simple, justification=centering}
-    \caption{#3}
-    \label{#2}
-    \vspace{4ex}
+     \centering
+     \includegraphics[width=#4\columnwidth,keepaspectratio]{figures/#1}
+     \captionsetup{labelformat=simple, justification=centering}
+     \caption{#3}
+     \label{#2}
+     \vspace{4ex}
   \end{subfigure}%%
+ \fi
 }
 
 \newcommand{\hash}{\mathsf{H}}
 
+\iflncs\else
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \renewcommand\qedsymbol{$\blacksquare$}
+\fi
