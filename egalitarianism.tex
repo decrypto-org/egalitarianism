@@ -3,7 +3,7 @@
 \newif\ifanonymous
 \newif\ifshort
 \newif\iflncs
-\lncstrue
+% \lncstrue
 % \anonymoustrue
 % \shorttrue
 
@@ -15,7 +15,7 @@
 \import{./}{title.tex}
 \thispagestyle{plain}
 \else
-\documentclass[a4paper,UKenglish,cleveref, autoref]{lipics-v2019}
+\documentclass[a4paper,UKenglish,cleveref, autoref]{oasics-v2019}
 \usepackage{preamble}
 
 \usepackage{longtable}
@@ -72,6 +72,8 @@
 \import{./}{conclusion.tex}
 \iflncs
 \bibliographystyle{plain}
+\else
+\bibliographystyle{plainurl}
 \fi
 \bibliography{pubs,abbrev3,crypto}
 

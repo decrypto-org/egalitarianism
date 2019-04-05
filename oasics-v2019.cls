@@ -1,22 +1,22 @@
 %%
-%% This is file `lipics-v2019.cls',
+%% This is file `oasics-v2019.cls',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% lipics.dtx  (with options: `class')
+%% oasics.dtx  (with options: `class')
 %% 
 %% -----------------------------------------------------------------
 %% Author:     le-tex publishing services
 %% 
-%% This file is part of the lipics package for preparing
-%% LIPICS articles.
+%% This file is part of the oasics package for preparing
+%% OASIcs articles.
 %% 
 %%       Copyright (C) 2010--2019 Schloss Dagstuhl
 %% -----------------------------------------------------------------
 %% 
-\ProvidesClass{lipics-v2019}
-    [2018/12/10 v2.0 LIPIcs articles]
+\ProvidesClass{oasics-v2019}
+    [2018/12/10 v2.0 OASIcs articles]
 \NeedsTeXFormat{LaTeX2e}[2015/01/01]
 \emergencystretch1em
 \advance\hoffset-1in
@@ -123,7 +123,7 @@
 \def\@seccntformat#1{\csname the#1\endcsname}
 \def\@biblabel#1{\textcolor{darkgray}{\sffamily\bfseries#1}}
 \def\copyrightline{%
-  \ifx\@hideLIPIcs\@undefined
+  \ifx\@hideOASIcs\@undefined
     \ifx\@EventLogo\@empty
     \else
       \setbox\@tempboxa\hbox{\includegraphics[height=42\p@]{\@EventLogo}}%
@@ -140,10 +140,10 @@
         ; Article~No.\,\@ArticleNo; pp.\,\@ArticleNo:\thepage--\@ArticleNo:\pageref{LastPage}%
         \\
       \fi
-      \setbox\@tempboxa\hbox{\includegraphics[height=14\p@,trim=0 15 0 0]{lipics-logo-bw}}%
+      \setbox\@tempboxa\hbox{\includegraphics[height=14\p@,trim=0 15 0 0]{oasics-logo-bw}}%
       \hspace*{\wd\@tempboxa}\enskip
-      \href{https://www.dagstuhl.de/lipics/}%
-           {Leibniz International Proceedings in Informatics}\\
+      \href{https://www.dagstuhl.de/oasics/}%
+           {OpenAccess Series in Informatics}\\
       \smash{\unhbox\@tempboxa}\enskip
       \href{https://www.dagstuhl.de}%
            {Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r Informatik, Dagstuhl Publishing, Germany}}%
@@ -153,24 +153,24 @@
   \let\@evenhead\@empty
   \let\@evenfoot\copyrightline
   \let\@oddfoot\copyrightline}
-\def\lipics@opterrshort{Option  "\CurrentOption" not supported}
-\def\lipics@opterrlong{The option "\CurrentOption" from article.cls is not supported by lipics.cls.}
-\DeclareOption{a5paper}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{b5paper}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{legalpaper}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{executivepaper}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{landscape}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{10pt}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{11pt}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{12pt}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{oneside}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{twoside}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{titlepage}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{notitlepage}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{onecolumn}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{twocolumn}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{fleqn}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
-\DeclareOption{openbib}{\@latexerr{\lipics@opterrshort}{\lipics@opterrlong}}
+\def\oasics@opterrshort{Option  "\CurrentOption" not supported}
+\def\oasics@opterrlong{The option "\CurrentOption" from article.cls is not supported by oasics.cls.}
+\DeclareOption{a5paper}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{b5paper}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{legalpaper}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{executivepaper}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{landscape}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{10pt}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{11pt}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{12pt}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{oneside}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{twoside}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{titlepage}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{notitlepage}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{onecolumn}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{twocolumn}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{fleqn}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
+\DeclareOption{openbib}{\@latexerr{\oasics@opterrshort}{\oasics@opterrlong}}
 \DeclareOption{a4paper}{\PassOptionsToClass{\CurrentOption}{article}
                         \advance\hoffset-2.95mm
                         \advance\voffset8.8mm}
@@ -244,9 +244,9 @@
               \itemsep   \z@ \@plus\p@}
 \def\ps@headings{%
     \def\@evenhead{\large\sffamily\bfseries
-                   \llap{\hbox to0.5\oddsidemargin{  \ifx\@hideLIPIcs\@undefined\ifx\@ArticleNo\@empty\textcolor{blue}{XX}\else\@ArticleNo\fi:\fi\thepage\hss}}\leftmark\hfil}%
+                   \llap{\hbox to0.5\oddsidemargin{  \ifx\@hideOASIcs\@undefined\ifx\@ArticleNo\@empty\textcolor{blue}{XX}\else\@ArticleNo\fi:\fi\thepage\hss}}\leftmark\hfil}%
     \def\@oddhead{\large\sffamily\bfseries\rightmark\hfil
-                  \rlap{\hbox to0.5\oddsidemargin{\hss  \ifx\@hideLIPIcs\@undefined\ifx\@ArticleNo\@empty\textcolor{blue}{XX}\else\@ArticleNo\fi:\fi\thepage}}}%
+                  \rlap{\hbox to0.5\oddsidemargin{\hss  \ifx\@hideOASIcs\@undefined\ifx\@ArticleNo\@empty\textcolor{blue}{XX}\else\@ArticleNo\fi:\fi\thepage}}}%
     \def\@oddfoot{\hfil
                   \rlap{%
                     \vtop{%
@@ -256,7 +256,7 @@
                                      \advance\@tempdima1in
                                      \advance\@tempdima\hoffset
                                      \hb@xt@\@tempdima{%
-                                       \ifx\@hideLIPIcs\@undefined
+                                       \ifx\@hideOASIcs\@undefined
                                          \textcolor{darkgray}{\normalsize\sffamily
                                          \bfseries\quad
                                          \expandafter\textsolittle
@@ -406,7 +406,7 @@
    \else
      \@keywords
    \fi
-   \ifx\@hideLIPIcs\@undefined
+   \ifx\@hideOASIcs\@undefined
      \ifx\@DOIPrefix\@empty\else
        \vskip0.7\baselineskip\noindent
        \doiHeading\href{https://doi.org/\@DOIPrefix.\@EventAcronym.\@EventYear.\@ArticleNo}{\@DOIPrefix.\@EventAcronym.\@EventYear.\@ArticleNo}%
@@ -556,9 +556,9 @@
 		pdftitle={\@title},
 		pdfauthor={\@pdfauthor},
 		pdfkeywords={\@keywords},
-		pdfcreator={LaTeX with lipics-v2019.cls and hyperref.sty},
+		pdfcreator={LaTeX with oasics-v2019.cls and hyperref.sty},
 		%TODO Find way to move information to correct fields in pdf metadata
-		pdfsubject={LIPIcs, Vol.\@SeriesVolume, \@EventShortTitle; Copyright (C), \@copyrightholder; licensed under Creative Commons License CC-BY}
+		pdfsubject={OASIcs, Vol.\@SeriesVolume, \@EventShortTitle; Copyright (C), \@copyrightholder; licensed under Creative Commons License CC-BY}
 		%pdflicenseurl={https://creativecommons.org/licenses/by/3.0/},
 		%pdfcopyright={Copyright (C), \@copyrightholder; licensed under Creative Commons License CC-BY},
 	}
@@ -575,7 +575,7 @@
 \captionsetup{labelformat=boxed}
 \captionsetup[table]{position=top}
 \RequirePackage[figuresright]{rotating}
-\caption@AtBeginDocument{\@ifpackageloaded{subfig}{\ClassError{lipics}{%
+\caption@AtBeginDocument{\@ifpackageloaded{subfig}{\ClassError{oasics}{%
   Do not load the subfig package}{The more recent subcaption package is already loaded}}{}}
 \RequirePackage{subcaption}
 \def\titlerunning#1{\gdef\@titlerunning{{\let\footnote\@gobble\markboth{#1}{#1}}}}
@@ -606,7 +606,7 @@
 \def\ArticleNo#1{\gdef\@ArticleNo{#1}}
 \ArticleNo{}
 \def\DOIPrefix#1{\gdef\@DOIPrefix{#1}}
-\DOIPrefix{10.4230/LIPIcs}
+\DOIPrefix{10.4230/OASIcs}
 \def\and{\newline}
 \let\orig@author\@author
 \let\@authorsfortoc\@empty
@@ -657,9 +657,9 @@
       \fi}
   \fi}
 \newcommand*\affil[2][]{%
-  \ClassError{lipics}
+  \ClassError{oasics}
     {\string\affil\space deprecated: Please enter affiliation as second parameter of the author macro}
-    {Since 2017, \string\affil\space is obsolete in lipics.}}
+    {Since 2017, \string\affil\space is obsolete in oasics.}}
 \newcommand*\Copyright[1]{%
   \def\@copyrightholder{#1}
   \def\@Copyright{%
@@ -674,7 +674,7 @@
     licensed under Creative Commons License CC-BY\ifx!#1!\\\null\fi\par}}
 \Copyright{\textcolor{red}{Author: Please provide a copyright holder}}
 \let\@copyrightholder\@empty
-\def\hideLIPIcs{\let\@hideLIPIcs\relax}
+\def\hideOASIcs{\let\@hideOASIcs\relax}
 \def\keywords#1{\def\@keywords{#1}}
 \let\@keywords\@empty
 \def\keywordsHeading{%
@@ -707,9 +707,9 @@
 }
 \def\ccsdescEnd#1\relax{}
 \def\subjclass#1{
-  \ClassError{lipics}
+  \ClassError{oasics}
     {\string\subjclass\space deprecated: Please enter subject classification in 1 or more ccsdesc macros}
-    {Since 2019, \string\subjclass\space is obsolete in lipics.}}
+    {Since 2019, \string\subjclass\space is obsolete in oasics.}}
 \let\@subjclass\@empty
 \def\subjclassHeading{%
   \textcolor{darkgray}{\fontsize{9}{12}\sffamily\bfseries
@@ -858,4 +858,4 @@
 \fi
 \endinput
 %%
-%% End of file `lipics-v2019.cls'.
+%% End of file `oasics-v2019.cls'.
