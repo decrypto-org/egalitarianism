@@ -57,7 +57,9 @@ def generate_plot(simulator, capital, hardware):
 def create_differencies(args, diff_args, hardware):
     for i, s in enumerate(diff_args.simulators):
         plot = generate_plot(s, args.capital, hardware)
-        # plot.y = [y / (i + 1) if y > -1 else y for y in plot.y]
+        if (i < len(diff_args.postprocessors)):
+            plot.y = [diff_args.postprocessors[i](y) for y in plot.y]
+
         plot.label = diff_args.labels[i]
         diff_args.multiPlot.plots.append(plot)
     filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), diff_args.attribute)
@@ -191,6 +193,7 @@ def main():
                 configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
                 diff_args.simulators.append(Simulator(Strategy(t * 30 * 24), Calculator(configuration)))
                 diff_args.labels.append('Duration: {0} year(s)'.format(int(t / 12)))
+                diff_args.postprocessors.append(lambda x, t=t: x / (t / 12))
 
         create_differencies(args, diff_args, hardware)
 

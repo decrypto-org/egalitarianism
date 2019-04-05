@@ -13,6 +13,7 @@ class MultiArgument():
         self.attribute = attribute
         self.simulators = []
         self.labels = []
+        self.postprocessors = []
         self.multiPlot = MultiPlot()
 
 
