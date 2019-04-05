@@ -1,3 +1,8 @@
 #!/bin/bash
 
-pipenv run python egalitarianism.py -f ./data/btc.csv -b 12.5 -s dp -p 10000 -t 12 -d 5106422924659.82 6727225469722.53 7152633351906.41 -k 0.08 0.10 0.11 -t 48 36 24 12 -r 4465.54 4074.25 3544.76 --difference
+pipenv run python egalitarianism.py -f ./data/btc.csv -b 12.5 -s dp -p 10000 -t 12 -d 5106422924659.82 6727225469722.53 7152633351906.41 -k 0.08 -r 4074.25 --difference &
+pipenv run python egalitarianism.py -f ./data/btc.csv -b 12.5 -s dp -p 10000 -t 12 -d 5106422924659.82 -k 0.11 0.10 0.08 -r 4074.25 --difference &
+pipenv run python egalitarianism.py -f ./data/btc.csv -b 12.5 -s dp -p 10000 -d 5106422924659.82 -k 0.08 -t 48 36 24 12 -r 4074.25 --difference &
+pipenv run python egalitarianism.py -f ./data/btc.csv -b 12.5 -s dp -p 10000 -t 12 -d 5106422924659.82 -k 0.08 -r 4465.54 4074.25 3544.76 --difference &
+
+wait

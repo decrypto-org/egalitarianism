@@ -1,3 +1,5 @@
+# noqa: E501
+
 import argparse
 import csv
 import numpy as np
@@ -53,14 +55,13 @@ def generate_plot(simulator, capital, hardware):
 
 
 def create_differencies(args, diff_args, hardware):
-    for da in diff_args:
-        for i, s in enumerate(da.simulators):
-            plot = generate_plot(s, args.capital, hardware)
-            # plot.y = [y / (i + 1) if y > -1 else y for y in plot.y]
-            plot.label = da.labels[i]
-            da.multiPlot.plots.append(plot)
-        filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), da.attribute)
-        create_figure(filename, da.multiPlot, legend=True)
+    for i, s in enumerate(diff_args.simulators):
+        plot = generate_plot(s, args.capital, hardware)
+        # plot.y = [y / (i + 1) if y > -1 else y for y in plot.y]
+        plot.label = diff_args.labels[i]
+        diff_args.multiPlot.plots.append(plot)
+    filename = '../figures/{0}_{1}_{2}K_diff_{3}.pdf'.format(args.currency, args.strategy, str(int(args.capital / 1000)), diff_args.attribute)
+    create_figure(filename, diff_args.multiPlot, legend=True)
 
 
 def main():
@@ -148,39 +149,48 @@ def main():
         return
 
     if args.difference:
-        diff_args = []
+        diff_args = None
 
-        diff_args.append(MultiArgument('difficulty'))
-        diff_args.append(MultiArgument('kwh'))
-        diff_args.append(MultiArgument('rate'))
-        diff_args.append(MultiArgument('time'))
+        if len(args.difficulty) > 1:
+            diff_args = MultiArgument('difficulty')
 
-        for d in diff_args:
-            d.multiPlot.legend['size'] = 32
-            d.multiPlot.fontSize = 32
-            d.multiPlot.figureSize = (9, 10)
+        if len(args.kwh) > 1:
+            diff_args = MultiArgument('kwh')
 
-        diff_args[3].multiPlot.ylabel = 'Freshly generated annual ROI'
+        if len(args.rate) > 1:
+            diff_args = MultiArgument('rate')
 
-        for i, d in enumerate(args.difficulty):
-            configuration = Configuration(d, args.coinbase, base_kwh, base_rate)
-            diff_args[0].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
-            diff_args[0].labels.append('Difficulty: {0}'.format(sci_notation(d, 2, 2, 12)))
+        if len(args.time) > 1:
+            diff_args = MultiArgument('time')
+            diff_args.multiPlot.ylabel = 'Freshly generated annual ROI'
 
-        for i, k in enumerate(args.kwh):
-            configuration = Configuration(base_difficulty, args.coinbase, k, base_rate)
-            diff_args[1].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
-            diff_args[1].labels.append('Electricity cost: \${0:,.2f}'.format(k))
+        diff_args.multiPlot.legend['size'] = 32
+        diff_args.multiPlot.fontSize = 32
+        diff_args.multiPlot.figureSize = (9, 10)
 
-        for i, r in enumerate(args.rate):
-            configuration = Configuration(base_difficulty, args.coinbase, base_kwh, r)
-            diff_args[2].simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
-            diff_args[2].labels.append('Price: \${0:,.0f}'.format(r))
+        if len(args.difficulty) > 1:
+            for i, d in enumerate(args.difficulty):
+                configuration = Configuration(d, args.coinbase, base_kwh, base_rate)
+                diff_args.simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
+                diff_args.labels.append('Difficulty: {0}'.format(sci_notation(d, 2, 2, 12)))
 
-        for i, t in enumerate(args.time):
-            configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
-            diff_args[3].simulators.append(Simulator(Strategy(t * 30 * 24), Calculator(configuration)))
-            diff_args[3].labels.append('Duration: {0} year(s)'.format(int(t / 12)))
+        if len(args.kwh) > 1:
+            for i, k in enumerate(args.kwh):
+                configuration = Configuration(base_difficulty, args.coinbase, k, base_rate)
+                diff_args.simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
+                diff_args.labels.append('Electricity cost: \${0:,.2f}'.format(k))
+
+        if len(args.rate) > 1:
+            for i, r in enumerate(args.rate):
+                configuration = Configuration(base_difficulty, args.coinbase, base_kwh, r)
+                diff_args.simulators.append(Simulator(Strategy(hours_of_operation), Calculator(configuration)))
+                diff_args.labels.append('Price: \${0:,.0f}'.format(r))
+
+        if len(args.time) > 1:
+            for i, t in enumerate(args.time):
+                configuration = Configuration(base_difficulty, args.coinbase, base_kwh, base_rate)
+                diff_args.simulators.append(Simulator(Strategy(t * 30 * 24), Calculator(configuration)))
+                diff_args.labels.append('Duration: {0} year(s)'.format(int(t / 12)))
 
         create_differencies(args, diff_args, hardware)
 
