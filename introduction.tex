@@ -11,17 +11,18 @@ any setup or identity system. Since its inception, a plethora of alternative
 cryptocurrencies, or ``altcoins,'' have sprung into existence, each claiming
 its own features.
 
-A major thread of research has focused on the mandates of block generation,
-specifically the mechanism of identifying the party responsible for producing a
+A major thread of blockchain research has focused on %the mandates of block generation,
+the mechanics of consensus and 
+specifically on the mechanism of identifying the party responsible for producing a
 new block at any point. Bitcoin, as well as the majority of altcoins,
 employs \emph{proof-of-work}~\cite{C:DwoNao92}, where block generation is
 called \emph{mining} and blocks are produced by \emph{miners} who expend
 computational power to solve cryptographic puzzles. On the other hand, the most
 prominent alternative mechanism is \emph{proof-of-stake}. In proof-of-stake,
-block generation is called \emph{minting} and blocks are produced by
+block generation is, some times, called \emph{minting} and blocks are produced by
 \emph{minters} who ``stake'' their coins, \ie users who own a set of coins and
 use them to participate in the consensus protocol. Intuitively, in both cases a
-leader is drawn at regular intervals at random from the block generators
+leader is drawn at regular intervals at random from the block generators'
 population, with a probability of selection proportional to their computational
 power or stake respectively.
 
@@ -78,12 +79,16 @@ it suffices to perform a case study of an indicative proof-of-stake protocol.
 We study the case of pure proof-of-stake, applied on a protocol consistent with Ouroboros~\cite{C:KRDO17},
 as well as a hybrid proof-of-work/proof-of-stake cryptocurrency,
 Decred~\cite{decred}.
-We find that, in an open market, pure proof-of-stake coins can be perfectly
+We find that pure proof-of-stake coins can be perfectly
 egalitarian, contrary to their proof-of-work counterparts. However, we
 note that variations of proof-of-stake, such as ``delegated proof-of-stake,''
 may not be perfectly egalitarian, since the delegates, \ie the leaders of
 the stake pools which are formed, typically earn extra profits for managing the
-stake pools~\cite{bkks2018}.
+stake pools~\cite{bkks2018}. 
+Moreover,  in both cases of proof-of-work and proof-of-stake we consider an {\em open
+market} that enables participants to invest in mining or minting without any 
+barriers; introducing additional market constraints in acquiring mining 
+equipment or stake can similarly disturb the egalitarianism of the underlying system. 
 
 \textbf{Our Contributions and Roadmap.}
 This work provides a quantitative evaluation of cryptocurrency egalitarianism.

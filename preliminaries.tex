@@ -19,7 +19,7 @@ some hash function $\hash$ defined by the system. Here, $T$ is a
 adjusted in order to ensure a stable block production rate, although typically
 remains constant for periods of consecutive blocks called \emph{epochs} --- for
 example, in Bitcoin, epochs are $2016$ blocks long~\cite{SP:BMCNKF15}. Because the search for
-solutions is brute-forced, the expected number of solutions found by a given
+solutions is exhaustive, the expected number of solutions found by a given
 miner is proportional to the number of evaluations of the
 hash function $\hash$ she can obtain in a given time frame.
 
@@ -45,10 +45,10 @@ becomes more egalitarian by using a memory-hard proof-of-work function. This
 intuition is correct, the core reason being the difficulty to construct
 specialized hardware for memory-hard functions. For example, no ASICs
 currently exist for Monero mining.  Therefore, the only way to scale mining
-operations is by purchasing more hardware. However, since the mining hardware
+operations is by purchasing more general purpose hardware. However, since the mining hardware
 in this case varies little, both in terms of cost and performance, scaling
-returns become proportional to investments.  To the best of our knowledge, this
-paper is the first to confirm this correspondence between the
+returns become proportional to investments.  To the best of our knowledge, our
+work is the first to confirm this correspondence between the
 memory-hardness of proof-of-work hash functions and the economics of mining.
 
 \begin{remark}[Block generation at scale]\label{rmk:pow-scale}
@@ -74,7 +74,7 @@ calculation of egalitarianism under these parameters for future work.
 \noindent\textbf{Proof-of-stake.}
 In proof-of-stake, a minter is selected in proportion to the stake they hold,
 which is to say proportionally to the amount of money they own. There exist a
-number of flavours of this process. In one case, all coins automatically
+number of flavors of this process. In one case, all coins automatically
 participate in the leader election process --- this is the case for Ouroboros~\cite{C:KRDO17} and
 Ethereum's Casper~\cite{buterin2017casper}. In a second flavour, the stake has
 to \emph{opt-in} to participate in the election by a special process, such as
@@ -107,7 +107,7 @@ In fact, correctly parameterized stake-based systems are much more egalitarian t
 
 It is instructive to dispel the above argument intuitively, before we support
 our position with data. Firstly, the argument that money can be exclusively
-owned, but computational power cannot, is misguided. Indeed, this may be true
+owned, but computational power cannot, is rather misguided. Indeed, this may be true
 in the case of a peculiar oligopoly, where a small faction of parties mutually
 agrees to never sell to outsiders, despite external demand. However, in an open
 market, both money and computational power can be freely purchased and, in

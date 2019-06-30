@@ -23,10 +23,10 @@ proof-of-work coins: Bitcoin, Litecoin, Ethereum, and Monero. These
 cryptocurrencies act as a representative sample among the thousands of existing
 cryptocurrencies. Bitcoin is the largest and most successful cryptocurrency by
 market cap. Litecoin is the first cryptocurrency aimed at becoming more
-egalitarian by replacing Bitcoin's SHA256 work function with scrypt~\cite{percival2016scrypt}, a more
-memory-hard function. Ethereum is one of the most promising alternative
+egalitarian by replacing Bitcoin's SHA256 work function with scrypt~\cite{percival2016scrypt}, a 
+memory-hard function~\cite{DBLP:conf/eurocrypt/AlwenCPRT17}. Ethereum is one of the most promising alternative
 cryptocurrencies, the first to support smart contracts, and the second largest
-by market cap; its work function is different from both Bitcoin and Litecoin.
+by market cap; its proof-of-work function is different from both Bitcoin and Litecoin.
 Finally, Monero is special with claims of strong egalitarianism due to its
 memory-hard mining function, Cryptonight~\cite{van2013cryptonote}. Furthermore, its protocol is often
 updated to maintain
@@ -266,7 +266,7 @@ egalitarianism could in principle be achieved by making the ticket price
 approach $0$.
 
 In the case of Ouroboros, every coin has the same probability of
-being chosen for eligibility~\cite{C:KRDO17}. When a coin is eligible for block
+being chosen for extending the chain~\cite{C:KRDO17}. When a coin is eligible for block
 generation, its owner can create a block by providing a proof of ownership of
 the chosen coin. Consider the case of a cryptocurrency with $N$ coins in
 circulation. When a block needs to be created, a coin is chosen at random from

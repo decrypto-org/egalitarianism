@@ -8,44 +8,55 @@ proof-of-stake.
 Proof-of-work protocols such as Bitcoin were formalized in the Bitcoin
 Backbone~\cite{EC:GarKiaLeo15,C:GarKiaLeo17} papers and follow-up
 works~\cite{pass2017analysis}. The seminal work of Selfish
-Mining~\cite{FC:EyaSir14,FC:SapSomZoh16} showed that the honest behavior is not
-incentive-compatible in Bitcoin, but the protocol can be modified to behave
-that way. However, in restricted models, Bitcoin can be shown to be incentive-compatible~\cite{kiayias2016blockchain}.  Proof-of-stake protocols such as
-Ouroboros~\cite{C:KRDO17} can be designed from the ground up to be
-incentive-compatible. The question of how to incentivize parties to conduct
+Mining~\cite{FC:EyaSir14}, see also \cite{FC:SapSomZoh16,kiayias2016blockchain} showed that 
+honest behavior is not incentive-compatible. Alternative reward sharing mechanisms 
+in the proof-of-stake  setting
+make it feasible to behave better in terms of incentive compatibility for instance
+Ouroboros~\cite{C:KRDO17} can be designed from the ground up to be a Nash 
+equilibrium under certain plausible conditions 
+and similarly, in the proof-of-work setting~\cite{PODC:PasShi17}. 
+The question of how to incentivize parties to conduct
 pool formation into the desired number of pools, or groups of minters, was
 studied in~\cite{bkks2018}.
+%
+%The above works study the incentives of blockchain systems from the designer's
+%point of view so that participants do not deviate from the prescribed protocol.
+%A related question is how \emph{fair} the protocol is to participants
+%themselves, and in particular to honest participants. The Backbone and Selfish
+%Mining works include attacks in which an adversary can strategically harm
+%\emph{chain quality}, causing the number of blocks and, in turn, the respective
+%rewards, to be disproportionate to their contributed computational power, thereby
+%harming fairness against honest participants. Fruitchains
+%proposes a protocol which solves this problem. In these works,
+%handing out rewards in exact proportion to computational power is considered
+%``fair.''
 
-The above works study the incentives of blockchain systems from the designer's
-point of view so that participants do not deviate from the prescribed protocol.
-A related question is how \emph{fair} the protocol is to participants
-themselves, and in particular to honest participants. The Backbone and Selfish
-Mining works include attacks in which an adversary can strategically harm
-\emph{chain quality}, causing the number of blocks and, in turn, the respective
-rewards, to be disproportionate to their contributed computational power, thereby
-harming fairness against honest participants. Fruitchains~\cite{PODC:PasShi17}
-proposes a protocol which solves this problem. In these works,
-handing out rewards in exact proportion to computational power is considered
-``fair.''
-
-\emph{Egalitarianism}, in the way considered in the paper, has been studied in
-proof-of-work systems from a technological point of view with respect to
-\emph{memory-hard functions} in~\cite{alwen2017depth,biryukov2016egalitarian}.
-However, the question
-of whether computational power grows proportionally to capital invested, \ie
-whether larger wealth results in more than proportional rewards, has not
-been previously studied. Therefore, our work aims at filling this gap by
-studying the effects of economies of scale when applied to cryptocurrency
-generation.
+\emph{Egalitarianism} has been studied before in
+proof-of-work systems from the perspective of 
+\emph{memory-hard functions} in~\cite{alwen2017depth,biryukov2016egalitarian},
+under the premise that memory hardness provides egalitarianism in the sense
+that the it can be used to argue that the 
+cost of one computational step will be roughly  the same irrespective of the
+underlying  
+computational platform (typically ASIC vs. generic, cf.  \cite{biryukov2016egalitarian}). 
+The approach we take here instead, asking whether 
+computational power grows proportionally to capital invested, \ie
+whether larger wealth results in more than proportional rewards,
+  is more general and it has not
+been previously studied to the best of our knowledge. 
+%Therefore, our work aims at filling this gap by
+%studying the effects of economies of scale when applied to cryptocurrency
+%generation.
 
 \noindent\textbf{Equitability of cryptocurrencies.}
 Fanti \textit{et al.} analyze economic blockchain fairness
 in~\cite{equitability}, where they define \emph{equitability}. They study the
 evolution of a system after a series of rounds, putting forth the property that
 stake ownership remains in proportion \emph{before} and \emph{after} rewards
-have been awarded. By studying the behaviour of the returns' \emph{variance}
+have been awarded. By studying the behavior of the returns' \emph{variance}
 under the randomness of executions, they show that the distribution of capital
-follows a Pólya process. Our work augments their results by quantifying the \emph{expectation}
+follows a Pólya process. Our work can be seen as complementary to 
+their results by quantifying the \emph{expectation}
 of rewards and then studying the variance under the randomness of initial capital
 allocation. In our work, we show that
 computational power is not proportional to the invested capital, and hence the

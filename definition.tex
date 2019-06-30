@@ -9,10 +9,10 @@ Before we present our definition, let us first state the \emph{desiderata} of su
 definition. First of all, we want to allow concrete measurements to be
 performed on cryptocurrencies and data to be extracted in a manner that is
 quantitative and not vague. Thus far, the claims for egalitarianism in various
-cryptocurrencies have been hand wavy, using a rhetoric which fails to include
+cryptocurrencies have been rather informal, using a rhetoric which fails to include
 exact data~\cite{van2013cryptonote,mcmillan2013}. As such, different cryptocurrencies claim egalitarianism over the
 others, without demonstrating the claims or provide conclusive arguments.
-Secondly, a definition of egalitarianism must measure the block generation
+Secondly, a definition of egalitarianism must measure the protocol maintenance 
 returns of a ``rich dollar'' compared to that of a ``poor dollar.''
 We thus desire a
 measure which, for a particular cryptocurrency, extracts a smaller value
@@ -59,16 +59,18 @@ returns which the \emph{optimal} strategy ensures for a given initial capital $v
 The expectation is taken with the blockchain execution as a random variable,
 since returns vary by execution (the randomness of the execution can affect the
 returns of the strategy, as the same strategy can bring larger returns if the
-participant is ``lucky'' and happens to produce many blocks~\cite{equitability}).
+participant is ``lucky'' e.g., it happens to produce many blocks~\cite{equitability}).
 
-We remark that we do allow strategies to reinvest capital. For instance,
+We remark first that we do allow strategies to reinvest capital. For instance,
 returns earned from mining rewards can be reinvested in electricity costs for
 future mining. Furthermore, for unit consistency, we assume the strategy
-$B(v)$ returns the freshly generated coins denominated in the same units as the capital $v$
-was given in, such that $f$ represents a ROI; thus, we denominate the
+$B(v)$ returns the freshly generated coins denominated in the same units as the capital $v$ was given in, such that $f$ represents a ROI; thus, we denominate the
 generated cryptocurrencies in USD using the market exchange rate.
+Second, we assume participants act independently and follow the protocol
+according to its specifications. 
 
-It is now straightforward to define the \emph{ideal egalitarian curve}. In this
+Based on the above, it
+is now straightforward to define the \emph{ideal egalitarian curve}. In this
 case, the ROI is stable regardless of capital invested. Under these ideal
 conditions, the amount of freshly generated cryptocurrency is exactly
 proportional to the money invested. Thus, the ideal curve is any constant
