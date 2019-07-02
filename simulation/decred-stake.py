@@ -83,7 +83,7 @@ plt.plot(x, y)
 plt.xlabel('Investment Capital (USD)')
 plt.ylabel('Freshly generated ROI')
 
-plt.gca().set_yticklabels(['{:.0f}\%'.format(x*100) for x in plt.gca().get_yticks()])
+plt.gca().set_yticklabels(['{:.2f}'.format(x) for x in plt.gca().get_yticks()])
 
 plt.savefig(pp, format='pdf', dpi=1000, bbox_inches='tight')
 
