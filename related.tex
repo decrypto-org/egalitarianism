@@ -8,13 +8,13 @@ proof-of-stake.
 Proof-of-work protocols such as Bitcoin were formalized in the Bitcoin
 Backbone~\cite{EC:GarKiaLeo15,C:GarKiaLeo17} papers and follow-up
 works~\cite{pass2017analysis}. The seminal work of Selfish
-Mining~\cite{FC:EyaSir14}, see also \cite{FC:SapSomZoh16,kiayias2016blockchain} showed that 
-honest behavior is not incentive-compatible. Alternative reward sharing mechanisms 
+Mining~\cite{FC:EyaSir14}, see also \cite{FC:SapSomZoh16,kiayias2016blockchain} showed that
+honest behavior is not incentive-compatible. Alternative reward sharing mechanisms
 in the proof-of-stake  setting
 make it feasible to behave better in terms of incentive compatibility for instance
-Ouroboros~\cite{C:KRDO17} can be designed from the ground up to be a Nash 
-equilibrium under certain plausible conditions 
-and similarly, in the proof-of-work setting~\cite{PODC:PasShi17}. 
+Ouroboros~\cite{C:KRDO17} can be designed from the ground up to be a Nash
+equilibrium under certain plausible conditions
+and similarly, in the proof-of-work setting~\cite{PODC:PasShi17}.
 The question of how to incentivize parties to conduct
 pool formation into the desired number of pools, or groups of minters, was
 studied in~\cite{bkks2018}.
@@ -32,18 +32,18 @@ studied in~\cite{bkks2018}.
 %``fair.''
 
 \emph{Egalitarianism} has been studied before in
-proof-of-work systems from the perspective of 
+proof-of-work systems from the perspective of
 \emph{memory-hard functions} in~\cite{alwen2017depth,biryukov2016egalitarian},
 under the premise that memory hardness provides egalitarianism in the sense
-that the it can be used to argue that the 
+that the it can be used to argue that the
 cost of one computational step will be roughly  the same irrespective of the
-underlying  
-computational platform (typically ASIC vs. generic, cf.  \cite{biryukov2016egalitarian}). 
-The approach we take here instead, asking whether 
+underlying
+computational platform (typically ASIC vs. generic, cf.  \cite{biryukov2016egalitarian}).
+The approach we take here instead, asking whether
 computational power grows proportionally to capital invested, \ie
 whether larger wealth results in more than proportional rewards,
   is more general and it has not
-been previously studied to the best of our knowledge. 
+been previously studied to the best of our knowledge.
 %Therefore, our work aims at filling this gap by
 %studying the effects of economies of scale when applied to cryptocurrency
 %generation.
@@ -53,12 +53,17 @@ Fanti \textit{et al.} analyze economic blockchain fairness
 in~\cite{equitability}, where they define \emph{equitability}. They study the
 evolution of a system after a series of rounds, putting forth the property that
 stake ownership remains in proportion \emph{before} and \emph{after} rewards
-have been awarded. By studying the behavior of the returns' \emph{variance}
-under the randomness of executions, they show that the distribution of capital
-follows a Pólya process. Our work can be seen as complementary to 
-their results by quantifying the \emph{expectation}
-of rewards and then studying the variance under the randomness of initial capital
-allocation. In our work, we show that
+have been awarded.
+By studying the behaviour of the returns' variance under the randomness of
+executions, they introduce a geometric reward function and show its optimality
+in terms of equitability.  Whereas their equitability metric jointly captures
+the normalized variance of rewards for every user conditioned on their initial
+resources (e.g., fraction of computational power for PoW), our egalitarianism
+metric instead captures the population-wide variation of best-case expected
+returns for an initial capital distribution among participants. In other words,
+our randomness is over the initial distribution of wealth, whereas theirs is
+over the evolution of a single blockchain execution.
+In our work, we show that
 computational power is not proportional to the invested capital, and hence the
 analogy between proof-of-work computational power and proof-of-stake capital
 breaks down, and a more detailed study is needed. Additionally, we remark that
