@@ -11,6 +11,14 @@
 \documentclass[11pt]{llncs}
 \usepackage{preamble}
 
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={150mm,247mm},
+    left=35mm,
+    right=35mm,
+}
+
 \begin{document}
 \import{./}{title.tex}
 \thispagestyle{plain}
@@ -21,8 +29,6 @@
 \usepackage{longtable}
 
 \bibliographystyle{plainurl}% the mandatory bibstyle
-
-\import{./}{title.tex}
 
 \Copyright{Sara Tucci-Piergiovanni et al.}%TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
@@ -59,6 +65,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+\import{./}{title.tex}
 
 \maketitle
 \fi

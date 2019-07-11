@@ -3,27 +3,36 @@
 \title{Cryptocurrency Egalitarianism:\protect\\A Quantitative Approach}
 
 \iflncs
-  \author{
-         Dimitris Karakostas \inst{1,3} \and
-         Aggelos Kiayias \inst{1,3} \and\\
-         Christos Nasikas \inst{2,4} \and
-         Dionysis Zindros \inst{2,3}
-  }
-  \institute{
-         University of Edinburgh\and
-         University of Athens\and
-         IOHK\and
-         ``ATHENA'' Research Center
-  }
+  \ifanonymous
+    \author{Anonymous}
+    \institute{}
+  \else
+    \author{
+           Dimitris Karakostas \inst{1,3} \and
+           Aggelos Kiayias \inst{1,3} \and\\
+           Christos Nasikas \inst{2,4} \and
+           Dionysis Zindros \inst{2,3}
+    }
+    \institute{
+           University of Edinburgh\and
+           University of Athens\and
+           IOHK\and
+           ``ATHENA'' Research Center
+    }
+  \fi
 \else
   \titlerunning{Cryptocurrency Egalitarianism}
 
-  \author{Dimitris Karakostas}{University of Edinburgh, IOHK}{dimitris.karakostas@ed.ac.uk}{}{}
+  \ifanonymous
+  \author{Anonymous}{}{}{}{}
+  \else
+    \author{Dimitris Karakostas}{University of Edinburgh, IOHK}{dimitris.karakostas@ed.ac.uk}{}{}
 
-  \author{Aggelos Kiayias}{University of Edinburgh, IOHK}{akiayias@inf.ed.ac.uk}{}{}
-  \author{Christos Nasikas}{University of Athens, ``Athena'' Research Center}{xnasikas@di.uoa.gr}{}{}
-  \author{Dionysis Zindros\footnote{Corresponding author}}{University of Athens, IOHK}{dionyziz@di.uoa.gr}{}{}
+    \author{Aggelos Kiayias}{University of Edinburgh, IOHK}{akiayias@inf.ed.ac.uk}{}{}
+    \author{Christos Nasikas}{University of Athens, ``Athena'' Research Center}{xnasikas@di.uoa.gr}{}{}
+    \author{Dionysis Zindros\footnote{Corresponding author}}{University of Athens, IOHK}{dionyziz@di.uoa.gr}{}{}
 
-  \authorrunning{Karakostas et al.}
+    \authorrunning{Karakostas et al.}
+  \fi
 \fi
 \maketitle
